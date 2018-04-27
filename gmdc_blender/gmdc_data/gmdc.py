@@ -1,15 +1,15 @@
 import struct
 from . import gmdc_header, gmdc_element, gmdc_linkage, gmdc_group, gmdc_model, gmdc_subset
 
-file_data = None
+file_data   = None
 byte_offset = None
 
-header = None
-elements = None
-linkages = None
-groups = None
-model = None
-subsets = None
+header      = None
+elements    = None
+linkages    = None
+groups      = None
+model       = None
+subsets     = None
 
 # Used to get human readable element identities
 element_ids = {
@@ -57,12 +57,34 @@ def load_data():
         elements.append(temp_element)
 
     # LINKAGES
+    count = read_int32()
+    linkages = []
+    for i in range(0,count):
+        temp_linkage = gmdc_linkage.GMDCLinkage()
+        temp_linkage.read_data()
+        linkages.append(temp_linkage)
 
     # GROUPS
+    count = read_int32()
+    groups = []
+    for i in range(0,count):
+        temp_group = gmdc_group.GMDCGroup()
+        temp_group.read_data()
+        groups.append(temp_group)
 
     # MODEL
+    model = gmdc_model.GMDCModel()
+    model.read_data()
 
+    print('\nByte Offset:', byte_offset, '/', len(file_data))
     # SUBSETS
+    count = read_int32()
+    subsets = []
+    for i in range(0,count):
+        temp_subset = gmdc_subset.GMDCSubset()
+        temp_subset.read_data()
+        subsets.append(temp_subset)
+
 
 
 # Byte reading methods
@@ -85,13 +107,19 @@ def read_int16():
     bytes = bytearray()
     for i in range(0,2):
         bytes.append(read_byte())
-    return int.from_bytes(bytes, 'little')
+    return struct.unpack('<h', bytes)[0]
 
 def read_int32():
     bytes = bytearray()
     for i in range(0,4):
         bytes.append(read_byte())
-    return int.from_bytes(bytes, 'little')
+    return struct.unpack('<i', bytes)[0]
+
+def read_uint32():
+    bytes = bytearray()
+    for i in range(0,4):
+        bytes.append(read_byte())
+    return struct.unpack('<I', bytes)[0]
 
 def read_float():
     bytes = bytearray()

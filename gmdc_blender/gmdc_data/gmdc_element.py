@@ -26,7 +26,7 @@ class GMDCElement:
 
     def read_data(self):
         self.ref_array_size         = gmdc.read_int32()
-        self.element_identity       = gmdc.read_int32()
+        self.element_identity       = gmdc.read_uint32()
         self.identity_repitition    = gmdc.read_int32()
 
         self.block_format   = gmdc.read_int32()
