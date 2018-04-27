@@ -1,5 +1,6 @@
 import struct
 from . import gmdc_header, gmdc_element, gmdc_linkage, gmdc_group, gmdc_model, gmdc_subset
+import bpy
 
 file_data   = None
 byte_offset = None
@@ -11,35 +12,14 @@ groups      = None
 model       = None
 subsets     = None
 
-# Used to get human readable element identities
-element_ids = {
-    0x1C4AFC56: 'Blend Indices',
-    0x5C4AFC5C: 'Blend Weights',
-    0x7C4DEE82: 'Target Indices',
-    0xCB6F3A6A: 'Normal Morph Deltas',
-    0xCB7206A1: 'Colour',
-    0xEB720693: 'Colour Deltas',
-    0x3B83078B: 'Normals List',
-    0x5B830781: 'Vertices',
-    0xBB8307AB: 'UV Coordinates',
-    0xDB830795: 'UV Coordinate Deltas',
-    0x9BB38AFB: 'Binormals',
-    0x3BD70105: 'Bone Weights',
-    0xFBD70111: 'Bone Assignments',
-    0x89D92BA0: 'Bump Map Normals',
-    0x69D92B93: 'Bump Map Normal Deltas',
-    0x5CF2CFE1: 'Morph Vertex Deltas',
-    0xDCF2CFDC: 'Morph Vertex Map',
-    0x114113C3: '(EP4) VertexID',
-    0x114113CD: '(EP4) RegionMask'
-}
-
-def read_file_data():
+def read_file_data(context, filepath):
     global byte_offset, file_data
+    print("reading .5gd file...")
 
-    file = open("../sims2_files/TestMesh.5gd", "rb")
+    file = open(filepath, "rb")
     file_data = file.read()
     byte_offset = 0
+    file.close()
 
 def load_data():
     global header, elements, linkages, groups, model, subsets
@@ -76,7 +56,6 @@ def load_data():
     model = gmdc_model.GMDCModel()
     model.read_data()
 
-    print('\nByte Offset:', byte_offset, '/', len(file_data))
     # SUBSETS
     count = read_int32()
     subsets = []
