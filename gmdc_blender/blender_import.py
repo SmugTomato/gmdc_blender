@@ -23,10 +23,11 @@ class ImportGMDC(Operator, ImportHelper):
             )
 
     def execute(self, context):
-        b_model = self.parse_data(context, self.filepath)
+        b_models = self.parse_data(context, self.filepath)
 
-        if b_model != False:
-            self.do_import(b_model)
+        if b_models != False:
+            for model in b_models:
+                self.do_import(model)
 
         return {'FINISHED'}
 
@@ -39,11 +40,13 @@ class ImportGMDC(Operator, ImportHelper):
             return False
 
         gmdc_data.load_data()
-        b_model = blender_model.BlenderModel.from_gmdc(gmdc_data)
-        return b_model
+        b_models = blender_model.BlenderModel.groups_from_gmdc(gmdc_data)
+        return b_models
 
 
     def do_import(self, b_model):
+        print('Importing group:', b_model.name)
+
         # Create object and mesh
         mesh = bpy.data.meshes.new(b_model.name)
         object = bpy.data.objects.new(b_model.name, mesh)
@@ -53,8 +56,10 @@ class ImportGMDC(Operator, ImportHelper):
         mesh.from_pydata(b_model.vertices, [], b_model.faces)
 
         # Load normals
-        for i in range(0,len(mesh.vertices)):
-            mesh.vertices[i].normal = b_model.normals[i]
+        for i, vert in enumerate(mesh.vertices):
+            vert.normal = b_model.normals[i]
+            pass
+        # print(len(mesh.vertices), len(b_model.vertices))
 
         # Create UV layer and load UV coordinates
         mesh.uv_textures.new('UVMap')
