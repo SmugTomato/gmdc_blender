@@ -4,7 +4,7 @@ from bpy_extras.io_utils import ImportHelper
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
 
-from .gmdc_data import gmdc
+from .gmdc_data.gmdc import GMDC
 from . import blender_model
 
 class ImportGMDC(Operator, ImportHelper):
@@ -28,13 +28,22 @@ class ImportGMDC(Operator, ImportHelper):
         return {'FINISHED'}
 
 def do_import(context, filepath):
-    gmdc.read_file_data(context, filepath)
-    gmdc.load_data()
+    gmdc_data = GMDC.from_file_data(context, filepath)
 
-    print('Byte Offset:', gmdc.byte_offset, '/', len(gmdc.file_data))
+    # a = gmdc_data.load_header()
+
+    if gmdc_data.load_header() == False:
+        print ('Unsupported GMDC version', hex(gmdc_data.header.file_type))
+        return {'ERROR'}
+
+    print('Version:', gmdc_data.header.version)
+
+    gmdc_data.load_data()
+
+    print('Byte Offset:', gmdc_data.data_read.byte_offset, '/', len(gmdc_data.data_read.file_data))
 
     #  Execute actual import code
-    b_model = blender_model.BlenderModel.from_gmdc()
+    b_model = blender_model.BlenderModel.from_gmdc(gmdc_data)
 
     my_mesh = bpy.data.meshes.new(b_model.name)
     my_object = bpy.data.objects.new(b_model.name, my_mesh)
@@ -43,3 +52,14 @@ def do_import(context, filepath):
     bpy.context.scene.objects.link(my_object)
 
     my_mesh.from_pydata(b_model.vertices, [], b_model.faces)
+
+    # Load normals
+    my_mesh.flip_normals()
+    for i in range(0,len(my_mesh.vertices)):
+        print(b_model.normals[i], '\t', my_object.data.vertices[i].normal)
+        my_mesh.vertices[i].normal = b_model.normals[i]
+
+    # Load UV
+    
+
+    # my_mesh.update(calc_edges=True)

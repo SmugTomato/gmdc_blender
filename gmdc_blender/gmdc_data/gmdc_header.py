@@ -16,16 +16,16 @@ class GMDCHeader:
         self.resource_version   = None
         self.file_name          = None
 
-    def read_data(self):
-        self.language           = gmdc.read_int16()
-        self.string_style       = gmdc.read_int16()
-        self.repeat_value       = gmdc.read_int32()
-        self.index_value        = gmdc.read_int32()
-        self.file_type          = gmdc.read_int32()
-        self.name               = gmdc.read_byte_string()
-        self.block_id           = gmdc.read_int32()
-        self.version            = gmdc.read_int32()
-        self.block_name         = gmdc.read_byte_string()
-        self.resource_id        = gmdc.read_int32()
-        self.resource_version   = gmdc.read_int32()
-        self.file_name          = gmdc.read_byte_string()
+    def read_data(self, data_read):
+        self.language           = data_read.read_int16()
+        self.string_style       = data_read.read_int16()
+        self.repeat_value       = data_read.read_int32()
+        self.index_value        = data_read.read_int32()
+        self.file_type          = data_read.read_uint32()
+        self.name               = data_read.read_byte_string()
+        self.block_id           = data_read.read_uint32()
+        self.version            = data_read.read_int32()
+        self.block_name         = data_read.read_byte_string()
+        self.resource_id        = data_read.read_int32()
+        self.resource_version   = data_read.read_int32()
+        self.file_name          = data_read.read_byte_string()
