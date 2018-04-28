@@ -7,7 +7,7 @@ class GMDC:
 
     def __init__(self, file_data, byte_offset):
         self.data_read  = DataReader(file_data, byte_offset)
-        
+
         self.header     = None
         self.elements   = None
         self.linkages   = None
@@ -16,8 +16,18 @@ class GMDC:
         self.subsets    = None
 
     @staticmethod
+    def from_test_func(file_path):
+        print("reading .5gd file...\n")
+
+        file = open(file_path, "rb")
+        file_data = file.read()
+        byte_offset = 0
+        file.close()
+        return GMDC(file_data, byte_offset)
+
+    @staticmethod
     def from_file_data(context, file_path):
-        print("reading .5gd file...")
+        print("reading .5gd file...\n")
 
         file = open(file_path, "rb")
         file_data = file.read()
@@ -32,7 +42,7 @@ class GMDC:
         if self.header.version != 4 or self.header.file_type != self.GMDC_IDENTIFIER:
             return False
         return True
-    
+
     def load_data(self):
         # ELEMENTS
         count = self.data_read.read_int32()

@@ -7,7 +7,7 @@ bl_info = {
 	"description": "Importer and exporter for Sims 2 GMDC(.5gd) files"
 }
 
-from . import main
+# from . import main
 # from gmdc_data import gmdc_header, gmdc_element, gmdc_linkage, gmdc_group, gmdc_model, gmdc_subset
 # import element_id
 # from element_id import ElementID

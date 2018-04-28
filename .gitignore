@@ -1,6 +1,9 @@
 # Compiled python modules.
 *.pyc
 
+# Sims 2 files folder
+/sims2_files/
+
 # Setuptools distribution folder.
 /dist/
 
