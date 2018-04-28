@@ -51,15 +51,31 @@ def do_import(context, filepath):
     my_object.location = bpy.context.scene.cursor_location
     bpy.context.scene.objects.link(my_object)
 
+    # my_mesh.from_pydata(b_model.vertices, [], b_model.faces)
     my_mesh.from_pydata(b_model.vertices, [], b_model.faces)
 
     # Load normals
-    my_mesh.flip_normals()
+    # my_mesh.flip_normals()
     for i in range(0,len(my_mesh.vertices)):
-        print(b_model.normals[i], '\t', my_object.data.vertices[i].normal)
         my_mesh.vertices[i].normal = b_model.normals[i]
 
     # Load UV
-    
+    my_mesh.uv_textures.new('UVMap')
+
+    for i, polygon in enumerate(my_mesh.polygons):
+        for j, loopindex in enumerate(polygon.loop_indices):
+            meshloop = my_mesh.loops[j]
+            meshuvloop = my_mesh.uv_layers.active.data[loopindex]
+            meshvertex = my_mesh.vertices[meshloop.vertex_index]
+
+            vertex_index = b_model.faces[i][j]
+            meshuvloop.uv = b_model.uvs[vertex_index]
+
+            # new_vertex_index =
+
+            # b_model.vertices[vertex_index]
+            # print(meshvertex.x)
+
+
 
     # my_mesh.update(calc_edges=True)
