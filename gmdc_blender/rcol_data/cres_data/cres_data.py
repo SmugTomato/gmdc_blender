@@ -1,61 +1,102 @@
-from .cobject_graph_node        import CObjectGraphNode
-from .ccomposition_tree_node    import CCompositionTreeNode
-from .csg_resource              import CSGResource
+from .subnodes.sgresource       import SgResource
+from .subnodes.comptree_node    import CompositionTreeNode
+from .subnodes.objectgraph_node import ObjectGraphNode
 
-class CRESData:
+# Could use some improvement once I get it working
+class CresData:
 
-    def __init__(self):
-        self.block_name     = None
-        self.block_id       = None
-        self.version        = None
-        self.type_code      = None
+    def __init__(self, block_name, block_id, block_version, type_code, sgresource,
+                    comptree, objectgraph, chains, is_subnode, purpose_type,
+                    enabled, link_index, object_count):
+        self.block_name     = block_name
+        self.block_id       = block_id
+        self.block_version  = block_version
+        self.type_code      = type_code
 
-        self.chains         = None
-        self.subnode        = None
-        self.enabled        = None
-        self.purpose        = None
+        self.sgresource     = sgresource
+        self.comptree       = comptree
+        self.objectgraph    = objectgraph
 
-        self.link           = None
-        self.bl_obj_count   = None
+        self.chains         = chains
+        self.is_subnode     = is_subnode
+        self.purpose_type   = purpose_type
 
-        self.csg_resource   = None
-        self.ccomp_tree     = None
-        self.cobj_graph     = None
+        self.enabled        = enabled
+        self.link_index     = link_index
+        self.object_count   = object_count
+        
 
+    @staticmethod
+    def from_data(reader):
+        print(reader.byte_offset)
 
-    def read_data(self, data_read):
-        self.block_name = data_read.read_byte_string()
-        self.block_id   = data_read.read_uint32()
-        self.version    = data_read.read_int32()
-        self.type_code  = data_read.read_byte()
+        block_name      = reader.read_byte_string()
+        block_id        = reader.read_uint32()
+        block_version   = reader.read_int32()
+        type_code       = reader.read_byte()
+
+        if type_code == 1:
+            sgresource      = SgResource.from_data(reader)
+            comptree        = CompositionTreeNode.from_data(reader)
+            objectgraph     = ObjectGraphNode.from_data(reader)
+
+            chain_count     = reader.read_int32()
+            chains          = []
+            for i in range(chain_count):
+                enabled             = reader.read_byte()
+                depends             = reader.read_byte()
+                location            = reader.read_int32()
+                chains.append( (enabled, depends, location) )
+
+            is_subnode      = reader.read_byte()
+            purpose_type    = reader.read_int32()
+
+            return CresData(block_name, block_id, block_version, type_code, 
+                            sgresource, comptree, objectgraph, 
+                            chains, is_subnode, purpose_type,
+                            [], [], [])
+        
+        # ELSE IF type_code == 0
+        objectgraph     = ObjectGraphNode.from_data(reader)
+        enabled         = reader.read_byte()
+        is_subnode      = reader.read_byte()
+        link_index      = reader.read_int32()
+        object_count    = reader.read_int32()
+
+        return CresData(block_name, block_id, block_version, type_code, 
+                            [], [], objectgraph, 
+                            [], is_subnode, [],
+                            enabled, link_index, object_count)
+
+    
+    def print(self):
+        print('Data block:')
+        print('\tBlock name:\t\t', self.block_name, sep="")
+        print('\tBlock ID:\t\t', hex(self.block_id), sep="")
+        print('\tBlock Version:\t', self.block_version, sep="")
+        print('\tTypecode:\t\t', self.type_code, sep="")
 
         if self.type_code == 1:
-            print('offset:', data_read.byte_offset)
-            self.csg_resource = CSGResource()
-            self.csg_resource.read_data(data_read)
+            self.sgresource.print()
+            self.comptree.print()
+            self.objectgraph.print()
 
-            print('offset:', data_read.byte_offset)
-            self.ccomp_tree = CCompositionTreeNode()
-            self.ccomp_tree.read_data(data_read)
+            for i, ex in enumerate(self.chains):
+                print('\tChain Link ', i, sep="")
+                print('\t\tEnabled:\t', ex[0], sep="")
+                print('\t\tDepends:\t', ex[1], sep="")
+                print('\t\tLocation:\t', ex[2], sep="")
+            
+            print('\tIs subnode:\t\t', self.is_subnode, sep="")
+            print('\tPurpose type:\t', self.purpose_type, sep="")
+        else:
+            self.objectgraph.print()
+            print('\tEnabled:\t\t', self.enabled, sep="")
+            print('\tIs subnode:\t\t', self.is_subnode, sep="")
+            print('\tLink index:\t\t', self.link_index, sep="")
+            print('\tObject count:\t\t', self.object_count, sep="")
+        
+        print('\tcDataListExtension:')
 
-            print('offset:', data_read.byte_offset)
-            self.cobj_graph = CObjectGraphNode()
-            self.cobj_graph.read_data(data_read)
 
-            print('offset:', data_read.byte_offset)
-            chain_count = data_read.read_int32()
-            self.chains = []
-            for i in range(chain_count):
-                enabled     = data_read.read_byte()
-                dependent   = data_read.read_byte()
-                location    = data_read.read_uint32()
-                self.chains.append( (enabled, dependent, location) )
-
-            self.subnode = data_read.read_byte()
-            self.purpose = data_read.read_int32()
-
-        elif self.type_code == 0:
-            self.enabled        = data_read.read_byte()
-            self.subnode        = data_read.read_byte()
-            self.link           = data_read.read_uint32()
-            self.bl_obj_count   = data_read.read_int32()
+        

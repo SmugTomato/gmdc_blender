@@ -1,0 +1,318 @@
+Version mark:	 0xffff0001
+# File links:	 1
+TGIR Node:
+	Group ID:		0x1c050000
+	Instance ID:	0xffafbac3
+	Resource ID:	0x1656b9c0
+	Type ID:		0xfc6eb1f7
+Item count:	 183
+	0xe519c933
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65245517
+	0xe9075bc5
+	0xe9075bc5
+	0xe9075bc5
+	0xe9075bc5
+	0xe9075bc5
+	0xe9075bc5
+	0xe9075bc5
+	0xe9075bc5
+	0xe9075bc5
+	0xe9075bc5
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0x6a836d56
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0xe9075bc5
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0xe9075bc5
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+	0x65246462
+Data block:
+	Block name:		cResourceNode
+	Block ID:		0xe519c933
+	Block Version:	7
+	Typecode:		1
+	cSGResource:
+		Name:		cSGResource
+		Block ID:	0x0
+		Version:	2
+		Filename:	TestMesh.SmugTomato-afbodydresslongloose_cres
+	cCompositionTreeNode:
+		Name:		cCompositionTreeNode
+		Block ID:	0x0
+		Version:	11
+	cObjectGraphNode:
+		Name:		cObjectGraphNode
+		Block ID:	0x0
+		Version:	4
+		Extensions:	25
+		Extension Link 0
+			Enabled:	1
+			Depends:	0
+			Data Index:	1
+		Extension Link 1
+			Enabled:	1
+			Depends:	0
+			Data Index:	2
+		Extension Link 2
+			Enabled:	1
+			Depends:	0
+			Data Index:	3
+		Extension Link 3
+			Enabled:	1
+			Depends:	0
+			Data Index:	4
+		Extension Link 4
+			Enabled:	1
+			Depends:	0
+			Data Index:	5
+		Extension Link 5
+			Enabled:	1
+			Depends:	0
+			Data Index:	6
+		Extension Link 6
+			Enabled:	1
+			Depends:	0
+			Data Index:	7
+		Extension Link 7
+			Enabled:	1
+			Depends:	0
+			Data Index:	8
+		Extension Link 8
+			Enabled:	1
+			Depends:	0
+			Data Index:	9
+		Extension Link 9
+			Enabled:	1
+			Depends:	0
+			Data Index:	10
+		Extension Link 10
+			Enabled:	1
+			Depends:	0
+			Data Index:	11
+		Extension Link 11
+			Enabled:	1
+			Depends:	0
+			Data Index:	12
+		Extension Link 12
+			Enabled:	1
+			Depends:	0
+			Data Index:	13
+		Extension Link 13
+			Enabled:	1
+			Depends:	0
+			Data Index:	14
+		Extension Link 14
+			Enabled:	1
+			Depends:	0
+			Data Index:	15
+		Extension Link 15
+			Enabled:	1
+			Depends:	0
+			Data Index:	16
+		Extension Link 16
+			Enabled:	1
+			Depends:	0
+			Data Index:	17
+		Extension Link 17
+			Enabled:	1
+			Depends:	0
+			Data Index:	18
+		Extension Link 18
+			Enabled:	1
+			Depends:	0
+			Data Index:	19
+		Extension Link 19
+			Enabled:	1
+			Depends:	0
+			Data Index:	20
+		Extension Link 20
+			Enabled:	1
+			Depends:	0
+			Data Index:	21
+		Extension Link 21
+			Enabled:	1
+			Depends:	0
+			Data Index:	22
+		Extension Link 22
+			Enabled:	1
+			Depends:	0
+			Data Index:	23
+		Extension Link 23
+			Enabled:	1
+			Depends:	0
+			Data Index:	24
+		Extension Link 24
+			Enabled:	1
+			Depends:	0
+			Data Index:	25
+		Filename:	##0x1c050000!TestMesh.SmugTomato-afbodydresslongloose_cres
+	Chain Link 0
+		Enabled:	1
+		Depends:	0
+		Location:	26
+	Is subnode:		0
+	Purpose type:	3
+	cDataListExtension:
