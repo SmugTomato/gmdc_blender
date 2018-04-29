@@ -1,5 +1,3 @@
-from . import gmdc
-
 class GMDCModel:
 
     trans_block_vals    = 7    # quaternion(x,y,z,w) and transform(x,y,z) values

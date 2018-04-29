@@ -1,5 +1,3 @@
-from . import gmdc
-
 class GMDCSubset:
 
     vertex_coords = 3    # position [x,y,z]

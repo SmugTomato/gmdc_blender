@@ -1,5 +1,3 @@
-from . import gmdc
-
 class GMDCGroup:
 
     def __init__(self):

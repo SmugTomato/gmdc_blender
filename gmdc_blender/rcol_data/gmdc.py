@@ -1,4 +1,4 @@
-from . import gmdc_header, gmdc_element, gmdc_linkage, gmdc_group, gmdc_model, gmdc_subset
+from .gmdc_data import gmdc_header, gmdc_element, gmdc_linkage, gmdc_group, gmdc_model, gmdc_subset
 from .data_reader import DataReader
 
 class GMDC:

@@ -1,5 +1,3 @@
-from . import gmdc
-
 class GMDCLinkage:
 
     def __init__(self):
