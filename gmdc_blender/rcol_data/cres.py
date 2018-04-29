@@ -24,9 +24,9 @@ class Cres:
         reader = DataReader(file_data, byte_offset)
         header = CresHeader.from_data(reader)
         data_blocks = []
-        data_blocks.append(CresData.from_data(reader))
-
-        print(reader.read_byte_string())
+        # data_blocks.append(CresData.from_data(reader))
+        for i in range(1):
+            data_blocks.append(CresData.from_data(reader))
 
         return Cres(header, data_blocks)
 
@@ -39,15 +39,3 @@ class Cres:
         self.data_blocks[0].print()
 
         sys.stdout = oldstdout
-
-    # def load_header(self):
-    #     self.header = CresHeader()
-    #     self.header.read_data(self.data_read)
-
-    # def load_data(self):
-    #     self.data_blocks = []
-    #     count = len(self.header.items)
-    #     for i in range(count):
-    #         print('index:', i)
-    #         tmp_data = CresData()
-    #         tmp_data.read_data(self.data_read)

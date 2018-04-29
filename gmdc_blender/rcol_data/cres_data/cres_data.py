@@ -1,13 +1,14 @@
-from .subnodes.sgresource       import SgResource
-from .subnodes.comptree_node    import CompositionTreeNode
-from .subnodes.objectgraph_node import ObjectGraphNode
+from .subnodes.sgresource           import SgResource
+from .subnodes.comptree_node        import CompositionTreeNode
+from .subnodes.objectgraph_node     import ObjectGraphNode
+from .subnodes.datalist_extension   import DataListExtension
 
 # Could use some improvement once I get it working
 class CresData:
 
     def __init__(self, block_name, block_id, block_version, type_code, sgresource,
                     comptree, objectgraph, chains, is_subnode, purpose_type,
-                    enabled, link_index, object_count):
+                    enabled, link_index, object_count, datalists):
         self.block_name     = block_name
         self.block_id       = block_id
         self.block_version  = block_version
@@ -24,12 +25,12 @@ class CresData:
         self.enabled        = enabled
         self.link_index     = link_index
         self.object_count   = object_count
+
+        self.datalists       = datalists
         
 
     @staticmethod
     def from_data(reader):
-        print(reader.byte_offset)
-
         block_name      = reader.read_byte_string()
         block_id        = reader.read_uint32()
         block_version   = reader.read_int32()
@@ -51,10 +52,19 @@ class CresData:
             is_subnode      = reader.read_byte()
             purpose_type    = reader.read_int32()
 
+            # datalists        = datalistsExtension.from_data(reader)
+            datalists = []
+            for i in range(objectgraph.extension_count):
+                tmp_dlist = DataListExtension.from_data(reader)
+                datalists.append(tmp_dlist)
+            
+            print('FILE=cres_data.py')
+            print('Address:', hex(reader.byte_offset))
+
             return CresData(block_name, block_id, block_version, type_code, 
                             sgresource, comptree, objectgraph, 
                             chains, is_subnode, purpose_type,
-                            [], [], [])
+                            [], [], [], datalists)
         
         # ELSE IF type_code == 0
         objectgraph     = ObjectGraphNode.from_data(reader)
@@ -63,10 +73,18 @@ class CresData:
         link_index      = reader.read_int32()
         object_count    = reader.read_int32()
 
+        # datalists        = datalistsExtension.from_data(reader)
+        datalists = []
+        for i in range(chain_count):
+            tmp_dlist = DataListExtension.from_data(reader)
+
+        print('FILE=cres_data.py')
+        print('Address:', hex(reader.byte_offset))
+
         return CresData(block_name, block_id, block_version, type_code, 
                             [], [], objectgraph, 
                             [], is_subnode, [],
-                            enabled, link_index, object_count)
+                            enabled, link_index, object_count, datalists)
 
     
     def print(self):
@@ -96,7 +114,7 @@ class CresData:
             print('\tLink index:\t\t', self.link_index, sep="")
             print('\tObject count:\t\t', self.object_count, sep="")
         
-        print('\tcDataListExtension:')
-
+        for dlist in self.datalists:
+            dlist.print()
 
         
