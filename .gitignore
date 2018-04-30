@@ -4,6 +4,9 @@
 # Sims 2 files folder
 /sims2_files/
 
+# data output files
+/outfiles/
+
 # Setuptools distribution folder.
 /dist/
 

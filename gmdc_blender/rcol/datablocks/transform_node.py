@@ -25,11 +25,11 @@ class TransformNode:
     
 
     def __init__(self, identity, comptree_node, objectgraph, 
-                    extensions, transform, rotation, assigned_subset):
+                    children, transform, rotation, assigned_subset):
         self.identity = identity
         self.comptree_node = comptree_node
         self.objectgraph = objectgraph
-        self.extensions = extensions
+        self.children = children
         self.transform = transform
         self.rotation = rotation
         self.assigned_subset = assigned_subset
@@ -42,9 +42,9 @@ class TransformNode:
         objectgraph = ObjectGraphNode.from_data(reader)
 
         extension_count = reader.read_int32()
-        extensions = []
+        children = []
         for _ in range(extension_count):
-            extensions.append( Extension.from_data(reader) )
+            children.append( Extension.from_data(reader) )
 
         transform = []
         for _ in range(3):
@@ -57,7 +57,7 @@ class TransformNode:
         assigned_subset = reader.read_int32()
 
         return TransformNode(identity, comptree_node, objectgraph, 
-                                extensions, transform, rotation, assigned_subset)
+                                children, transform, rotation, assigned_subset)
     
 
     def print(self):
@@ -68,12 +68,13 @@ class TransformNode:
 
         self.objectgraph.print()
 
-        print('-----|Extensions|-----')
-        for ob in self.extensions:
-            print('  >> Extension:')
+        print('-----|Children|-----')
+        print('Child count:\t', len(self.children), sep="")
+        for ob in self.children:
+            print('  >> Child:')
             ob.print()
         
         print('-----|Misc|-----')
         print('Transform:\t\t\t\t', self.transform, sep="")  
         print('Rotation:\t\t\t\t\t', self.rotation, sep="")  
-        print('Assigned subset:\t', hex(self.assigned_subset), sep="")  
+        print('Assigned subset:\t', self.assigned_subset, sep="")       # Assigned subset in the GMDC

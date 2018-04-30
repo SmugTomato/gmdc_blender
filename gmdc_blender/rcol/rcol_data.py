@@ -68,7 +68,7 @@ class Rcol:
         for i in range(item_count):
             data_blocks.append( DataHelper.read_datablock(reader, items[i]) )
 
-        print('Address:\t', hex(reader.byte_offset))
+        print('Address:\t', hex(reader.byte_offset), '\t', reader.byte_offset, '/', len(reader.file_data))
         
         return Rcol(version_mark, file_links, items, data_blocks)
     

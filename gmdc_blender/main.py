@@ -4,6 +4,7 @@
 
 from rcol.gmdc import GMDC
 from rcol.rcol_data import Rcol
+from rcol.data_helper import DataHelper
 
 
 # test_gmdc = gmdc.GMDC.from_test_func('../sims2_files/ChildTestMesh.5gd')
@@ -32,7 +33,13 @@ from rcol.rcol_data import Rcol
 #     print()
 
 def main():
-    test_rcol = Rcol.from_test_func('AdultTestMesh.5cr')
+    test_rcol = Rcol.from_test_func('../sims2_files/AdultTestMesh.5cr')
     test_rcol.print()
+
+    count = 0
+    for ob in test_rcol.data_blocks:
+        if ob.identity.identity == DataHelper.TRANSFORM_NODE:
+            count += 1
+    print(count)
 
 main()
