@@ -35,6 +35,8 @@ import element_id
 def main():
     # CRES Load test
     test_cres = Cres.from_test_func('../sims2_files/AdultTestMesh.5cr')
+    # test_cres = Cres.from_test_func('../sims2_files/TableTest.5cr')
+
     test_cres.print()
 
 main()

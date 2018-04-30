@@ -21,3 +21,4 @@ class SgResource:
         print('\t\tBlock ID:\t', hex(self.block_id), sep="")
         print('\t\tVersion:\t', self.version, sep="")
         print('\t\tFilename:\t', self.file_name, sep="")
+        print()

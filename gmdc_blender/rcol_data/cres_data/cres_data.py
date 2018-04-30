@@ -1,17 +1,23 @@
-from .subnodes.sgresource           import SgResource
-from .subnodes.comptree_node        import CompositionTreeNode
-from .subnodes.objectgraph_node     import ObjectGraphNode
-from .subnodes.datalist_extension   import DataListExtension
+from .subnodes.sgresource               import SgResource
+from .subnodes.comptree_node            import CompositionTreeNode
+from .subnodes.objectgraph_node         import ObjectGraphNode
+from .subnodes.datalist_extension       import DataListExtension
+from .subnodes.transform_node           import TransformNode
+from .subnodes.bonedata_extension       import BoneDataExtension
+
+from .subnodes.generic.childnode_info   import ChildNodeInfo
+from .subnodes.generic.identity_block   import IdentityBlock
 
 # Could use some improvement once I get it working
 class CresData:
 
-    def __init__(self, block_name, block_id, block_version, type_code, sgresource,
+    def __init__(self, id_block, type_code, sgresource,
                     comptree, objectgraph, chains, is_subnode, purpose_type,
                     enabled, link_index, object_count, datalists):
-        self.block_name     = block_name
-        self.block_id       = block_id
-        self.block_version  = block_version
+        # self.block_name     = block_name
+        # self.block_id       = block_id
+        # self.block_version  = block_version
+        self.id_block       = id_block
         self.type_code      = type_code
 
         self.sgresource     = sgresource
@@ -31,23 +37,22 @@ class CresData:
 
     @staticmethod
     def from_data(reader):
-        block_name      = reader.read_byte_string()
-        block_id        = reader.read_uint32()
-        block_version   = reader.read_int32()
+        # block_name      = reader.read_byte_string()
+        # block_id        = reader.read_uint32()
+        # block_version   = reader.read_int32()
+        id_block        = IdentityBlock.from_data(reader)
+
         type_code       = reader.read_byte()
 
         if type_code == 1:
             sgresource      = SgResource.from_data(reader)
-            comptree        = CompositionTreeNode.from_data(reader)
+            comptree        = IdentityBlock.from_data(reader)
             objectgraph     = ObjectGraphNode.from_data(reader)
 
             chain_count     = reader.read_int32()
             chains          = []
             for i in range(chain_count):
-                enabled             = reader.read_byte()
-                depends             = reader.read_byte()
-                location            = reader.read_int32()
-                chains.append( (enabled, depends, location) )
+                chains.append( ChildNodeInfo.from_data(reader) )
 
             is_subnode      = reader.read_byte()
             purpose_type    = reader.read_int32()
@@ -59,9 +64,22 @@ class CresData:
                 datalists.append(tmp_dlist)
             
             print('FILE=cres_data.py')
-            print('Address:', hex(reader.byte_offset))
+            print('Address: ', hex(reader.byte_offset), '\t', reader.byte_offset, '/', len(reader.file_data), sep='')
 
-            return CresData(block_name, block_id, block_version, type_code, 
+
+            TransformNode.from_data(reader).print()
+            print()
+            BoneDataExtension.from_data(reader).print()
+            # print( reader.read_byte_string() )
+            # print( hex(reader.read_uint32()) )
+            # print( reader.read_int32() )
+            # print(reader.read_byte())
+
+
+            print('FILE=cres_data.py')
+            print('Address: ', hex(reader.byte_offset), ',\tOffset:', reader.byte_offset, '/', len(reader.file_data), sep='')
+
+            return CresData(id_block, type_code, 
                             sgresource, comptree, objectgraph, 
                             chains, is_subnode, purpose_type,
                             [], [], [], datalists)
@@ -79,9 +97,11 @@ class CresData:
             tmp_dlist = DataListExtension.from_data(reader)
 
         print('FILE=cres_data.py')
-        print('Address:', hex(reader.byte_offset))
+        print('Address: ', hex(reader.byte_offset), '\t', reader.byte_offset, '/', len(reader.file_data), sep='')
 
-        return CresData(block_name, block_id, block_version, type_code, 
+
+
+        return CresData(id_block, type_code, 
                             [], [], objectgraph, 
                             [], is_subnode, [],
                             enabled, link_index, object_count, datalists)
@@ -89,21 +109,23 @@ class CresData:
     
     def print(self):
         print('Data block:')
-        print('\tBlock name:\t\t', self.block_name, sep="")
-        print('\tBlock ID:\t\t', hex(self.block_id), sep="")
-        print('\tBlock Version:\t', self.block_version, sep="")
+        # print('\tBlock name:\t\t', self.block_name, sep="")
+        # print('\tBlock ID:\t\t', hex(self.block_id), sep="")
+        # print('\tBlock Version:\t', self.block_version, sep="")
+        self.id_block.print()
         print('\tTypecode:\t\t', self.type_code, sep="")
+        print()
 
         if self.type_code == 1:
             self.sgresource.print()
+            print('\tCompositionTreeNode:')
             self.comptree.print()
+            print()
             self.objectgraph.print()
 
-            for i, ex in enumerate(self.chains):
-                print('\tChain Link ', i, sep="")
-                print('\t\tEnabled:\t', ex[0], sep="")
-                print('\t\tDepends:\t', ex[1], sep="")
-                print('\t\tLocation:\t', ex[2], sep="")
+            for ex in self.chains:
+                ex.print()
+            print()
             
             print('\tIs subnode:\t\t', self.is_subnode, sep="")
             print('\tPurpose type:\t', self.purpose_type, sep="")

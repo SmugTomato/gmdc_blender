@@ -1,3 +1,5 @@
+from .generic.childnode_info import ChildNodeInfo
+
 class ObjectGraphNode:
     
     def __init__(self, name, class_id, version, extension_count, extension_links,
@@ -18,10 +20,7 @@ class ObjectGraphNode:
 
         extension_links = []
         for i in range(extension_count):
-            enabled             = reader.read_byte()
-            depends             = reader.read_byte()
-            data_extension_ind  = reader.read_int32()
-            extension_links.append( (enabled, depends, data_extension_ind) )
+            extension_links.append( ChildNodeInfo.from_data(reader) )
 
         file_name = '<<< No filename on versions other than 4 >>>'
         if version == 4:
@@ -37,10 +36,8 @@ class ObjectGraphNode:
         print('\t\tVersion:\t', self.version, sep="")
         print('\t\tExtensions:\t', self.extension_count, sep="")
 
-        for i, ex in enumerate(self.extension_links):
-            print('\t\tExtension Link ', i, sep="")
-            print('\t\t\tEnabled:\t', ex[0], sep="")
-            print('\t\t\tDepends:\t', ex[1], sep="")
-            print('\t\t\tData Index:\t', ex[2], sep="")
+        for ex in self.extension_links:
+            ex.print()
         
         print('\t\tFilename:\t', self.file_name, sep="")
+        print()

@@ -190,129 +190,134 @@ Item count:	 183
 	0x65246462
 	0x65246462
 Data block:
-	Block name:		cResourceNode
-	Block ID:		0xe519c933
-	Block Version:	7
+		Name:		cResourceNode
+		Identity:	0xe519c933
+		Version:	7
 	Typecode:		1
+
 	cSGResource:
 		Name:		cSGResource
 		Block ID:	0x0
 		Version:	2
 		Filename:	TestMesh.SmugTomato-afbodydresslongloose_cres
-	cCompositionTreeNode:
+
+	CompositionTreeNode:
 		Name:		cCompositionTreeNode
-		Block ID:	0x0
+		Identity:	0x0
 		Version:	11
+
 	cObjectGraphNode:
 		Name:		cObjectGraphNode
 		Block ID:	0x0
 		Version:	4
 		Extensions:	25
-		Extension Link 0
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	1
-		Extension Link 1
+			Index:		0x1
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	2
-		Extension Link 2
+			Index:		0x2
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	3
-		Extension Link 3
+			Index:		0x3
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	4
-		Extension Link 4
+			Index:		0x4
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	5
-		Extension Link 5
+			Index:		0x5
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	6
-		Extension Link 6
+			Index:		0x6
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	7
-		Extension Link 7
+			Index:		0x7
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	8
-		Extension Link 8
+			Index:		0x8
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	9
-		Extension Link 9
+			Index:		0x9
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	10
-		Extension Link 10
+			Index:		0xa
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	11
-		Extension Link 11
+			Index:		0xb
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	12
-		Extension Link 12
+			Index:		0xc
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	13
-		Extension Link 13
+			Index:		0xd
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	14
-		Extension Link 14
+			Index:		0xe
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	15
-		Extension Link 15
+			Index:		0xf
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	16
-		Extension Link 16
+			Index:		0x10
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	17
-		Extension Link 17
+			Index:		0x11
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	18
-		Extension Link 18
+			Index:		0x12
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	19
-		Extension Link 19
+			Index:		0x13
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	20
-		Extension Link 20
+			Index:		0x14
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	21
-		Extension Link 21
+			Index:		0x15
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	22
-		Extension Link 22
+			Index:		0x16
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	23
-		Extension Link 23
+			Index:		0x17
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	24
-		Extension Link 24
+			Index:		0x18
+		Extension Link:
 			Enabled:	1
 			Depends:	0
-			Data Index:	25
+			Index:		0x19
 		Filename:	##0x1c050000!TestMesh.SmugTomato-afbodydresslongloose_cres
-	Chain Link 0
-		Enabled:	1
-		Depends:	0
-		Location:	26
+
+		Extension Link:
+			Enabled:	1
+			Depends:	0
+			Index:		0x1a
+
 	Is subnode:		0
 	Purpose type:	3
 	cDataListExtension:
@@ -324,6 +329,7 @@ Data block:
 		Class version:	3
 		Extension type:	7
 		Variable name:	thumbnailExtension
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -345,6 +351,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -366,6 +373,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -387,6 +395,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -408,6 +417,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -429,6 +439,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -450,6 +461,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -471,6 +483,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -492,6 +505,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.0, 0.0, 0.0, 1.0]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -513,6 +527,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.0, 0.0, 0.0, 1.0]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -534,6 +549,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.0, 0.0, 0.0, 1.0]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -555,6 +571,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.0, 0.0, 0.0, 1.0]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -576,6 +593,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.0, 0.0, 0.0, 1.0]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -597,6 +615,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.0, 0.0, 0.0, 1.0]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -618,6 +637,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.0, 0.0, 0.0, 1.0]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -639,6 +659,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[-0.03656812757253647, 0.06856532394886017, -0.6821765899658203, 0.727046549320221]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -660,6 +681,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.0, 0.0, 0.0, 1.0]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -681,6 +703,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.0, 0.0, 0.0, 1.0]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -702,6 +725,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[-0.5, -0.5, 0.5, 0.5]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -723,6 +747,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[-0.03656812757253647, -0.06856532394886017, 0.6821765899658203, 0.727046549320221]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -744,6 +769,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.0, 0.0, 0.0, 1.0]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -765,6 +791,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.0, 0.0, 0.0, 1.0]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -786,6 +813,7 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[0.5, 0.5, 0.5, 0.5]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
@@ -807,11 +835,12 @@ Data block:
 			Extension type:	8
 			Variable name:	bone_adjust_rotation
 			Content:[-1.8960874115236948e-07, 0.8433571457862854, 0.5373534560203552, -2.971361823256302e-07]
+
 	cDataListExtension:
 		Block name:		cDataListExtension
 		Block ID:		0x6a836d56
 		Version:		1
-		Name:			cExtension
+		Name:			cExtension-
 		Class ID:		0
 		Class version:	3
 		Extension type:	7
@@ -820,3 +849,4 @@ Data block:
 			Extension type:	6
 			Variable name:	LODs
 			Content:
+
