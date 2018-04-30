@@ -65,15 +65,17 @@ class Rcol:
             items.append( reader.read_uint32() )
         
         data_blocks = []
-        for i in range(1):
+        for i in range(item_count):
             data_blocks.append( DataHelper.read_datablock(reader, items[i]) )
+
+        print('Address:\t', hex(reader.byte_offset))
         
         return Rcol(version_mark, file_links, items, data_blocks)
     
 
     def print(self):
         old_stdout = sys.stdout
-        sys.stdout = open('cres_out.txt', 'w')
+        sys.stdout = open('../outfiles/cres_out_' + 'header' + '.txt', 'w')
 
         print('Version mark:\t', hex(self.version_mark), sep="")
 
@@ -87,10 +89,12 @@ class Rcol:
             print('\t', hex(n), sep="")
         print()
 
-        for ob in self.data_blocks:
-            print('-----||Datablock||-----')
-            ob.print()
-            print()
+        for i, ob in enumerate(self.data_blocks):
+            sys.stdout = open('../outfiles/cres_out_' + 'data[' + str(i) + '].txt', 'w') 
+            if ob != None:
+                print('-----||Datablock||-----')
+                ob.print()
+                print('\n')
         
         sys.stdout = old_stdout
         

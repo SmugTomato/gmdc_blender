@@ -16,7 +16,11 @@ Created by SmugTomato
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
-from .datablocks.resource_node import ResourceNode
+from .datablocks.resource_node                  import ResourceNode
+from .datablocks.data_list_extension_container  import DataListExtensionContainer
+from .datablocks.transform_node                 import TransformNode
+from .datablocks.bone_data_extension            import BoneDataExtension
+from .datablocks.shape_ref_node                 import ShapeRefNode
 
 
 class DataHelper:
@@ -36,12 +40,13 @@ class DataHelper:
     @classmethod
     def read_datablock(cls, reader, block_id):
         if block_id == cls.BONE_DATA_EXTENSION:
-            pass
+            return BoneDataExtension.from_data(reader)
         elif block_id == cls.DATA_LIST_EXTENSION:
-            pass
+            return DataListExtensionContainer.from_data(reader)
         elif block_id == cls.SHAPE_REF_NODE:
-            pass
+            return ShapeRefNode.from_data(reader)
         elif block_id == cls.TRANSFORM_NODE:
-            pass
+            return TransformNode.from_data(reader)
         elif block_id == cls.RESOURCE_NODE:
             return ResourceNode.from_data(reader)
+        return None

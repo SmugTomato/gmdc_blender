@@ -37,6 +37,6 @@ class Extension:
     
 
     def print(self):
-        print('\tEnabled:\t', self.is_enabled, sep="")
-        print('\tDepends:\t', self.is_dependent, sep="")
-        print('\tIndex:\t\t', self.index, sep="")
+        print('\t\tEnabled:\t', self.is_enabled, sep="")
+        print('\t\tDepends:\t', self.is_dependent, sep="")
+        print('\t\tIndex:\t\t', self.index, '\t', hex(self.index), sep="")

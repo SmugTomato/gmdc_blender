@@ -36,6 +36,6 @@ class IdentityBlock:
         return IdentityBlock(name, identity, version)
     
     def print(self):
-        print('Name:\t\t', self.name, sep="")
-        print('ID:\t\t', hex(self.identity), sep="")
+        print('Name:\t\t\t', self.name, sep="")
+        print('ID:\t\t\t\t', hex(self.identity), sep="")
         print('Version:\t', self.version, sep="")        

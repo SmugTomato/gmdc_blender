@@ -192,130 +192,4497 @@ Items:	183
 	0x65246462
 
 -----||Datablock||-----
-Name:		cResourceNode
-ID:		0xe519c933
+Name:			cResourceNode
+ID:				0xe519c933
 Version:	7
 Typecode:	1
 -----|cSGResource|-----
-Name:		cSGResource
-ID:		0x0
+Name:			cSGResource
+ID:				0x0
 Version:	2
 Filename:	TestMesh.SmugTomato-afbodydresslongloose_cres
 -----|cCompositionTreeNode|-----
-Name:		cCompositionTreeNode
-ID:		0x0
+Name:			cCompositionTreeNode
+ID:				0x0
 Version:	11
 -----|cObjectGraphNode|-----
-Name:		cObjectGraphNode
-ID:		0x0
+Name:			cObjectGraphNode
+ID:				0x0
 Version:	4
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		1
+		Enabled:	1
+		Depends:	0
+		Index:		1
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		2
+		Enabled:	1
+		Depends:	0
+		Index:		2
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		3
+		Enabled:	1
+		Depends:	0
+		Index:		3
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		4
+		Enabled:	1
+		Depends:	0
+		Index:		4
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		5
+		Enabled:	1
+		Depends:	0
+		Index:		5
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		6
+		Enabled:	1
+		Depends:	0
+		Index:		6
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		7
+		Enabled:	1
+		Depends:	0
+		Index:		7
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		8
+		Enabled:	1
+		Depends:	0
+		Index:		8
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		9
+		Enabled:	1
+		Depends:	0
+		Index:		9
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		10
+		Enabled:	1
+		Depends:	0
+		Index:		10
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		11
+		Enabled:	1
+		Depends:	0
+		Index:		11
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		12
+		Enabled:	1
+		Depends:	0
+		Index:		12
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		13
+		Enabled:	1
+		Depends:	0
+		Index:		13
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		14
+		Enabled:	1
+		Depends:	0
+		Index:		14
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		15
+		Enabled:	1
+		Depends:	0
+		Index:		15
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		16
+		Enabled:	1
+		Depends:	0
+		Index:		16
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		17
+		Enabled:	1
+		Depends:	0
+		Index:		17
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		18
+		Enabled:	1
+		Depends:	0
+		Index:		18
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		19
+		Enabled:	1
+		Depends:	0
+		Index:		19
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		20
+		Enabled:	1
+		Depends:	0
+		Index:		20
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		21
+		Enabled:	1
+		Depends:	0
+		Index:		21
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		22
+		Enabled:	1
+		Depends:	0
+		Index:		22
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		23
+		Enabled:	1
+		Depends:	0
+		Index:		23
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		24
+		Enabled:	1
+		Depends:	0
+		Index:		24
   >> Extenstion:
-	Enabled:	1
-	Depends:	0
-	Index:		25
+		Enabled:	1
+		Depends:	0
+		Index:		25
 Filename:	##0x1c050000!TestMesh.SmugTomato-afbodydresslongloose_cres
 -----|Chains|-----
   >> Chain
-	Enabled:	1
-	Depends:	0
-	Index:		26
+		Enabled:	1
+		Depends:	0
+		Index:		26
 -----|Misc|-----
 Subnode:	0
 Purpose Type:	3
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	thumbnailExtension
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	bellytarget_surface_pregnant
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[3.502464031539791e-17, 0.14325985312461853, 0.19656987488269806]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	bellytarget_surface_fat
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[2.6962570797264127e-17, 0.14325985312461853, 0.13073590397834778]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	bellytarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[2.3501716597513713e-17, 0.14325985312461853, 0.10247496515512466]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	l_hiptarget_surface_fat
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[0.13600000739097595, -0.01600000075995922, -0.09779617935419083]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	l_hiptarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[0.10699999332427979, -0.01600000075995922, -0.09090381115674973]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	r_hiptarget_surface_fat
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[-0.13600000739097595, -0.01569196581840515, -0.09779617935419083]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	r_hiptarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[-0.10656455159187317, -0.01600000075995922, -0.09090381115674973]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	l_thighfronttarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[0.018110858276486397, 0.25364068150520325, -0.11935676634311676]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	l_thightarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[0.08914770931005478, -0.0003775280201807618, -3.302942059235647e-05]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	l_calftarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[0.11469648778438568, 0.0019034120487049222, -0.00020039876108057797]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	r_thighfronttarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[-0.018095338717103004, 0.25364014506340027, -0.11935687065124512]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	r_thightarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[-0.08770361542701721, -0.00042776850750669837, -3.738378291018307e-05]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	r_calftarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[-0.11680538207292557, 0.001976632745936513, -0.00020828480774071068]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	backtarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[7.102019710966973e-19, -0.001007060636766255, -0.019288675859570503]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	l_shouldertarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[-0.062313616275787354, 0.07715047895908356, 0.0004923269734717906]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[-0.03656812757253647, 0.06856532394886017, -0.6821765899658203, 0.727046549320221]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	l_upperarmtarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[-0.05374821648001671, 1.6627171135041863e-05, 0.00022000441094860435]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	l_forearmtarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[-0.02831621654331684, -6.354370725603076e-06, -3.062309406232089e-05]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	l_bracelet_grip
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[-0.024000000208616257, 0.10999999940395355, -4.44089183380283e-17]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[-0.5, -0.5, 0.5, 0.5]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	r_shouldertarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[0.062313616275787354, 0.07699999958276749, 0.0004923269734717906]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[-0.03656812757253647, -0.06856532394886017, 0.6821765899658203, 0.727046549320221]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	r_upperarmtarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[0.05374821648001671, 1.6627145669190213e-05, 0.00022000441094860435]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	r_forearmtarget_surface
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[0.028318127617239952, -6.036191280145431e-06, -2.996758666995447e-05]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	r_bracelet_grip
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[0.024453196674585342, 0.11007563024759293, 0.0002368263085372746]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[0.5, 0.5, 0.5, 0.5]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	bone_adjust
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	bone_adjust_bone_tag
+	Content:	neck_grip
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	bone_adjust_translation
+	Content:	[2.469939808236177e-10, -0.0011709692189469934, 0.07657328248023987]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	bone_adjust_rotation
+	Content:	[-1.8960874115236948e-07, 0.8433571457862854, 0.5373534560203552, -2.971361823256302e-07]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	GameData
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	LODs
+	Content:	
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		27
+Filename:	auskel
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		28
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		29
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		30
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		31
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		32
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		33
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		34
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		35
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		36
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		37
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		38
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		39
+-----|Misc|-----
+Transform:				[0.0, 0.0, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x0
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		40
+Filename:	head_ikctr
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.5093059539794922, 1.6772390604019165]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		41
+Filename:	r_foot_ikctr
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.09839517623186111, -0.0019024271750822663, 0.08595399558544159]
+Rotation:					[-6.738807201145391e-07, 0.9702956080436707, -0.24192233383655548, -2.702782921915059e-06]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		42
+Filename:	l_foot_ikctr
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.09839484840631485, -0.0019024269422516227, 0.08595399558544159]
+Rotation:					[-6.738807201145391e-07, 0.9702956080436707, -0.24192233383655548, -2.702782921915059e-06]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		43
+Filename:	r_hand_ikctr
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.7568320035934448, 0.062888003885746, 1.508193016052246]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		44
+Filename:	l_hand_ikctr
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.7568231821060181, 0.06301482766866684, 1.5078279972076416]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		45
+Filename:	head_ikpole
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-1.3393097741953852e-09, 0.03186710178852081, 2.088559865951538]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		46
+Filename:	l_foot_ikpole
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.08150351047515869, 0.23048695921897888, 0.4572349786758423]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		47
+Filename:	r_foot_ikpole
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.08128994703292847, 0.2304619997739792, 0.4572349786758423]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		48
+Filename:	r_hand_ikpole
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.47866663336753845, -0.12883299589157104, 1.5070899724960327]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		49
+Filename:	l_hand_ikpole
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.47866663336753845, -0.1288367658853531, 1.5068119764328003]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		50
+Filename:	root_trans
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		51
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		52
+-----|Misc|-----
+Transform:				[0.0, 0.0, 1.0121999979019165]
+Rotation:					[-1.9696665276569547e-06, 0.7071077823638916, 0.707105815410614, -1.9696608433150686e-06]
+Assigned subset:	0x1
+
+
+-----||Datablock||-----
+Name:			cShapeRefNode
+ID:				0x65245517
+Version:	20
+-----|IdentityBlock|-----
+Name:			cRenderableNode
+ID:				0x0
+Version:	5
+-----|IdentityBlock|-----
+Name:			cBoundedNode
+ID:				0x0
+Version:	5
+-----|cTransformNode|-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.0, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+-----|Shape links and unknowns|-----
+?	1
+?	1
+?	Practical
+?	0
+?	1
+>> Shape link:
+		Enabled:	1
+		Depends:	1
+		Index:		0
+?	16
+>> Unknown list
+	?	0
+	?	0
+	?	0
+>> Blend list
+>> Unknown list 2
+?	0xffffffff
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	2
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	2
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	2
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	2
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	2
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	2
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	2
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	2
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	2
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	2
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	2
+	?	0.0
+	?	2
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	plumbbob_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.0, 0.0]
+Rotation:					[-1.9696665276569547e-06, 0.7071077823638916, 0.707105815410614, -1.9696608433150686e-06]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		53
+Filename:	root_rot
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		54
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		55
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		56
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		57
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		58
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		59
+-----|Misc|-----
+Transform:				[0.0, 0.0, 0.0]
+Rotation:					[7.346839692639297e-39, -6.123043018768217e-17, 6.123043018768217e-17, 1.0]
+Assigned subset:	0x2
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	1
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	root_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.0, 0.0]
+Rotation:					[-1.9696665276569547e-06, -0.7071077823638916, -0.707105815410614, -1.9696608433150686e-06]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	bellytarget_surface_pregnant
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[3.502464031539791e-17, 0.14325985312461853, 0.19656987488269806]
+Rotation:					[-0.00021170530817471445, -0.06422393023967743, 0.9974974393844604, 0.029565447941422462]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	bellytarget_surface_fat
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[2.6962570797264127e-17, 0.14325985312461853, 0.13073590397834778]
+Rotation:					[-0.00021170530817471445, -0.06422393023967743, 0.9974974393844604, 0.029565447941422462]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		60
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		61
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		62
+Filename:	bellytarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[2.3501716597513713e-17, 0.14325985312461853, 0.10247496515512466]
+Rotation:					[-0.00021170530817471445, -0.06422393023967743, 0.9974974393844604, 0.029565447941422462]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		63
+Filename:	pelvis
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		64
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		65
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		66
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		67
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		68
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		69
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		70
+-----|Misc|-----
+Transform:				[0.0, 0.11100000143051147, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x28
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	spine0
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		71
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		72
+-----|Misc|-----
+Transform:				[-7.396739510328671e-19, 0.11600000411272049, -0.04399999976158142]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x3
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	IKTargetMorphBase
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	IKTargetMorphName
+	Content:	bellytarget_surface
+	-----|Subnode|-----
+	Extension type:	2
+	Variable name:	IKTargetMorphSkinType
+	Content:	7
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	IKTargetMorphBoneTranslation
+	Content:	[2.3501716597513713e-17, 0.14325985312461853, 0.10247496515512466]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	IKTargetMorphBoneRotation
+	Content:	[-0.00021170530817471445, -0.06422393023967743, 0.9974974393844604, 0.029565447941422462]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	IKTargetMorphDelta
+	-----|Subnode|-----
+	Extension type:	2
+	Variable name:	IKTargetMorphSkinType
+	Content:	7
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	IKTargetMorphName
+	Content:	_fat
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	IKTargetMorphBoneTranslation
+	Content:	[9.538792073726654e-05, -0.003621339797973633, 0.028027795255184174]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	IKTargetMorphBoneRotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	IKTargetMorphDelta
+	-----|Subnode|-----
+	Extension type:	2
+	Variable name:	IKTargetMorphSkinType
+	Content:	7
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	IKTargetMorphName
+	Content:	_pregnant
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	IKTargetMorphBoneTranslation
+	Content:	[0.000317595899105072, -0.01205722987651825, 0.09331867098808289]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	IKTargetMorphBoneRotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_hiptarget_surface_fat
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.13600000739097595, -0.01600000075995922, -0.09779617935419083]
+Rotation:					[-0.00021170530817471445, -0.06422393023967743, 0.9974974393844604, 0.029565447941422462]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		73
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		74
+Filename:	l_hiptarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.10699999332427979, -0.01600000075995922, -0.09090381115674973]
+Rotation:					[-0.00021170530817471445, -0.06422393023967743, 0.9974974393844604, 0.029565447941422462]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_hiptarget_surface_fat
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.13600000739097595, -0.01569196581840515, -0.09779617935419083]
+Rotation:					[-0.00021170530817471445, -0.06422393023967743, 0.9974974393844604, 0.029565447941422462]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		75
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		76
+Filename:	r_hiptarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.10656455159187317, -0.01600000075995922, -0.09090381115674973]
+Rotation:					[-0.00021170530817471445, -0.06422393023967743, 0.9974974393844604, 0.029565447941422462]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	dress
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-2.8591510524142113e-33, -0.19999998807907104, -2.499622285313818e-16]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x31
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		77
+Filename:	l_thigh
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		78
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		79
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		80
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		81
+-----|Misc|-----
+Transform:				[0.06599999964237213, -0.10999999940395355, 6.684967653826925e-18]
+Rotation:					[0.9988961815834045, 0.01743583008646965, 0.0007612159242853522, 0.04360995441675186]
+Assigned subset:	0x2d
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		82
+Filename:	r_thigh
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		83
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		84
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		85
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		86
+-----|Misc|-----
+Transform:				[-0.06599999964237213, -0.10999999940395355, 6.7515374951639676e-18]
+Rotation:					[0.9988961815834045, -0.01743590272963047, -0.0007595524657517672, 0.04360998421907425]
+Assigned subset:	0x29
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	breathe_trans
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-1.9721522189714914e-33, 0.07999999821186066, 0.12999999523162842]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x27
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	spine1
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		87
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		88
+-----|Misc|-----
+Transform:				[5.545725141876084e-20, 0.1599999964237213, 0.0]
+Rotation:					[-0.08715589344501495, 0.0, 0.0, 0.9961946606636047]
+Assigned subset:	0x4
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	IKTargetMorphBase
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	IKTargetMorphName
+	Content:	l_hiptarget_surface
+	-----|Subnode|-----
+	Extension type:	2
+	Variable name:	IKTargetMorphSkinType
+	Content:	8
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	IKTargetMorphBoneTranslation
+	Content:	[0.10699999332427979, -0.01600000075995922, -0.09090381115674973]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	IKTargetMorphBoneRotation
+	Content:	[-0.00021170530817471445, -0.06422393023967743, 0.9974974393844604, 0.029565447941422462]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	IKTargetMorphDelta
+	-----|Subnode|-----
+	Extension type:	2
+	Variable name:	IKTargetMorphSkinType
+	Content:	8
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	IKTargetMorphName
+	Content:	_fat
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	IKTargetMorphBoneTranslation
+	Content:	[-0.028972573578357697, -0.0008265357464551926, -0.006957888603210449]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	IKTargetMorphBoneRotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	IKTargetMorphBase
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	IKTargetMorphName
+	Content:	r_hiptarget_surface
+	-----|Subnode|-----
+	Extension type:	2
+	Variable name:	IKTargetMorphSkinType
+	Content:	8
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	IKTargetMorphBoneTranslation
+	Content:	[-0.10656455159187317, -0.01600000075995922, -0.09090381115674973]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	IKTargetMorphBoneRotation
+	Content:	[-0.00021170530817471445, -0.06422393023967743, 0.9974974393844604, 0.029565447941422462]
+
+
+-----||Datablock||-----
+Name:			cDataListExtension
+ID:				0x6a836d56
+Version:	1
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Content|-----
+Extension type:	7
+Variable name:	IKTargetMorphDelta
+	-----|Subnode|-----
+	Extension type:	2
+	Variable name:	IKTargetMorphSkinType
+	Content:	8
+	-----|Subnode|-----
+	Extension type:	6
+	Variable name:	IKTargetMorphName
+	Content:	_fat
+	-----|Subnode|-----
+	Extension type:	5
+	Variable name:	IKTargetMorphBoneTranslation
+	Content:	[0.02937890589237213, 0.0023136138916015625, -0.00675075501203537]
+	-----|Subnode|-----
+	Extension type:	8
+	Variable name:	IKTargetMorphBoneRotation
+	Content:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	0
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_thighfronttarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.018110858276486397, 0.25364068150520325, -0.11935676634311676]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_thightarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.08914770931005478, -0.0003775280201807618, -3.302942059235647e-05]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_shorts
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-5.329070399086743e-17, 0.0, 8.881783998477905e-18]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x39
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_calf
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		89
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		90
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		91
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		92
+-----|Misc|-----
+Transform:				[0.0, 0.4985860586166382, 0.0]
+Rotation:					[0.09584592282772064, 0.0, 0.0, 0.9953961968421936]
+Assigned subset:	0x2e
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	0
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_thighfronttarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.018095338717103004, 0.25364014506340027, -0.11935687065124512]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_thightarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.08770361542701721, -0.00042776850750669837, -3.738378291018307e-05]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_shorts
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-8.881783998477905e-18, 0.0, 1.1726730267469297e-17]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x37
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_calf
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		93
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		94
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		95
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		96
+-----|Misc|-----
+Transform:				[0.0, 0.4985860586166382, 0.0]
+Rotation:					[0.09584592282772064, -4.596341356956704e-21, -4.7734741687579786e-20, 0.9953961968421936]
+Assigned subset:	0x2a
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	backtarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[7.102019710966973e-19, -0.001007060636766255, -0.019288675859570503]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x3b
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		97
+Filename:	spine2
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		98
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		99
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		100
+-----|Misc|-----
+Transform:				[-3.8405875899648255e-18, 0.1599999964237213, -1.776356799695581e-17]
+Rotation:					[0.19936829805374146, 0.0, 0.0, 0.9799246191978455]
+Assigned subset:	0x5
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_calftarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.11469648778438568, 0.0019034120487049222, -0.00020039876108057797]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_ankle_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.41999998688697815, 0.0]
+Rotation:					[1.9696665276569547e-06, -0.7071077823638916, 0.707105815410614, -1.9696608433150686e-06]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_pantsleg
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, -7.105427198782324e-17, 4.440891999238953e-18]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x38
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_foot
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		101
+-----|Misc|-----
+Transform:				[0.0, 0.4339207410812378, -2.5216311460464655e-18]
+Rotation:					[-0.5591937899589539, 0.0, 0.0, 0.8290370106697083]
+Assigned subset:	0x2f
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_calftarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.11680538207292557, 0.001976632745936513, -0.00020828480774071068]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_ankle_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-5.329070399086743e-17, 0.4202221632003784, 1.776356799695581e-17]
+Rotation:					[1.9696665276569547e-06, -0.7071077823638916, 0.707105815410614, -1.9696608433150686e-06]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_pantsleg
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-5.329070399086743e-17, 2.0927703908305082e-16, -1.4224732378932726e-18]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x36
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_foot
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		102
+-----|Misc|-----
+Transform:				[0.0, 0.4339207410812378, 3.435582096589229e-10]
+Rotation:					[-0.5591937899589539, 0.0, 0.0, 0.8290370106697083]
+Assigned subset:	0x2b
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	1
+	?	0.8999999761581421
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		103
+Filename:	l_clavicle
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		104
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		105
+-----|Misc|-----
+Transform:				[0.019999999552965164, 0.08260530233383179, 0.03413302078843117]
+Rotation:					[-0.08617491275072098, -0.08617467433214188, -0.7018370628356934, 0.7018351554870605]
+Assigned subset:	0x18
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		106
+Filename:	r_clavicle
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		107
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		108
+-----|Misc|-----
+Transform:				[-0.019999999552965164, 0.08260530233383179, 0.03413302078843117]
+Rotation:					[-0.08617491275072098, 0.08617467433214188, 0.7018370628356934, 0.7018351554870605]
+Assigned subset:	0x9
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		109
+Filename:	neck
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		110
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		111
+-----|Misc|-----
+Transform:				[1.4028223216711566e-18, 0.1599999964237213, 1.3322675997716858e-17]
+Rotation:					[0.10452865064144135, 0.0, 0.0, 0.9945218563079834]
+Assigned subset:	0x6
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		112
+Filename:	l_toe
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		113
+-----|Misc|-----
+Transform:				[0.0, 0.15199999511241913, 0.0]
+Rotation:					[-0.24192233383655548, 0.0, 0.0, 0.9702956080436707]
+Assigned subset:	0x30
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		114
+Filename:	r_toe
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		115
+-----|Misc|-----
+Transform:				[0.0, 0.15199999511241913, 0.0]
+Rotation:					[-0.24192233383655548, 0.0, 0.0, 0.9702956080436707]
+Assigned subset:	0x2c
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	1
+	?	0.699999988079071
+-----|Rotation|-----
+	Preferred rotation angle:	[-0.12186934798955917, 0.0, 0.0, 0.9925461411476135]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_shouldertarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.062313616275787354, 0.07715047895908356, 0.0004923269734717906]
+Rotation:					[-0.03656809777021408, 0.0685655027627945, -0.6821775436401367, 0.7270455956459045]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		116
+Filename:	l_upperarm
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		117
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		118
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		119
+-----|Misc|-----
+Transform:				[7.502962921985919e-17, 0.14000000059604645, 0.0]
+Rotation:					[0.03770769014954567, 0.0, 0.0, 0.99928879737854]
+Assigned subset:	0x19
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	1
+	?	0.699999988079071
+-----|Rotation|-----
+	Preferred rotation angle:	[-0.12186934798955917, 0.0, 0.0, 0.9925461411476135]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_shouldertarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.062313616275787354, 0.07699999958276749, 0.0004923269734717906]
+Rotation:					[-0.03656809777021408, -0.0685655027627945, 0.6821775436401367, 0.7270455956459045]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		120
+Filename:	r_upperarm
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		121
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		122
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		123
+-----|Misc|-----
+Transform:				[5.311596652015369e-15, 0.14000000059604645, -7.873770520538904e-16]
+Rotation:					[0.03770763799548149, 0.0, 0.0, 0.99928879737854]
+Assigned subset:	0xa
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	1
+	?	0.25
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	neck_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[2.469939808236177e-10, -0.0011709692189469934, 0.07657328248023987]
+Rotation:					[-2.2280298708210466e-06, -0.8433580994606018, -0.5373519659042358, -1.243280848939321e-06]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		124
+Filename:	head
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		125
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		126
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		127
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		128
+-----|Misc|-----
+Transform:				[-2.9929522484294334e-18, 0.07499999552965164, 0.0]
+Rotation:					[-0.2163776159286499, 7.603338048056685e-08, 3.4418130212543474e-07, 0.9763097763061523]
+Assigned subset:	0x7
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		129
+Filename:	l_toe_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.04999999701976776, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		130
+Filename:	r_toe_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.04999999701976776, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_upperarmtarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.05374821648001671, 1.6627171135041863e-05, 0.00022000441094860435]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_shortsleeve
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[2.482365577200288e-16, -1.776356799695581e-17, -5.551114999048691e-19]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x35
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_bicep
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		131
+-----|Misc|-----
+Transform:				[0.0, 0.18700000643730164, 2.6515061122789263e-17]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x1a
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_upperarmtarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.05374821648001671, 1.6627145669190213e-05, 0.00022000441094860435]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_shortsleeve
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-2.469918957435978e-16, 0.0, -3.3306689994292145e-18]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x33
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_bicep
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		132
+-----|Misc|-----
+Transform:				[-4.930475024431244e-15, 0.18700000643730164, 7.489398086382335e-16]
+Rotation:					[0.0, -4.4695733304140656e-29, 0.0, 1.0]
+Assigned subset:	0xb
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	1
+	?	0.25
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	mouth_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.012000000104308128, 0.0949999988079071]
+Rotation:					[1.9696665276569547e-06, 0.707105815410614, 0.7071077823638916, -1.9696608433150686e-06]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		133
+Filename:	r_eye_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.03500000014901161, 0.08299999684095383, 0.09199999272823334]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		134
+Filename:	l_eye_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.03535005822777748, 0.08310208469629288, 0.09197720140218735]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		135
+Filename:	head_grip
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		136
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		137
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		138
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		139
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		140
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		141
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		142
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		143
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		144
+-----|Misc|-----
+Transform:				[5.7912814099836396e-08, 0.0818004310131073, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_forearm
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		145
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		146
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		147
+-----|Misc|-----
+Transform:				[3.340758780723263e-07, 0.13289986550807953, 0.0]
+Rotation:					[0.06662231683731079, 1.2828941464704258e-07, -8.228488113104504e-09, 0.9977782368659973]
+Assigned subset:	0x1b
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_forearm
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		148
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		149
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		150
+-----|Misc|-----
+Transform:				[0.000367754022590816, 0.13289962708950043, -0.0001206924207508564]
+Rotation:					[0.06662231683731079, 5.565194259309197e-20, -3.7159174548191106e-21, 0.9977782368659973]
+Assigned subset:	0xc
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	3
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.0, 0.0, 0.0, 1.0]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	b_hair
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.05999999865889549, -0.09999999403953552]
+Rotation:					[-0.7071077823638916, 0.0, 0.0, 0.707105815410614]
+Assigned subset:	0x40
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_hair
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.07249999791383743, 0.05999999865889549, 0.014999999664723873]
+Rotation:					[0.0, 0.0, -0.7071077823638916, 0.707105815410614]
+Assigned subset:	0x3f
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_hair
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.07249999791383743, 0.05999999865889549, 0.014999999664723873]
+Rotation:					[0.0, 0.0, 0.7071077823638916, 0.707105815410614]
+Assigned subset:	0x3e
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	f_hair
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.08500000089406967, 0.10499999672174454]
+Rotation:					[0.7071077823638916, 0.0, 0.0, 0.707105815410614]
+Assigned subset:	0x3d
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	c_hair
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-2.8199616863844312e-08, 0.05999813601374626, 5.11139251102577e-06]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x3c
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_earring_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.07400000095367432, -0.03805852681398392, -0.008123276755213737]
+Rotation:					[0.3535517454147339, 0.612373948097229, 0.6123702526092529, -0.3535561263561249]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_earring_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.07419033348560333, -0.03805852681398392, -0.008123276755213737]
+Rotation:					[-0.3535551428794861, 0.6123719811439514, 0.6123722195625305, 0.3535527288913727]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	glasses_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-2.251643455020158e-10, -5.03425435454119e-05, 0.11901822686195374]
+Rotation:					[-1.9696665276569547e-06, 0.7071077823638916, 0.707105815410614, -1.9696608433150686e-06]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	hat_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[9.40878521760169e-08, 0.133465975522995, -5.8632933360058814e-05]
+Rotation:					[-1.9696665276569547e-06, 0.7071077823638916, 0.707105815410614, -1.9696608433150686e-06]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_forearmtarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.02831621654331684, -6.354370725603076e-06, -3.062309406232089e-05]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_longsleeve
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.0, 0.0]
+Rotation:					[0.0, 2.2640272752628333e-31, 0.0, 1.0]
+Assigned subset:	0x34
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_wrist
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		151
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		152
+-----|Misc|-----
+Transform:				[-3.4156067840740434e-07, 0.14000000059604645, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x1c
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_forearmtarget_surface
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.028318127617239952, -6.036191280145431e-06, -2.996758666995447e-05]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_longsleeve
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.0, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x32
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_wrist
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		153
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		154
+-----|Misc|-----
+Transform:				[0.0, 0.14000000059604645, 0.0]
+Rotation:					[0.0, -1.7560091513282344e-26, 0.0, 1.0]
+Assigned subset:	0xd
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_bracelet_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.024000000208616257, 0.10999999940395355, 0.0]
+Rotation:					[-0.5, -0.5000013709068298, 0.5, 0.49999862909317017]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_hand
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		155
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		156
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		157
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		158
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		159
+-----|Misc|-----
+Transform:				[-6.758336326129211e-07, 0.14399999380111694, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x1d
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_bracelet_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.024453196674585342, 0.11007563024759293, 0.0002368263085372746]
+Rotation:					[0.5, 0.5000013709068298, 0.5, 0.49999862909317017]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_hand
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		160
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		161
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		162
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		163
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		164
+-----|Misc|-----
+Transform:				[-2.9017278836167477e-16, 0.14399999380111694, 1.776356733521132e-16]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0xe
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_hand_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.019999999552965164, 0.04999999701976776, 0.004000000189989805]
+Rotation:					[0.0, 0.7071077823638916, 0.0, 0.707105815410614]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_pinky0
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		165
+-----|Misc|-----
+Transform:				[0.0, 0.08500000089406967, -0.029000001028180122]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x25
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_mid0
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		166
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		167
+-----|Misc|-----
+Transform:				[0.0, 0.0860000029206276, 0.014999999664723873]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x23
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_index0
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		168
+-----|Misc|-----
+Transform:				[0.0, 0.08500000089406967, 0.04099999740719795]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x21
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		169
+Filename:	l_thumb0
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		170
+-----|Misc|-----
+Transform:				[0.00800000037997961, 0.020999997854232788, 0.025999998673796654]
+Rotation:					[0.3826840817928314, 0.0, 0.0, 0.9238792657852173]
+Assigned subset:	0x1e
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_hand_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-0.019999999552965164, 0.04999999701976776, 0.004000000189989805]
+Rotation:					[0.0, -0.7071077823638916, 0.0, 0.707105815410614]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_pinky0
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		171
+-----|Misc|-----
+Transform:				[0.0, 0.08500000089406967, -0.029000001028180122]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x16
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_mid0
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		172
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		173
+-----|Misc|-----
+Transform:				[0.0, 0.0860000029206276, 0.014999999664723873]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x14
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_index0
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		174
+-----|Misc|-----
+Transform:				[1.1051411578138758e-16, 0.08500000089406967, 0.04099999740719795]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x12
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+  >> Extenstion:
+		Enabled:	1
+		Depends:	0
+		Index:		175
+Filename:	r_thumb0
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		176
+-----|Misc|-----
+Transform:				[-0.00800000037997961, 0.020999997854232788, 0.025999998673796654]
+Rotation:					[0.3826840817928314, 0.0, 0.0, 0.9238792657852173]
+Assigned subset:	0xf
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_pinky1
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-2.138202725987526e-09, 0.03999999910593033, -2.4868995857482625e-16]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x26
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_ring_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.024000000208616257, 0.0]
+Rotation:					[0.5, -0.5000013709068298, -0.5, 0.49999862909317017]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_mid1
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.04099999740719795, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x24
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_index1
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		177
+-----|Misc|-----
+Transform:				[0.0, 0.03799999877810478, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x22
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	1
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.3826834559440613, 0.0, 0.0, 0.9238795042037964]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_thumb1
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		178
+-----|Misc|-----
+Transform:				[0.0, 0.03200000151991844, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x1f
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_pinky1
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[5.826428624252012e-18, 0.03999999910593033, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x17
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_ring_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-5.684341759025859e-16, 0.023914935067296028, 0.0]
+Rotation:					[0.5, 0.5000013709068298, 0.5, 0.49999862909317017]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_mid1
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-8.542938724968418e-17, 0.04099999740719795, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x15
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_index1
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		179
+-----|Misc|-----
+Transform:				[-2.459569108175592e-17, 0.03799999877810478, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x13
+
+
+-----||Datablock||-----
+Name:			cBoneDataExtension
+ID:				0xe9075bc5
+Version:	4
+-----|cCompositionTreeNode|-----
+Name:			cExtension
+ID:				0x0
+Version:	3
+-----|Unknown|-----
+	?	3
+	?	0.0
+	?	1
+	?	1.0
+-----|Rotation|-----
+	Preferred rotation angle:	[0.3826834559440613, 0.0, 0.0, 0.9238795042037964]
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_thumb1
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		180
+-----|Misc|-----
+Transform:				[2.924287547375682e-16, 0.03200000151991844, -1.4210854397564648e-16]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x10
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_index_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[0.0, 0.041999995708465576, -2.9827623010403315e-11]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_thumb2
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		181
+-----|Misc|-----
+Transform:				[-8.436713549997421e-09, 0.039000000804662704, -7.105426934084528e-16]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x20
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_index_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[4.104587460611759e-16, 0.041999995708465576, -3.552713599391162e-17]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_thumb2
+-----|Extensions|-----
+  >> Extension:
+		Enabled:	1
+		Depends:	0
+		Index:		182
+-----|Misc|-----
+Transform:				[-4.1625783140309934e-17, 0.039000000804662704, 1.4210854397564648e-16]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x11
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	l_thumb_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[-5.7938880360097755e-09, 0.027000000700354576, -2.8421708795129297e-16]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
+
+-----||Datablock||-----
+Name:			cTransformNode
+ID:				0x65246462
+Version:	7
+-----|cCompositionTreeNode|-----
+Name:			cCompositionTreeNode
+ID:				0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:			cObjectGraphNode
+ID:				0x0
+Version:	4
+Filename:	r_thumb_grip
+-----|Extensions|-----
+-----|Misc|-----
+Transform:				[2.299299522683768e-16, 0.027000000700354576, 0.0]
+Rotation:					[0.0, 0.0, 0.0, 1.0]
+Assigned subset:	0x7fffffff
+
 
