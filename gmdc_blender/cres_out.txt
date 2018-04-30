@@ -1,11 +1,12 @@
-Version mark:	 0xffff0001
-# File links:	 1
-TGIR Node:
-	Group ID:		0x1c050000
+Version mark:	0xffff0001
+File Links:	1
+TGIR Block:
+	Group ID:	0x1c050000
 	Instance ID:	0xffafbac3
 	Resource ID:	0x1656b9c0
-	Type ID:		0xfc6eb1f7
-Item count:	 183
+	Type ID:	0xfc6eb1f7
+
+Items:	183
 	0xe519c933
 	0x6a836d56
 	0x6a836d56
@@ -189,664 +190,132 @@ Item count:	 183
 	0x65246462
 	0x65246462
 	0x65246462
-Data block:
-		Name:		cResourceNode
-		Identity:	0xe519c933
-		Version:	7
-	Typecode:		1
 
-	cSGResource:
-		Name:		cSGResource
-		Block ID:	0x0
-		Version:	2
-		Filename:	TestMesh.SmugTomato-afbodydresslongloose_cres
-
-	CompositionTreeNode:
-		Name:		cCompositionTreeNode
-		Identity:	0x0
-		Version:	11
-
-	cObjectGraphNode:
-		Name:		cObjectGraphNode
-		Block ID:	0x0
-		Version:	4
-		Extensions:	25
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x1
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x2
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x3
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x4
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x5
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x6
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x7
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x8
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x9
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0xa
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0xb
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0xc
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0xd
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0xe
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0xf
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x10
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x11
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x12
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x13
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x14
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x15
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x16
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x17
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x18
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x19
-		Filename:	##0x1c050000!TestMesh.SmugTomato-afbodydresslongloose_cres
-
-		Extension Link:
-			Enabled:	1
-			Depends:	0
-			Index:		0x1a
-
-	Is subnode:		0
-	Purpose type:	3
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	thumbnailExtension
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:bellytarget_surface_pregnant
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[3.502464031539791e-17, 0.14325985312461853, 0.19656987488269806]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:bellytarget_surface_fat
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[2.6962570797264127e-17, 0.14325985312461853, 0.13073590397834778]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:bellytarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[2.3501716597513713e-17, 0.14325985312461853, 0.10247496515512466]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:l_hiptarget_surface_fat
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[0.13600000739097595, -0.01600000075995922, -0.09779617935419083]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:l_hiptarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[0.10699999332427979, -0.01600000075995922, -0.09090381115674973]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:r_hiptarget_surface_fat
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[-0.13600000739097595, -0.01569196581840515, -0.09779617935419083]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:r_hiptarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[-0.10656455159187317, -0.01600000075995922, -0.09090381115674973]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[-0.0002118838601745665, -0.06422381103038788, 0.9974973797798157, 0.029568230733275414]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:l_thighfronttarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[0.018110858276486397, 0.25364068150520325, -0.11935676634311676]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.0, 0.0, 0.0, 1.0]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:l_thightarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[0.08914770931005478, -0.0003775280201807618, -3.302942059235647e-05]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.0, 0.0, 0.0, 1.0]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:l_calftarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[0.11469648778438568, 0.0019034120487049222, -0.00020039876108057797]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.0, 0.0, 0.0, 1.0]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:r_thighfronttarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[-0.018095338717103004, 0.25364014506340027, -0.11935687065124512]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.0, 0.0, 0.0, 1.0]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:r_thightarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[-0.08770361542701721, -0.00042776850750669837, -3.738378291018307e-05]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.0, 0.0, 0.0, 1.0]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:r_calftarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[-0.11680538207292557, 0.001976632745936513, -0.00020828480774071068]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.0, 0.0, 0.0, 1.0]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:backtarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[7.102019710966973e-19, -0.001007060636766255, -0.019288675859570503]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.0, 0.0, 0.0, 1.0]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:l_shouldertarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[-0.062313616275787354, 0.07715047895908356, 0.0004923269734717906]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[-0.03656812757253647, 0.06856532394886017, -0.6821765899658203, 0.727046549320221]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:l_upperarmtarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[-0.05374821648001671, 1.6627171135041863e-05, 0.00022000441094860435]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.0, 0.0, 0.0, 1.0]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:l_forearmtarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[-0.02831621654331684, -6.354370725603076e-06, -3.062309406232089e-05]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.0, 0.0, 0.0, 1.0]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:l_bracelet_grip
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[-0.024000000208616257, 0.10999999940395355, -4.44089183380283e-17]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[-0.5, -0.5, 0.5, 0.5]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:r_shouldertarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[0.062313616275787354, 0.07699999958276749, 0.0004923269734717906]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[-0.03656812757253647, -0.06856532394886017, 0.6821765899658203, 0.727046549320221]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:r_upperarmtarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[0.05374821648001671, 1.6627145669190213e-05, 0.00022000441094860435]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.0, 0.0, 0.0, 1.0]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:r_forearmtarget_surface
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[0.028318127617239952, -6.036191280145431e-06, -2.996758666995447e-05]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.0, 0.0, 0.0, 1.0]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:r_bracelet_grip
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[0.024453196674585342, 0.11007563024759293, 0.0002368263085372746]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[0.5, 0.5, 0.5, 0.5]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	bone_adjust
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	bone_adjust_bone_tag
-			Content:neck_grip
-		cDataListExtension (SubNode):
-			Extension type:	5
-			Variable name:	bone_adjust_translation
-			Content:[2.469939808236177e-10, -0.0011709692189469934, 0.07657328248023987]
-		cDataListExtension (SubNode):
-			Extension type:	8
-			Variable name:	bone_adjust_rotation
-			Content:[-1.8960874115236948e-07, 0.8433571457862854, 0.5373534560203552, -2.971361823256302e-07]
-
-	cDataListExtension:
-		Block name:		cDataListExtension
-		Block ID:		0x6a836d56
-		Version:		1
-		Name:			cExtension-
-		Class ID:		0
-		Class version:	3
-		Extension type:	7
-		Variable name:	GameData
-		cDataListExtension (SubNode):
-			Extension type:	6
-			Variable name:	LODs
-			Content:
+-----||Datablock||-----
+Name:		cResourceNode
+ID:		0xe519c933
+Version:	7
+Typecode:	1
+-----|cSGResource|-----
+Name:		cSGResource
+ID:		0x0
+Version:	2
+Filename:	TestMesh.SmugTomato-afbodydresslongloose_cres
+-----|cCompositionTreeNode|-----
+Name:		cCompositionTreeNode
+ID:		0x0
+Version:	11
+-----|cObjectGraphNode|-----
+Name:		cObjectGraphNode
+ID:		0x0
+Version:	4
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		1
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		2
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		3
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		4
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		5
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		6
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		7
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		8
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		9
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		10
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		11
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		12
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		13
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		14
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		15
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		16
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		17
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		18
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		19
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		20
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		21
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		22
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		23
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		24
+  >> Extenstion:
+	Enabled:	1
+	Depends:	0
+	Index:		25
+Filename:	##0x1c050000!TestMesh.SmugTomato-afbodydresslongloose_cres
+-----|Chains|-----
+  >> Chain
+	Enabled:	1
+	Depends:	0
+	Index:		26
+-----|Misc|-----
+Subnode:	0
+Purpose Type:	3
 

@@ -2,9 +2,8 @@
 # from .element_id import ElementID
 # from .blender_model import BlenderModel
 
-from rcol_data.gmdc import GMDC
-from rcol_data.cres import Cres
-import element_id
+from rcol.gmdc import GMDC
+from rcol.rcol_data import Rcol
 
 
 # test_gmdc = gmdc.GMDC.from_test_func('../sims2_files/ChildTestMesh.5gd')
@@ -33,10 +32,7 @@ import element_id
 #     print()
 
 def main():
-    # CRES Load test
-    test_cres = Cres.from_test_func('../sims2_files/AdultTestMesh.5cr')
-    # test_cres = Cres.from_test_func('../sims2_files/TableTest.5cr')
-
-    test_cres.print()
+    test_rcol = Rcol.from_test_func('AdultTestMesh.5cr')
+    test_rcol.print()
 
 main()
