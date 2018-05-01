@@ -34,7 +34,7 @@ class Rcol:
     
 
     @staticmethod
-    def from_test_func(file_path):
+    def from_file_data(file_path):
         print("reading .5gd file...\n")
 
         file = open(file_path, "rb")

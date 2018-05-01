@@ -4,7 +4,9 @@ from bpy_extras.io_utils import ImportHelper
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
 
-from .gmdc_data.gmdc import GMDC
+from .rcol.gmdc import GMDC
+from .rcol.rcol_data import Rcol
+from .rcol.data_helper import DataHelper
 from . import blender_model
 
 class ImportGMDC(Operator, ImportHelper):
@@ -24,6 +26,16 @@ class ImportGMDC(Operator, ImportHelper):
 
     def execute(self, context):
         b_models = self.parse_data(context, self.filepath)
+
+        cres_path = self.filepath.replace('.5gd', '.5cr')
+        cres = Rcol.from_file_data(cres_path)
+
+        self.vert_groups = []
+        for block in cres.data_blocks:
+            if block.identity.identity == DataHelper.TRANSFORM_NODE:
+                if block.assigned_subset != 0x7fffffff:
+                    self.vert_groups.append( block.objectgraph.filename )
+        print(self.vert_groups)
 
         if b_models != False:
             for model in b_models:
@@ -71,3 +83,5 @@ class ImportGMDC(Operator, ImportHelper):
                 meshuvloop.uv = b_model.uvs[vertex_index]
 
         # Create vertex groups for bone assignments
+        for grp in self.vert_groups:
+            object.vertex_groups.new(grp)

@@ -33,13 +33,16 @@ from rcol.data_helper import DataHelper
 #     print()
 
 def main():
-    test_rcol = Rcol.from_test_func('../sims2_files/AdultTestMesh.5cr')
+    test_rcol = Rcol.from_file_data('../sims2_files/AdultTestMesh.5cr')
     test_rcol.print()
 
-    count = 0
+    bones = []
     for ob in test_rcol.data_blocks:
         if ob.identity.identity == DataHelper.TRANSFORM_NODE:
-            count += 1
-    print(count)
+            if ob.assigned_subset != 0x7fffffff:
+                bones.append((ob.assigned_subset, ob.objectgraph.filename))
+
+    for ob in bones:
+        print(ob)
 
 main()
