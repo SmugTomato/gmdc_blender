@@ -1,5 +1,6 @@
-import bpy
+import bpy, math
 import bmesh
+from mathutils import Vector, Matrix, Quaternion
 from bpy_extras.io_utils import ImportHelper
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
@@ -8,6 +9,7 @@ from .rcol.gmdc import GMDC
 from .rcol.rcol_data import Rcol
 from .rcol.data_helper import DataHelper
 from . import blender_model
+from .skeleton_builder import SkeletonBuilder
 
 class ImportGMDC(Operator, ImportHelper):
     """Sims 2 GMDC Importer"""
@@ -30,12 +32,14 @@ class ImportGMDC(Operator, ImportHelper):
         cres_path = self.filepath.replace('.5gd', '.5cr')
         cres = Rcol.from_file_data(cres_path)
 
+        self.import_skeleton(cres)
+
         self.vert_groups = []
         for block in cres.data_blocks:
             if block.identity.identity == DataHelper.TRANSFORM_NODE:
                 if block.assigned_subset != 0x7fffffff:
                     self.vert_groups.append( block.objectgraph.filename )
-        print(self.vert_groups)
+        # print(self.vert_groups)
 
         if b_models != False:
             for model in b_models:
@@ -54,6 +58,53 @@ class ImportGMDC(Operator, ImportHelper):
         gmdc_data.load_data()
         b_models = blender_model.BlenderModel.groups_from_gmdc(gmdc_data)
         return b_models
+
+
+
+    def import_skeleton(self, data):
+        bones_info = SkeletonBuilder.build(data.data_blocks)
+
+        # Create armature and object
+        name = 'Skel'
+        bpy.ops.object.add(
+            type='ARMATURE',
+            enter_editmode=True,
+            location=(0,0,0))
+        ob = bpy.context.object
+        ob.show_x_ray = True
+        ob.name = name
+        amt = ob.data
+        amt.name = name+'Amt'
+        amt.show_axes = True
+
+        boneTable = [
+            ('Base', None, (1,0,0)),
+            ('Mid', 'Base', (1,0,0)),
+            ('Tip', 'Mid', (0,0,1))
+        ]
+
+        # Create bones
+        bpy.ops.object.mode_set(mode='EDIT')
+        # for (bname, pname, vector) in boneTable:
+        for b in bones_info:
+            bone = amt.edit_bones.new(b.name)
+            rot = Quaternion(b.rotation)
+            trans = Vector(b.position)
+            if b.parent != -1:
+                b_parent = bones_info[b.parent]
+                parent = amt.edit_bones[b_parent.name]
+                bone.parent = parent
+                bone.head = parent.tail
+                bone.use_connect = False
+                # (trans_p, rot_p, scale_p) = parent.matrix.decompose()
+                # rot = rot * rot_p
+                # trans = trans - trans_p
+            else:
+                bone.head = Vector(trans)
+            bone.tail = rot * Vector(trans) + bone.head
+            print(rot.magnitude)
+        bpy.ops.object.mode_set(mode='OBJECT')
+
 
 
     def do_import(self, b_model):

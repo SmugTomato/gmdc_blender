@@ -5,6 +5,8 @@
 from rcol.gmdc import GMDC
 from rcol.rcol_data import Rcol
 from rcol.data_helper import DataHelper
+from skeleton_builder import SkeletonBuilder
+from bone_data import BoneData
 
 
 # test_gmdc = gmdc.GMDC.from_test_func('../sims2_files/ChildTestMesh.5gd')
@@ -32,17 +34,19 @@ from rcol.data_helper import DataHelper
 #         print('Element:', e, '\t', hex(element.element_identity), '\tLength:', len(element.element_values), '\t', element_id.element_ids[element.element_identity])
 #     print()
 
+
 def main():
-    test_rcol = Rcol.from_file_data('../sims2_files/AdultTestMesh.5cr')
-    test_rcol.print()
+    # test_rcol = Rcol.from_file_data('../sims2_files/AdultTestMesh.5cr')
+    # test_rcol.print()
+    #
+    # bones = SkeletonBuilder.build(test_rcol.data_blocks)
 
-    bones = []
-    for ob in test_rcol.data_blocks:
-        if ob.identity.identity == DataHelper.TRANSFORM_NODE:
-            if ob.assigned_subset != 0x7fffffff:
-                bones.append((ob.assigned_subset, ob.objectgraph.filename))
+    for i, name in enumerate(SkeletonBuilder.bone_parent_table):
+        print(i, '\t', name, sep="")
 
-    for ob in bones:
-        print(ob)
+    # test_gmdc = GMDC.from_test_func('../sims2_files/AdultTestMesh.5gd')
+    # test_gmdc.load_header()
+    # test_gmdc.load_data()
+    # test_gmdc.elements[22].print()
 
 main()

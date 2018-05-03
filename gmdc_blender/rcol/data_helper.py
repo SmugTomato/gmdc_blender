@@ -33,10 +33,6 @@ class DataHelper:
     RESOURCE_NODE       = 0xE519C933
 
 
-    def __init__(self):
-        pass
-
-
     @classmethod
     def read_datablock(cls, reader, block_id):
         if block_id == cls.BONE_DATA_EXTENSION:
@@ -50,3 +46,21 @@ class DataHelper:
         elif block_id == cls.RESOURCE_NODE:
             return ResourceNode.from_data(reader)
         return None
+
+    @classmethod
+    def parent_of_node(cls, data, d_block):
+        parent = -1     # Default to -1 for parentless bones
+
+        # Iterate through all data blocks until parent is found
+        for i, block in enumerate(data):
+            # Check if identity == TransformNode
+            if block.identity.identity == cls.TRANSFORM_NODE:
+                # Iterate through all its children until the index of d_block is found
+                for child in block.children:
+                    if child.index == data.index(d_block):
+                        # Check if this block is an actual bone and not IK related
+                        if block.assigned_subset != 0x7fffffff:
+                            return i
+                        return cls.parent_of_node(data, block)
+
+        return parent

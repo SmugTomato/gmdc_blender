@@ -31,11 +31,11 @@ class Rcol:
         self.file_links     = file_links
         self.items          = items
         self.data_blocks    = data_blocks
-    
+
 
     @staticmethod
     def from_file_data(file_path):
-        print("reading .5gd file...\n")
+        print("reading .5cr file...\n")
 
         file = open(file_path, "rb")
         file_data = file.read()
@@ -45,7 +45,7 @@ class Rcol:
         reader = DataReader(file_data, byte_offset)
 
         return Rcol.from_data(reader)
-        
+
 
     @staticmethod
     def from_data(reader):
@@ -53,25 +53,25 @@ class Rcol:
         if version_mark != 0xffff0001:      # Means the file does not contain a version mark
             reader.byte_offset = 0          # Reset the byte offset to account for lack of version mark
             version_mark = 0
-        
+
         link_count = reader.read_int32()
         file_links = []
         for _ in range(link_count):
             file_links.append( TgirBlock.from_data(reader, version_mark != 0xffff0001) )
-        
+
         item_count = reader.read_int32()
         items = []
         for _ in range(item_count):
             items.append( reader.read_uint32() )
-        
+
         data_blocks = []
         for i in range(item_count):
             data_blocks.append( DataHelper.read_datablock(reader, items[i]) )
 
         print('Address:\t', hex(reader.byte_offset), '\t', reader.byte_offset, '/', len(reader.file_data))
-        
+
         return Rcol(version_mark, file_links, items, data_blocks)
-    
+
 
     def print(self):
         old_stdout = sys.stdout
@@ -83,18 +83,17 @@ class Rcol:
         for ob in self.file_links:
             ob.print()
         print()
-        
+
         print('Items:\t', len(self.items), sep="")
         for n in self.items:
             print('\t', hex(n), sep="")
         print()
 
         for i, ob in enumerate(self.data_blocks):
-            sys.stdout = open('../outfiles/cres_out_' + 'data[' + str(i) + '].txt', 'w') 
+            sys.stdout = open('../outfiles/cres_out_' + 'data[' + str(i) + '].txt', 'w')
             if ob != None:
                 print('-----||Datablock||-----')
                 ob.print()
                 print('\n')
-        
+
         sys.stdout = old_stdout
-        

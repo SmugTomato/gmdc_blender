@@ -54,3 +54,9 @@ class GMDCElement:
         for i in range(0,count):
             temp_val = data_read.read_int16()
             self.references.append(temp_val)
+
+
+    def print(self):
+        print('Items:', self.list_length)
+        for i, val in enumerate(self.element_values):
+            print(i, '\t', val[0], sep='')
