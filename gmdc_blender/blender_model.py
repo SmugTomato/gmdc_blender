@@ -3,13 +3,14 @@ from .element_id import ElementID
 
 class BlenderModel:
 
-    def __init__(self, vertices, normals, faces, uvs, name, vertex_groups):
+    def __init__(self, vertices, normals, faces, uvs, name, bone_assign, bone_weight):
         self.name           = name
         self.vertices       = vertices
         self.normals        = normals
         self.faces          = faces
         self.uvs            = uvs
-        self.vertex_groups  = vertex_groups
+        self.bone_assign    = bone_assign
+        self.bone_weight    = bone_weight
 
     @staticmethod
     def groups_from_gmdc(gmdc_data):
@@ -43,6 +44,8 @@ class BlenderModel:
         vertices    = None
         uvs         = None
         normals     = None
+        bone_assign = None
+        bone_weight = None
         for ind in element_indices:
             # Vertices
             if gmdc_data.elements[ind].element_identity == ElementID.VERTICES:
@@ -65,6 +68,21 @@ class BlenderModel:
                     normal_set = (v[0], -v[1], v[2])    # Flip Y axis to match the vertices
                     normals.append(normal_set)
 
+            # Bone Assignments
+            if gmdc_data.elements[ind].element_identity == ElementID.BONE_ASSIGNMENTS:
+                bone_assign = []
+                for v in gmdc_data.elements[ind].element_values:
+                    temp_array = []
+                    for num in v:
+                        if num != 255:
+                            temp_array.append(num)
+                    bone_assign.append(temp_array)
+
+            # Bone Weights
+            if gmdc_data.elements[ind].element_identity == ElementID.BONE_WEIGHTS:
+                bone_weight = gmdc_data.elements[ind].element_values
+
+
 
         # Faces
         faces = []
@@ -77,7 +95,6 @@ class BlenderModel:
         # Name
         name = gmdc_data.groups[group_index].name
 
-        # Vertex Groups
 
 
-        return BlenderModel(vertices, normals, faces, uvs, name, vertex_groups=None)
+        return BlenderModel(vertices, normals, faces, uvs, name, bone_assign, bone_weight)

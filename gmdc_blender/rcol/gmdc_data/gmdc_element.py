@@ -1,3 +1,23 @@
+'''
+Copyright (C) 2018 SmugTomato
+
+Created by SmugTomato
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+'''
+
+
 class GMDCElement:
 
     def __init__(self):
@@ -15,12 +35,19 @@ class GMDCElement:
         self.element_values = None
         self.references     = None
 
-    def get_set_length(self):
+    def __get_set_length(self):
         if self.block_format == 0x01:
             return 2
         elif self.block_format == 0x02:
             return 3
+        elif self.block_format == 0x04:
+            return 4
         return 1
+
+    def __get_list_length(self):
+        if self.block_format != 0x04:
+            return int(self.block_size / self.set_length / 4)
+        return int(self.block_size / 1 / 4)
 
     def read_data(self, data_read):
         self.ref_array_size         = data_read.read_int32()
@@ -32,8 +59,8 @@ class GMDCElement:
 
         self.block_size     = data_read.read_int32()
 
-        self.set_length     = self.get_set_length()
-        self.list_length    = int(self.block_size / self.set_length / 4)
+        self.set_length     = self.__get_set_length()
+        self.list_length    = self.__get_list_length()
 
         self.element_values = []
         for i in range(0,self.list_length):
@@ -41,7 +68,7 @@ class GMDCElement:
 
             for j in range(0,self.set_length):
                 if self.block_format == 0x04:
-                    temp_val = data_read.read_int32()
+                    temp_val = data_read.read_byte()
                     temp_array.append(temp_val)
                 else:
                     temp_val = data_read.read_float()
@@ -59,4 +86,4 @@ class GMDCElement:
     def print(self):
         print('Items:', self.list_length)
         for i, val in enumerate(self.element_values):
-            print(i, '\t', val[0], sep='')
+            print(i, '\t', val, sep='')

@@ -2,11 +2,11 @@
 # from .element_id import ElementID
 # from .blender_model import BlenderModel
 
-from rcol.gmdc import GMDC
-from rcol.rcol_data import Rcol
-from rcol.data_helper import DataHelper
-from skeleton_builder import SkeletonBuilder
-from bone_data import BoneData
+from gmdc_blender.rcol.gmdc import GMDC
+from gmdc_blender.rcol.data_helper import DataHelper
+from gmdc_blender.bone_data import BoneData
+from gmdc_blender.element_id import element_ids
+from gmdc_blender.element_id import ElementID
 
 
 # test_gmdc = gmdc.GMDC.from_test_func('../sims2_files/ChildTestMesh.5gd')
@@ -44,19 +44,16 @@ def main():
     # for i, name in enumerate(SkeletonBuilder.bone_parent_table):
     #     print(i, '\t', name, sep="")
 
-    test_gmdc = GMDC.from_test_func('../sims2_files/AdultTestMesh.5gd')
+    test_gmdc = GMDC.from_test_func('sims2_files/ChildTestMesh.5gd')
     test_gmdc.load_header()
     test_gmdc.load_data()
 
-    skeleton = SkeletonBuilder.build(test_gmdc)
-    for bone in skeleton:
-        pass
-        # print(bone.subset, bone.name)
-        # bone.print()
-
-    # test_gmdc = GMDC.from_test_func('../sims2_files/AdultTestMesh.5gd')
-    # test_gmdc.load_header()
-    # test_gmdc.load_data()
-    # test_gmdc.elements[22].print()
+    # for link in test_gmdc.linkages:
+    #     for ind in link.indices:
+    #         identity = test_gmdc.elements[ind].element_identity
+    #         if identity == ElementID.BONE_WEIGHTS:
+    #             print(ind, element_ids[identity], test_gmdc.elements[ind].block_format, test_gmdc.elements[ind].set_format)
+    #             test_gmdc.elements[ind].print()
+    #     print()
 
 main()

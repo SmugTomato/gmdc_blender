@@ -1,3 +1,21 @@
+'''
+Copyright (C) 2018 SmugTomato
+
+Created by SmugTomato
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+'''
 import bpy, math
 import bmesh
 from mathutils import Vector, Matrix, Quaternion
@@ -39,7 +57,7 @@ class ImportGMDC(Operator, ImportHelper):
 
         if b_models != False:
             for model in b_models:
-                self.do_import(model)
+                print( self.do_import(model, armature) )
 
         return {'FINISHED'}
 
@@ -54,7 +72,6 @@ class ImportGMDC(Operator, ImportHelper):
         gmdc_data.load_data()
         b_models = blender_model.BlenderModel.groups_from_gmdc(gmdc_data)
         return b_models
-
 
 
     def import_skeleton(self, data):
@@ -109,7 +126,7 @@ class ImportGMDC(Operator, ImportHelper):
         return ob
 
 
-    def do_import(self, b_model):
+    def do_import(self, b_model, armature):
         print('Importing group:', b_model.name)
 
         # Create object and mesh
@@ -124,7 +141,6 @@ class ImportGMDC(Operator, ImportHelper):
         for i, vert in enumerate(mesh.vertices):
             vert.normal = b_model.normals[i]
             pass
-        # print(len(mesh.vertices), len(b_model.vertices))
 
         # Create UV layer and load UV coordinates
         mesh.uv_textures.new('UVMap')
@@ -136,5 +152,36 @@ class ImportGMDC(Operator, ImportHelper):
                 meshuvloop.uv = b_model.uvs[vertex_index]
 
         # Create vertex groups for bone assignments
-        # for grp in self.vert_groups:
-        #     object.vertex_groups.new(grp)
+        for val in BoneData.bone_parent_table:
+            object.vertex_groups.new(val[0])
+
+        # Load bone assignments and weights
+        # Check for mismatches in index counts
+        if len(b_model.vertices) != len(b_model.bone_assign) or \
+            len(b_model.vertices) != len(b_model.bone_weight):
+            print(len(b_model.vertices), len(b_model.bone_assign), len(b_model.bone_weight))
+            error = 'ERROR: Group ' + b_model.name + '\'s vertex index counts don\'t match.'
+            return error
+
+        for i in range(len(mesh.vertices)):
+            test = mesh.vertices[i].co == Vector(b_model.vertices[i])
+            if test != True:
+                print(mesh.vertices[i].co, Vector(b_model.vertices[i]))
+
+        print('Applying bone weights')
+        for i in range(len(b_model.bone_assign)):
+            remainder = 1.0     # Used for an implied 4th bone weight
+            print(i, b_model.bone_assign[i])
+            for j in range(len(b_model.bone_assign[i])):
+                grpname = BoneData.bone_parent_table[ b_model.bone_assign[i][j] ][0]
+                vertgroup = object.vertex_groups[grpname]
+                print(grpname)
+
+                if j != 3:
+                    weight = b_model.bone_weight[i][j]
+                    remainder -= weight
+                    vertgroup.add( [i], weight, 'ADD' )
+                else:
+                    vertgroup.add( [i], remainder, 'ADD' )
+
+        return 'Group ' + b_model.name + ' imported.\n'
