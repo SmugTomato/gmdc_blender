@@ -41,8 +41,18 @@ def main():
     #
     # bones = SkeletonBuilder.build(test_rcol.data_blocks)
 
-    for i, name in enumerate(SkeletonBuilder.bone_parent_table):
-        print(i, '\t', name, sep="")
+    # for i, name in enumerate(SkeletonBuilder.bone_parent_table):
+    #     print(i, '\t', name, sep="")
+
+    test_gmdc = GMDC.from_test_func('../sims2_files/AdultTestMesh.5gd')
+    test_gmdc.load_header()
+    test_gmdc.load_data()
+
+    skeleton = SkeletonBuilder.build(test_gmdc)
+    for bone in skeleton:
+        pass
+        # print(bone.subset, bone.name)
+        # bone.print()
 
     # test_gmdc = GMDC.from_test_func('../sims2_files/AdultTestMesh.5gd')
     # test_gmdc.load_header()

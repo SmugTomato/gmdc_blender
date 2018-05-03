@@ -17,7 +17,7 @@ from bpy_extras.io_utils import ImportHelper
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
 from .blender_import import ImportGMDC
-
+ 
 
 def menu_func_im(self, context):
     self.layout.operator(ImportGMDC.bl_idname)

@@ -9,7 +9,7 @@ from .rcol.gmdc import GMDC
 from .rcol.rcol_data import Rcol
 from .rcol.data_helper import DataHelper
 from . import blender_model
-from .skeleton_builder import SkeletonBuilder
+from .bone_data import BoneData
 
 class ImportGMDC(Operator, ImportHelper):
     """Sims 2 GMDC Importer"""
@@ -27,19 +27,15 @@ class ImportGMDC(Operator, ImportHelper):
             )
 
     def execute(self, context):
-        b_models = self.parse_data(context, self.filepath)
+        gmdc_data = GMDC.from_file_data(self.filepath)
+        if gmdc_data.load_header() == False:
+            print ('Unsupported GMDC version', hex(gmdc_data.header.file_type))
+            return False
 
-        cres_path = self.filepath.replace('.5gd', '.5cr')
-        cres = Rcol.from_file_data(cres_path)
+        gmdc_data.load_data()
+        b_models = blender_model.BlenderModel.groups_from_gmdc(gmdc_data)
 
-        self.import_skeleton(cres)
-
-        self.vert_groups = []
-        for block in cres.data_blocks:
-            if block.identity.identity == DataHelper.TRANSFORM_NODE:
-                if block.assigned_subset != 0x7fffffff:
-                    self.vert_groups.append( block.objectgraph.filename )
-        # print(self.vert_groups)
+        armature = self.import_skeleton(gmdc_data)
 
         if b_models != False:
             for model in b_models:
@@ -62,49 +58,55 @@ class ImportGMDC(Operator, ImportHelper):
 
 
     def import_skeleton(self, data):
-        bones_info = SkeletonBuilder.build(data.data_blocks)
+        skeldata = BoneData.build_bones(data)
 
         # Create armature and object
-        name = 'Skel'
+        name = 'Armature'
         bpy.ops.object.add(
             type='ARMATURE',
             enter_editmode=True,
             location=(0,0,0))
+        # Armature object
         ob = bpy.context.object
         ob.show_x_ray = True
         ob.name = name
+        # Armature
         amt = ob.data
-        amt.name = name+'Amt'
-        amt.show_axes = True
+        amt.draw_type = 'STICK'
 
-        boneTable = [
-            ('Base', None, (1,0,0)),
-            ('Mid', 'Base', (1,0,0)),
-            ('Tip', 'Mid', (0,0,1))
-        ]
-
-        # Create bones
-        bpy.ops.object.mode_set(mode='EDIT')
-        # for (bname, pname, vector) in boneTable:
-        for b in bones_info:
-            bone = amt.edit_bones.new(b.name)
-            rot = Quaternion(b.rotation)
-            trans = Vector(b.position)
-            if b.parent != -1:
-                b_parent = bones_info[b.parent]
-                parent = amt.edit_bones[b_parent.name]
+        # Create bones from skeldata
+        for bonedata in skeldata:
+            bone = amt.edit_bones.new(bonedata.name)
+            trans = Vector(bonedata.position)
+            rot = Quaternion(bonedata.rotation)
+            bone.tail = rot * trans
+            if bonedata.parent != None:
+                parent = amt.edit_bones[bonedata.parent]
                 bone.parent = parent
                 bone.head = parent.tail
-                bone.use_connect = False
-                # (trans_p, rot_p, scale_p) = parent.matrix.decompose()
-                # rot = rot * rot_p
-                # trans = trans - trans_p
-            else:
-                bone.head = Vector(trans)
-            bone.tail = rot * Vector(trans) + bone.head
-            print(rot.magnitude)
-        bpy.ops.object.mode_set(mode='OBJECT')
+            if bone.tail == bone.head:
+                # Blender does not support 0 length bones
+                bone.tail += Vector((0,0.00001,0))
 
+            # Enter custom properties for exporting later
+            # # Translate Vector
+            bone['tX'] = bonedata.position[0]
+            bone['tY'] = bonedata.position[1]
+            bone['tZ'] = bonedata.position[2]
+            # # Rotation Quaternion
+            bone['rW'] = bonedata.rotation[0]
+            bone['rX'] = bonedata.rotation[1]
+            bone['rY'] = bonedata.rotation[2]
+            bone['rZ'] = bonedata.rotation[3]
+
+
+        # Go back to Object mode, scale the armature -1 along Z and apply the transform
+        bpy.ops.object.mode_set(mode='OBJECT')
+        bpy.ops.transform.resize(value=(1, 1, -1))
+        bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+
+        # Return the Armature object
+        return ob
 
 
     def do_import(self, b_model):
@@ -134,5 +136,5 @@ class ImportGMDC(Operator, ImportHelper):
                 meshuvloop.uv = b_model.uvs[vertex_index]
 
         # Create vertex groups for bone assignments
-        for grp in self.vert_groups:
-            object.vertex_groups.new(grp)
+        # for grp in self.vert_groups:
+        #     object.vertex_groups.new(grp)

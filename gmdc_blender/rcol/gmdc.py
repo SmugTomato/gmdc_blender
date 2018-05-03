@@ -26,7 +26,7 @@ class GMDC:
         return GMDC(file_data, byte_offset)
 
     @staticmethod
-    def from_file_data(context, file_path):
+    def from_file_data(file_path):
         print("reading .5gd file...\n")
 
         file = open(file_path, "rb")
