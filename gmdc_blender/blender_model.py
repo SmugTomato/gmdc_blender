@@ -51,7 +51,7 @@ class BlenderModel:
             if gmdc_data.elements[ind].element_identity == ElementID.VERTICES:
                 vertices = []
                 for v in gmdc_data.elements[ind].element_values:
-                    values = (v[0], -v[1], v[2])        # Flip Y axis to make the model front-facing
+                    values = (-v[0], -v[1], v[2])        # Flip Y axis to make the model front-facing
                     vertices.append(values)
 
             # UV coordinates
@@ -65,17 +65,21 @@ class BlenderModel:
             if gmdc_data.elements[ind].element_identity == ElementID.NORMALS_LIST:
                 normals = []
                 for v in gmdc_data.elements[ind].element_values:
-                    normal_set = (v[0], -v[1], v[2])    # Flip Y axis to match the vertices
+                    normal_set = (-v[0], -v[1], v[2])    # Flip Y axis to match the vertices
                     normals.append(normal_set)
 
             # Bone Assignments
             if gmdc_data.elements[ind].element_identity == ElementID.BONE_ASSIGNMENTS:
                 bone_assign = []
+                testarr = []
                 for v in gmdc_data.elements[ind].element_values:
                     temp_array = []
                     for num in v:
                         if num != 255:
-                            temp_array.append(num)
+                            # The true index of the bone, as stored in the group's
+                            # Subset section.
+                            truenum = gmdc_data.groups[group_index].subsets[num]
+                            temp_array.append(truenum)
                     bone_assign.append(temp_array)
 
             # Bone Weights
@@ -89,10 +93,11 @@ class BlenderModel:
         face_count = int(len(gmdc_data.groups[group_index].faces) / 3)
         for i in range(0,face_count):
             # Faces have to be loaded backwards to work properly with the UV coordinates
-            face = ( gmdc_data.groups[group_index].faces[i*3 + 2], gmdc_data.groups[group_index].faces[i*3 + 1], gmdc_data.groups[group_index].faces[i*3] )
+            face = ( gmdc_data.groups[group_index].faces[i*3 + 0], gmdc_data.groups[group_index].faces[i*3 + 1], gmdc_data.groups[group_index].faces[i*3 + 2] )
             faces.append(face)
 
         # Name
+        # print(gmdc_data.header.file_name)
         name = gmdc_data.groups[group_index].name
 
 

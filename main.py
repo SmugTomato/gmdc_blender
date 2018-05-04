@@ -8,6 +8,8 @@ from gmdc_blender.bone_data import BoneData
 from gmdc_blender.element_id import element_ids
 from gmdc_blender.element_id import ElementID
 
+from gmdc_blender.rcol.rcol_data import Rcol
+
 
 # test_gmdc = gmdc.GMDC.from_test_func('../sims2_files/ChildTestMesh.5gd')
 # # test_gmdc = gmdc.GMDC.from_test_func('../sims2_files/ToddlerTestMesh.5gd')
@@ -36,8 +38,19 @@ from gmdc_blender.element_id import ElementID
 
 
 def main():
-    # test_rcol = Rcol.from_file_data('../sims2_files/AdultTestMesh.5cr')
-    # test_rcol.print()
+    # test_rcol = Rcol.from_file_data('sims2_files/AdultTestMesh.5cr')
+    # # test_rcol.print()
+    #
+    # arr = []
+    # for block in test_rcol.data_blocks:
+    #     if block.identity.identity == DataHelper.TRANSFORM_NODE and block.assigned_subset < 100:
+    #         tup = (block.assigned_subset, block.objectgraph.filename)
+    #         arr.append(tup)
+    #
+    # arr2 = sorted(arr, key=lambda x: x[0])
+    # for tup in arr2:
+    #     print (tup)
+
     #
     # bones = SkeletonBuilder.build(test_rcol.data_blocks)
 
@@ -48,12 +61,9 @@ def main():
     test_gmdc.load_header()
     test_gmdc.load_data()
 
-    # for link in test_gmdc.linkages:
-    #     for ind in link.indices:
-    #         identity = test_gmdc.elements[ind].element_identity
-    #         if identity == ElementID.BONE_WEIGHTS:
-    #             print(ind, element_ids[identity], test_gmdc.elements[ind].block_format, test_gmdc.elements[ind].set_format)
-    #             test_gmdc.elements[ind].print()
-    #     print()
+    for grp in test_gmdc.groups:
+        for i, set in enumerate(grp.subsets):
+            print(i, set, BoneData.bone_parent_table[set])
+        print()
 
 main()

@@ -75,7 +75,7 @@ class Rcol:
 
     def print(self):
         old_stdout = sys.stdout
-        sys.stdout = open('../outfiles/cres_out_' + 'header' + '.txt', 'w')
+        sys.stdout = open('outfiles/cres_out_' + 'header' + '.txt', 'w')
 
         print('Version mark:\t', hex(self.version_mark), sep="")
 
@@ -90,7 +90,7 @@ class Rcol:
         print()
 
         for i, ob in enumerate(self.data_blocks):
-            sys.stdout = open('../outfiles/cres_out_' + 'data[' + str(i) + '].txt', 'w')
+            sys.stdout = open('outfiles/cres_out_' + 'data[' + str(i) + '].txt', 'w')
             if ob != None:
                 print('-----||Datablock||-----')
                 ob.print()

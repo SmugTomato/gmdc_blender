@@ -72,7 +72,7 @@ class BoneData:
         ('r_thigh',          'pelvis'),
         ('r_calf',           'r_thigh'),
         ('r_foot',           'r_calf'),
-        ('r_toe',          'r_foot'),
+        ('r_toe',            'r_foot'),
         # Left leg
         ('l_thigh',          'pelvis'),
         ('l_calf',           'l_thigh'),
@@ -110,7 +110,7 @@ class BoneData:
 
     @staticmethod
     def build_bones(gmdc):
-        print('Loading skeleton')
+        print('Loading skeleton.\n')
         bones = []
 
         for subset, nameset in enumerate(BoneData.bone_parent_table):

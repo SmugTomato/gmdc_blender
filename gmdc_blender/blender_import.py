@@ -44,6 +44,12 @@ class ImportGMDC(Operator, ImportHelper):
             maxlen=255,  # Max internal buffer length, longer would be clamped.
             )
 
+    do_skeleton = BoolProperty(
+            name="Import Skeleton",
+            description="Import Skeleton",
+            default=True,
+            )
+
     def execute(self, context):
         gmdc_data = GMDC.from_file_data(self.filepath)
         if gmdc_data.load_header() == False:
@@ -53,11 +59,13 @@ class ImportGMDC(Operator, ImportHelper):
         gmdc_data.load_data()
         b_models = blender_model.BlenderModel.groups_from_gmdc(gmdc_data)
 
-        armature = self.import_skeleton(gmdc_data)
+        armature = None
+        if self.do_skeleton:
+            armature = self.import_skeleton(gmdc_data)
 
         if b_models != False:
             for model in b_models:
-                print( self.do_import(model, armature) )
+                print( self.do_import(model) )
 
         return {'FINISHED'}
 
@@ -126,8 +134,8 @@ class ImportGMDC(Operator, ImportHelper):
         return ob
 
 
-    def do_import(self, b_model, armature):
-        print('Importing group:', b_model.name)
+    def do_import(self, b_model):
+        print('Importing group: \'', b_model.name, '\'.', sep='')
 
         # Create object and mesh
         mesh = bpy.data.meshes.new(b_model.name)
@@ -140,7 +148,6 @@ class ImportGMDC(Operator, ImportHelper):
         # Load normals
         for i, vert in enumerate(mesh.vertices):
             vert.normal = b_model.normals[i]
-            pass
 
         # Create UV layer and load UV coordinates
         mesh.uv_textures.new('UVMap')
@@ -152,31 +159,23 @@ class ImportGMDC(Operator, ImportHelper):
                 meshuvloop.uv = b_model.uvs[vertex_index]
 
         # Create vertex groups for bone assignments
-        for val in BoneData.bone_parent_table:
+        for i, val in enumerate(BoneData.bone_parent_table):
             object.vertex_groups.new(val[0])
 
         # Load bone assignments and weights
         # Check for mismatches in index counts
         if len(b_model.vertices) != len(b_model.bone_assign) or \
             len(b_model.vertices) != len(b_model.bone_weight):
-            print(len(b_model.vertices), len(b_model.bone_assign), len(b_model.bone_weight))
             error = 'ERROR: Group ' + b_model.name + '\'s vertex index counts don\'t match.'
             return error
 
-        for i in range(len(mesh.vertices)):
-            test = mesh.vertices[i].co == Vector(b_model.vertices[i])
-            if test != True:
-                print(mesh.vertices[i].co, Vector(b_model.vertices[i]))
-
-        print('Applying bone weights')
+        print('Applying bone weights.')
         for i in range(len(b_model.bone_assign)):
             remainder = 1.0     # Used for an implied 4th bone weight
-            print(i, b_model.bone_assign[i])
+            # print(i, b_model.bone_assign[i])
             for j in range(len(b_model.bone_assign[i])):
                 grpname = BoneData.bone_parent_table[ b_model.bone_assign[i][j] ][0]
                 vertgroup = object.vertex_groups[grpname]
-                print(grpname)
-
                 if j != 3:
                     weight = b_model.bone_weight[i][j]
                     remainder -= weight
@@ -184,4 +183,4 @@ class ImportGMDC(Operator, ImportHelper):
                 else:
                     vertgroup.add( [i], remainder, 'ADD' )
 
-        return 'Group ' + b_model.name + ' imported.\n'
+        return 'Group \'' + b_model.name + '\' imported.\n'
