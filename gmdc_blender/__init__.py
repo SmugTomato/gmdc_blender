@@ -30,20 +30,29 @@ import bpy
 from bpy_extras.io_utils import ImportHelper
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
+
 from .blender_import import ImportGMDC
+from .blender_export import ExportGMDC
 
 
 def menu_func_im(self, context):
     self.layout.operator(ImportGMDC.bl_idname)
 
+def menu_func_ex(self, context):
+    self.layout.operator(ExportGMDC.bl_idname)
+
 def register():
     bpy.utils.register_class(ImportGMDC)
+    bpy.utils.register_class(ExportGMDC)
     bpy.types.INFO_MT_file_import.append(menu_func_im)
+    bpy.types.INFO_MT_file_export.append(menu_func_ex)
 
 
 def unregister():
     bpy.utils.unregister_class(ImportGMDC)
+    bpy.utils.unregister_class(ExportGMDC)
     bpy.types.INFO_MT_file_import.remove(menu_func_im)
+    bpy.types.INFO_MT_file_export.remove(menu_func_ex)
 
 
 if __name__ == "__main__":

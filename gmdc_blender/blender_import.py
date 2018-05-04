@@ -32,7 +32,7 @@ from .bone_data import BoneData
 class ImportGMDC(Operator, ImportHelper):
     """Sims 2 GMDC Importer"""
     bl_idname = "import.gmdc_import"
-    bl_label = "Sims 2 GMDC (.5gd)"
+    bl_label = "Sims 2 GMDC Import"
     bl_options = {'REGISTER', 'UNDO'}
 
     # ImportHelper mixin class uses this
@@ -143,6 +143,7 @@ class ImportGMDC(Operator, ImportHelper):
         # Create object and mesh
         mesh = bpy.data.meshes.new(b_model.name)
         mesh['opacity'] = b_model.opacity_amount
+        mesh['filename'] = b_model.filename
         object = bpy.data.objects.new(b_model.name, mesh)
         bpy.context.scene.objects.link(object)
 

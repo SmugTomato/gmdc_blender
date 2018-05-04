@@ -22,8 +22,9 @@ from .morphmap      import MorphMap
 class BlenderModel:
 
     def __init__(self, vertices, normals, faces, uvs, name, bone_assign,
-                    bone_weight, opacity_amount, morphs):
+                    bone_weight, opacity_amount, morphs, filename):
         self.name           = name
+        self.filename       = filename
         self.vertices       = vertices
         self.normals        = normals
         self.faces          = faces
@@ -117,13 +118,13 @@ class BlenderModel:
         faces = []
         face_count = int(len(gmdc_data.groups[group_index].faces) / 3)
         for i in range(0,face_count):
-            # Faces have to be loaded backwards to work properly with the UV coordinates
             face = ( gmdc_data.groups[group_index].faces[i*3 + 0], gmdc_data.groups[group_index].faces[i*3 + 1], gmdc_data.groups[group_index].faces[i*3 + 2] )
             faces.append(face)
 
 
         # Name and opacity
         name = gmdc_data.groups[group_index].name
+        filename = gmdc_data.header.file_name
         opacity_amount = gmdc_data.groups[group_index].opacity_amount
 
 
@@ -131,4 +132,18 @@ class BlenderModel:
         morphs = MorphMap.make_morphs(gmdc_data, group_index, element_indices)
 
 
-        return BlenderModel(vertices, normals, faces, uvs, name, bone_assign, bone_weight, opacity_amount, morphs)
+        return BlenderModel(vertices, normals, faces, uvs, name, bone_assign,
+                            bone_weight, opacity_amount, morphs, filename)
+
+
+    # Build from blender data for export
+    @staticmethod
+    def from_blender(objects, filename):
+        models = []
+        for ob in objects:
+            models.append( BlenderModel.__build_from_blender(ob, filename) )
+        return models
+
+
+    def __build_from_blender(object, filename):
+        pass

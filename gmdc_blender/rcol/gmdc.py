@@ -17,11 +17,14 @@ Created by SmugTomato
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 from .gmdc_data import gmdc_header, gmdc_element, gmdc_linkage, gmdc_group, gmdc_model, gmdc_subset
+from .gmdc_data.gmdc_header import GMDCHeader
 from .data_reader import DataReader
 
 class GMDC:
 
+
     GMDC_IDENTIFIER = 0xAC4F8687
+
 
     def __init__(self, file_data, byte_offset):
         self.data_read  = DataReader(file_data, byte_offset)
@@ -33,6 +36,7 @@ class GMDC:
         self.model      = None
         self.subsets    = None
 
+
     @staticmethod
     def from_test_func(file_path):
         print("reading .5gd file...\n")
@@ -42,6 +46,7 @@ class GMDC:
         byte_offset = 0
         file.close()
         return GMDC(file_data, byte_offset)
+
 
     @staticmethod
     def from_file_data(file_path):
@@ -53,13 +58,22 @@ class GMDC:
         file.close()
         return GMDC(file_data, byte_offset)
 
+
     def load_header(self):
-        self.header = gmdc_header.GMDCHeader()
-        self.header.read_data(self.data_read)
+        self.header = GMDCHeader.from_data(self.data_read)
 
         if self.header.version != 4 or self.header.file_type != self.GMDC_IDENTIFIER:
             return False
         return True
+
+    @staticmethod
+    def build_data(objects):
+        pass
+
+
+    def __build_header(self, filename):
+        self.header = GMDCHeader.build_data(filename)
+
 
     def load_data(self):
         # ELEMENTS

@@ -20,30 +20,59 @@ Created by SmugTomato
 
 class GMDCHeader:
 
-    def __init__(self):
-        self.language           = None
-        self.string_style       = None
-        self.repeat_value       = None
-        self.index_value        = None
-        self.file_type          = None
-        self.name               = None
-        self.block_id           = None
-        self.version            = None
-        self.block_name         = None
-        self.resource_id        = None
-        self.resource_version   = None
-        self.file_name          = None
 
-    def read_data(self, data_read):
-        self.language           = data_read.read_int16()
-        self.string_style       = data_read.read_int16()
-        self.repeat_value       = data_read.read_int32()
-        self.index_value        = data_read.read_int32()
-        self.file_type          = data_read.read_uint32()
-        self.name               = data_read.read_byte_string()
-        self.block_id           = data_read.read_uint32()
-        self.version            = data_read.read_int32()
-        self.block_name         = data_read.read_byte_string()
-        self.resource_id        = data_read.read_int32()
-        self.resource_version   = data_read.read_int32()
-        self.file_name          = data_read.read_byte_string()
+    def __init__(self, language, stringstyle, repeatval, indexval, filetype,
+                        blockname, block_id, version, resname, res_id,
+                        res_version, filename):
+        self.language           = language
+        self.string_style       = stringstyle
+        self.repeat_value       = repeatval
+        self.index_value        = indexval
+        self.file_type          = filetype
+        self.block_name         = blockname
+        self.block_id           = block_id
+        self.version            = version
+        self.res_name           = resname
+        self.res_id             = res_id
+        self.res_version        = res_version
+        self.file_name          = file_name
+
+
+    @staticmethod
+    def from_data(data_read):
+        language           = data_read.read_int16()
+        stringstyle        = data_read.read_int16()
+        repeatval          = data_read.read_int32()
+        indexval           = data_read.read_int32()
+        filetype           = data_read.read_uint32()
+        blockname          = data_read.read_byte_string()
+        block_id           = data_read.read_uint32()
+        version            = data_read.read_int32()
+        resname            = data_read.read_byte_string()
+        res_id             = data_read.read_int32()
+        res_version        = data_read.read_int32()
+        filename           = data_read.read_byte_string()
+
+        return GMDCHeader( language, stringstyle, repeatval, indexval, filetype,
+                            blockname, block_id, version, resname, res_id,
+                            res_version, filename)
+
+
+    @staticmethod
+    def build_data(filename):
+        language    = 0x0001        # WORD
+        stringstyle = 0xffff        # WORD
+        repeatval   = 0             # DWORD
+        indexval    = 1             # DWORD
+        filetype    = 0xAC4F8687    # DWORD, GMDC Identifier
+        blockname   = 'cGeometryDataContainer'
+        block_id    = 0xAC4F8687    # DWORD, GMDC Identifier
+        version     = 4             # DWORD, needs support for 1 and 2 later
+        resname     = 'cSGResource'
+        res_id      = 0             # DWORD
+        res_version = 2             # DWORD
+        # filename
+
+        return GMDCHeader( language, stringstyle, repeatval, indexval, filetype,
+                            blockname, block_id, version, resname, res_id,
+                            res_version, filename)
