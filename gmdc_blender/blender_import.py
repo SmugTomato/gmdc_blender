@@ -65,7 +65,7 @@ class ImportGMDC(Operator, ImportHelper):
 
         if b_models != False:
             for model in b_models:
-                print( self.do_import(model) )
+                print( self.do_import(model, armature) )
 
         return {'FINISHED'}
 
@@ -99,19 +99,20 @@ class ImportGMDC(Operator, ImportHelper):
         amt = ob.data
         amt.draw_type = 'STICK'
 
-        # Create bones from skeldata
+        # Create bones from skeleton data
+        # Sims 2 bones seem to be reversed head to tail
         for bonedata in skeldata:
             bone = amt.edit_bones.new(bonedata.name)
             trans = Vector(bonedata.position)
             rot = Quaternion(bonedata.rotation)
-            bone.tail = rot * trans
+            bone.head = rot * trans
             if bonedata.parent != None:
                 parent = amt.edit_bones[bonedata.parent]
                 bone.parent = parent
-                bone.head = parent.tail
+                bone.tail = parent.head
             if bone.tail == bone.head:
                 # Blender does not support 0 length bones
-                bone.tail += Vector((0,0.00001,0))
+                bone.head += Vector((0,0.00001,0))
 
             # Enter custom properties for exporting later
             # # Translate Vector
@@ -134,20 +135,24 @@ class ImportGMDC(Operator, ImportHelper):
         return ob
 
 
-    def do_import(self, b_model):
+    def do_import(self, b_model, armature):
         print('Importing group: \'', b_model.name, '\'.', sep='')
+
 
         # Create object and mesh
         mesh = bpy.data.meshes.new(b_model.name)
         object = bpy.data.objects.new(b_model.name, mesh)
         bpy.context.scene.objects.link(object)
 
+
         # Load vertices and faces
         mesh.from_pydata(b_model.vertices, [], b_model.faces)
+
 
         # Load normals
         for i, vert in enumerate(mesh.vertices):
             vert.normal = b_model.normals[i]
+
 
         # Create UV layer and load UV coordinates
         mesh.uv_textures.new('UVMap')
@@ -158,9 +163,11 @@ class ImportGMDC(Operator, ImportHelper):
                 vertex_index = b_model.faces[i][j]
                 meshuvloop.uv = b_model.uvs[vertex_index]
 
+
         # Create vertex groups for bone assignments
         for i, val in enumerate(BoneData.bone_parent_table):
             object.vertex_groups.new(val[0])
+
 
         # Load bone assignments and weights
         # Check for mismatches in index counts
@@ -168,6 +175,7 @@ class ImportGMDC(Operator, ImportHelper):
             len(b_model.vertices) != len(b_model.bone_weight):
             error = 'ERROR: Group ' + b_model.name + '\'s vertex index counts don\'t match.'
             return error
+
 
         print('Applying bone weights.')
         for i in range(len(b_model.bone_assign)):
@@ -182,5 +190,12 @@ class ImportGMDC(Operator, ImportHelper):
                     vertgroup.add( [i], weight, 'ADD' )
                 else:
                     vertgroup.add( [i], remainder, 'ADD' )
+
+
+        # Add Armature modifier
+        if armature:
+            object.modifiers.new("Armature", 'ARMATURE')
+            object.modifiers["Armature"].object = armature
+            object.modifiers["Armature"].use_deform_preserve_volume = True
 
         return 'Group \'' + b_model.name + '\' imported.\n'
