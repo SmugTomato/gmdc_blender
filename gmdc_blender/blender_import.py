@@ -202,7 +202,6 @@ class ImportGMDC(Operator, ImportHelper):
 
 
         # Apply Morphs(if any) as shape keys
-        print(b_model.morphs)
         if b_model.morphs:
             # Blender always needs a base shape key
             shpkey = object.shape_key_add(from_mix=False)
@@ -221,10 +220,5 @@ class ImportGMDC(Operator, ImportHelper):
                         vert.co[1] + morph.deltas[i][1],
                         vert.co[2] + morph.deltas[i][2]
                     ) )
-
-
-        # Load normals
-        for i, vert in enumerate(mesh.vertices):
-            vert.normal = b_model.normals[i]
 
         return 'Group \'' + b_model.name + '\' imported.\n'

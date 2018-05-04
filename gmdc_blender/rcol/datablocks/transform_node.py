@@ -22,9 +22,9 @@ from .sub_blocks.generic.extension      import Extension
 
 
 class TransformNode:
-    
 
-    def __init__(self, identity, comptree_node, objectgraph, 
+
+    def __init__(self, identity, comptree_node, objectgraph,
                     children, transform, rotation, assigned_subset):
         self.identity = identity
         self.comptree_node = comptree_node
@@ -33,7 +33,7 @@ class TransformNode:
         self.transform = transform
         self.rotation = rotation
         self.assigned_subset = assigned_subset
-    
+
 
     @staticmethod
     def from_data(reader):
@@ -49,16 +49,16 @@ class TransformNode:
         transform = []
         for _ in range(3):
             transform.append( reader.read_float() )
-        
+
         rotation = []
         for _ in range(4):
             rotation.append( reader.read_float() )
-        
+
         assigned_subset = reader.read_int32()
 
-        return TransformNode(identity, comptree_node, objectgraph, 
+        return TransformNode(identity, comptree_node, objectgraph,
                                 children, transform, rotation, assigned_subset)
-    
+
 
     def print(self):
         self.identity.print()
@@ -73,8 +73,8 @@ class TransformNode:
         for ob in self.children:
             print('  >> Child:')
             ob.print()
-        
+
         print('-----|Misc|-----')
-        print('Transform:\t\t\t\t', self.transform, sep="")  
-        print('Rotation:\t\t\t\t\t', self.rotation, sep="")  
+        print('Transform:\t\t\t\t', self.transform, sep="")
+        print('Rotation:\t\t\t\t\t', self.rotation, sep="")
         print('Assigned subset:\t', self.assigned_subset, sep="")       # Assigned subset in the GMDC

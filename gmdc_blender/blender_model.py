@@ -73,21 +73,24 @@ class BlenderModel:
             if gmdc_data.elements[ind].element_identity == ElementID.VERTICES:
                 vertices = []
                 for v in gmdc_data.elements[ind].element_values:
-                    values = (-v[0], -v[1], v[2])        # Flip Y axis to make the model front-facing
+                    # Flip X and Y axis, Sims 2 has these reversed
+                    values = (-v[0], -v[1], v[2])
                     vertices.append(values)
 
             # UV coordinates
             if gmdc_data.elements[ind].element_identity == ElementID.UV_COORDINATES:
                 uvs = []
                 for v in gmdc_data.elements[ind].element_values:
-                    uv_set = (v[0], -v[1] + 1)          # Flip v value and add 1 to make it work in blender
+                    # Flip v value and add 1 to make it work in blender
+                    uv_set = (v[0], -v[1] + 1)
                     uvs.append(uv_set)
 
             # Normals
             if gmdc_data.elements[ind].element_identity == ElementID.NORMALS_LIST:
                 normals = []
                 for v in gmdc_data.elements[ind].element_values:
-                    normal_set = (-v[0], -v[1], v[2])    # Flip Y axis to match the vertices
+                    # Flip X and Y axis, Sims 2 has these reversed
+                    normal_set = (-v[0], -v[1], v[2])
                     normals.append(normal_set)
 
             # Bone Assignments
