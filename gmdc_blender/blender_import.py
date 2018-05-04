@@ -135,12 +135,14 @@ class ImportGMDC(Operator, ImportHelper):
         return ob
 
 
+
     def do_import(self, b_model, armature):
         print('Importing group: \'', b_model.name, '\'.', sep='')
 
 
         # Create object and mesh
         mesh = bpy.data.meshes.new(b_model.name)
+        mesh['opacity'] = b_model.opacity_amount
         object = bpy.data.objects.new(b_model.name, mesh)
         bpy.context.scene.objects.link(object)
 
@@ -196,6 +198,33 @@ class ImportGMDC(Operator, ImportHelper):
         if armature:
             object.modifiers.new("Armature", 'ARMATURE')
             object.modifiers["Armature"].object = armature
-            object.modifiers["Armature"].use_deform_preserve_volume = True
+            object.modifiers["Armature"].use_deform_preserve_volume = False
+
+
+        # Apply Morphs(if any) as shape keys
+        print(b_model.morphs)
+        if b_model.morphs:
+            # Blender always needs a base shape key
+            shpkey = object.shape_key_add(from_mix=False)
+            shpkey.name = "base"
+
+            for morph in b_model.morphs:
+                if morph.name == ', ':
+                    continue
+
+                shpkey = object.shape_key_add(from_mix=False)
+                shpkey.name = morph.name
+
+                for i, vert in enumerate(mesh.vertices):
+                    shpkey.data[vert.index].co = Vector( (
+                        vert.co[0] + morph.deltas[i][0],
+                        vert.co[1] + morph.deltas[i][1],
+                        vert.co[2] + morph.deltas[i][2]
+                    ) )
+
+
+        # Load normals
+        for i, vert in enumerate(mesh.vertices):
+            vert.normal = b_model.normals[i]
 
         return 'Group \'' + b_model.name + '\' imported.\n'

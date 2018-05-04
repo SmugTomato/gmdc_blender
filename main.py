@@ -9,6 +9,7 @@ from gmdc_blender.element_id import element_ids
 from gmdc_blender.element_id import ElementID
 
 from gmdc_blender.rcol.rcol_data import Rcol
+from gmdc_blender.blender_model import BlenderModel
 
 
 # test_gmdc = gmdc.GMDC.from_test_func('../sims2_files/ChildTestMesh.5gd')
@@ -57,13 +58,31 @@ def main():
     # for i, name in enumerate(SkeletonBuilder.bone_parent_table):
     #     print(i, '\t', name, sep="")
 
-    test_gmdc = GMDC.from_test_func('sims2_files/ChildTestMesh.5gd')
+    test_gmdc = GMDC.from_test_func('sims2_files/UnderwearTest.5gd')
     test_gmdc.load_header()
     test_gmdc.load_data()
 
-    for grp in test_gmdc.groups:
-        for i, set in enumerate(grp.subsets):
-            print(i, set, BoneData.bone_parent_table[set])
-        print()
+
+    bmod = BlenderModel.groups_from_gmdc(test_gmdc)
+    print(bmod[0].morphs)
+
+
+    # for pair in test_gmdc.model.name_pairs:
+    #     print(pair)
+    # print()
+    #
+    # for grp in test_gmdc.groups:
+    #     print(grp.link_index)
+    # print()
+    #
+    # for link in test_gmdc.linkages:
+    #     for ind in link.indices:
+    #         if test_gmdc.elements[ind].element_identity == ElementID.MORPH_VERTEX_MAP:
+    #             print(
+    #                 test_gmdc.elements[ind].identity_repitition,
+    #                 element_ids[test_gmdc.elements[ind].element_identity]
+    #             )
+    #             for i, v in enumerate(test_gmdc.elements[ind].element_values):
+    #                 print(i, v)
 
 main()

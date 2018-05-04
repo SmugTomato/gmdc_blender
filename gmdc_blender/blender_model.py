@@ -1,9 +1,28 @@
-# from .obj_data import gmdc_data
-from .element_id import ElementID
+'''
+Copyright (C) 2018 SmugTomato
+
+Created by SmugTomato
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+'''
+from .element_id    import ElementID
+from .morphmap      import MorphMap
 
 class BlenderModel:
 
-    def __init__(self, vertices, normals, faces, uvs, name, bone_assign, bone_weight):
+    def __init__(self, vertices, normals, faces, uvs, name, bone_assign,
+                    bone_weight, opacity_amount, morphs):
         self.name           = name
         self.vertices       = vertices
         self.normals        = normals
@@ -11,6 +30,8 @@ class BlenderModel:
         self.uvs            = uvs
         self.bone_assign    = bone_assign
         self.bone_weight    = bone_weight
+        self.opacity_amount = opacity_amount
+        self.morphs         = morphs
 
     @staticmethod
     def groups_from_gmdc(gmdc_data):
@@ -46,6 +67,7 @@ class BlenderModel:
         normals     = None
         bone_assign = None
         bone_weight = None
+        morphs      = None
         for ind in element_indices:
             # Vertices
             if gmdc_data.elements[ind].element_identity == ElementID.VERTICES:
@@ -96,10 +118,14 @@ class BlenderModel:
             face = ( gmdc_data.groups[group_index].faces[i*3 + 0], gmdc_data.groups[group_index].faces[i*3 + 1], gmdc_data.groups[group_index].faces[i*3 + 2] )
             faces.append(face)
 
-        # Name
-        # print(gmdc_data.header.file_name)
+
+        # Name and opacity
         name = gmdc_data.groups[group_index].name
+        opacity_amount = gmdc_data.groups[group_index].opacity_amount
 
 
+        # Morphs
+        morphs = MorphMap.make_morphs(gmdc_data, group_index, element_indices)
 
-        return BlenderModel(vertices, normals, faces, uvs, name, bone_assign, bone_weight)
+
+        return BlenderModel(vertices, normals, faces, uvs, name, bone_assign, bone_weight, opacity_amount, morphs)
