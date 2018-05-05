@@ -35,7 +35,7 @@ class GMDCHeader:
         self.res_name           = resname
         self.res_id             = res_id
         self.res_version        = res_version
-        self.file_name          = file_name
+        self.file_name          = filename
 
 
     @staticmethod
@@ -76,3 +76,18 @@ class GMDCHeader:
         return GMDCHeader( language, stringstyle, repeatval, indexval, filetype,
                             blockname, block_id, version, resname, res_id,
                             res_version, filename)
+
+
+    def write(self, writer):
+        writer.write_int16(self.language)
+        writer.write_int16(self.string_style)
+        writer.write_int32(self.repeat_value)
+        writer.write_int32(self.index_value)
+        writer.write_uint32(self.file_type)
+        writer.write_byte_string(self.block_name)
+        writer.write_uint32(self.block_id)
+        writer.write_int32(self.version)
+        writer.write_byte_string(self.res_name)
+        writer.write_uint32(self.res_id)
+        writer.write_int32(self.res_version)
+        writer.write_byte_string(self.file_name)

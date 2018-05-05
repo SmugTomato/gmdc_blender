@@ -47,3 +47,19 @@ class GMDCGroup:
             for i in range(0,count):
                 subset_ref = data_read.read_int16()
                 self.subsets.append(subset_ref)
+
+
+    def write(self, writer):
+        writer.write_int32(self.primitive_type)
+        writer.write_int32(self.link_index)
+        writer.write_byte_string(self.name)
+
+        writer.write_int32( len(self.faces) )
+        for vert_ind in self.faces:
+            writer.write_int16(vert_ind)
+
+        writer.write_int32(self.opacity_amount)
+
+        writer.write_int32( len(self.subsets) )
+        for subset in self.subsets:
+            writer.write_int16(subset)

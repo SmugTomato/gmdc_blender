@@ -18,6 +18,7 @@ Created by SmugTomato
 '''
 import struct
 
+
 class DataReader:
 
     def __init__(self, file_data, byte_offset):

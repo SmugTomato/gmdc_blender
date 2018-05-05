@@ -87,3 +87,24 @@ class GMDCElement:
         print('Items:', self.list_length)
         for i, val in enumerate(self.element_values):
             print(i, '\t', val, sep='')
+
+
+    def write(self, writer):
+        writer.write_int32(self.ref_array_size)
+        writer.write_uint32(self.element_identity)
+        writer.write_int32(self.identity_repitition)
+
+        writer.write_int32(self.block_format)
+        writer.write_int32(self.set_format)
+
+        writer.write_int32(self.block_size)
+        for set in self.element_values:
+            for val in set:
+                if self.block_format == 0x04:
+                    writer.write_byte( val )
+                else:
+                    writer.write_float( val )
+
+        writer.write_int32(len(self.references))
+        for ref in self.references:
+            writer.write_int16(ref)

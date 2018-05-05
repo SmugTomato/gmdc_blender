@@ -19,6 +19,7 @@ Created by SmugTomato
 from .gmdc_data import gmdc_header, gmdc_element, gmdc_linkage, gmdc_group, gmdc_model, gmdc_subset
 from .gmdc_data.gmdc_header import GMDCHeader
 from .data_reader import DataReader
+from .data_writer import DataWriter
 
 class GMDC:
 
@@ -59,6 +60,43 @@ class GMDC:
         return GMDC(file_data, byte_offset)
 
 
+    def write(self, path):
+        print("writing .5gd file...\n")
+
+        file_data = open(path, "wb")
+        writer = DataWriter()
+
+        # HEADER
+        self.header.write(writer)
+
+        # ELEMENTS
+        writer.write_int32( len(self.elements) )
+        for el in self.elements:
+            el.write(writer)
+
+        # LINKAGES
+        writer.write_int32( len(self.linkages) )
+        for li in self.linkages:
+            li.write(writer)
+
+        # GROUPS
+        writer.write_int32( len(self.groups) )
+        for gr in self.groups:
+            gr.write(writer)
+
+        # MODEL
+        self.model.write(writer)
+
+        # SUBSETS
+        writer.write_int32( len(self.subsets) )
+        for su in self.subsets:
+            su.write(writer)
+
+        writer.write_out(file_data)
+        file_data.close()
+
+
+
     def load_header(self):
         self.header = GMDCHeader.from_data(self.data_read)
 
@@ -67,8 +105,11 @@ class GMDC:
         return True
 
     @staticmethod
-    def build_data(objects):
-        pass
+    def build_data(meshdata, filename):
+        gmdc_data = GMDC(None, None)
+        header = GMDCHeader.build_data(filename)
+        gmdc_data.header = header
+        return gmdc_data
 
 
     def __build_header(self, filename):

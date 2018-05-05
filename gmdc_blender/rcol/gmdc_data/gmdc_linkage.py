@@ -57,3 +57,24 @@ class GMDCLinkage:
         for i in range(0,count):
             temp_val = data_read.read_int16()
             self.submodel_uvs.append(temp_val)
+
+
+    def write(self, writer):
+        writer.write_int32( len(self.indices) )
+        for ind in self.indices:
+            writer.write_int16(ind)
+
+        writer.write_int32(self.ref_array_size)
+        writer.write_int32(self.active_elements)
+
+        writer.write_int32( len(self.submodel_vertices) )
+        for vert_ind in self.submodel_vertices:
+            writer.write_int16(vert_ind)
+
+        writer.write_int32( len(self.submodel_normals) )
+        for norm_ind in self.submodel_normals:
+            writer.write_int16(norm_ind)
+
+        writer.write_int32( len(self.submodel_normals) )
+        for uv_ind in self.submodel_uvs:
+            writer.write_int16(uv_ind)

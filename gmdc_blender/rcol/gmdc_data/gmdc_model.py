@@ -50,6 +50,7 @@ class GMDCModel:
             self.name_pairs.append(temp_pair)
 
         vert_count = data_read.read_int32()
+        self.vertices = []
         if vert_count > 0:
             face_count = data_read.read_int32()
 
@@ -63,3 +64,29 @@ class GMDCModel:
             for i in range(0,face_count):
                 temp_face = data_read.read_int16()
                 self.faces.append(temp_face)
+
+
+    def write(self, writer):
+        writer.write_int32( len(self.transforms) )
+        for transform in self.transforms:
+            for val in transform:
+                writer.write_float(val)
+
+        writer.write_int32( len(self.name_pairs) )
+        for pair in self.name_pairs:
+            for name in pair:
+                writer.write_byte_string(name)
+
+        # Skip next section if vertcount == 0
+        writer.write_int32( len(self.vertices) )
+        if len(self.vertices) == 0:
+            return
+
+        writer.write_int32( len(self.faces) )
+
+        for vert in self.vertices:
+            for val in vert:
+                writer.write_float(val)
+
+        for face_ind in self.faces:
+            writer.write_int16(face_ind)

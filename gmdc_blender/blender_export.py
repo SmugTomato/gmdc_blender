@@ -119,7 +119,7 @@ class ExportGMDC(Operator, ExportHelper):
 
 
         # UVs
-        uv_layer = mesh.uv_layers['UVMap']
+        uv_layer = mesh.uv_layers[0]
         for i, polygon in enumerate(mesh.polygons):
             for j, loopindex in enumerate(polygon.loop_indices):
                 meshuvloop = mesh.uv_layers.active.data[loopindex]

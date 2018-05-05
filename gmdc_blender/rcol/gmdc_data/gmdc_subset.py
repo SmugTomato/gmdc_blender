@@ -28,10 +28,10 @@ class GMDCSubset:
 
     def read_data(self, data_read):
         vert_count = data_read.read_int32()
+        self.vertices = []
         if vert_count > 0:
             face_count = data_read.read_int32()
 
-            self.vertices = []
             for i in range(0,vert_count):
                 temp_verts = []
                 for i in range(0,GMDCSubset.vertex_coords):
@@ -43,3 +43,17 @@ class GMDCSubset:
             for i in range(0,face_count):
                 temp_val = data_read.read_int16()
                 self.faces.append(temp_val)
+
+
+    def write(self, writer):
+        writer.write_int32( len(self.vertices) )
+        if len(self.vertices) == 0:
+            return
+
+        writer.write_int32( len(self.faces) )
+        for vert in self.vertices:
+            for val in vert:
+                writer.write_float(val)
+
+        for vert_ind in self.faces:
+            writer.write_int16(vert_ind)
