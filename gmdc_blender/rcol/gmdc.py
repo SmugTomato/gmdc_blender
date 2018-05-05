@@ -131,13 +131,33 @@ class GMDC:
     def build_data(b_models, bones):
         gmdc_data = GMDC(None, None)
 
+        # HEADER
         gmdc_data.header = GMDCHeader.build_data(b_models[0].filename)
 
+        # ELEMENTS
         # Tuple ( elements[], group_element_links[][] )
         element_data = gmdc_element.GMDCElement.from_blender(b_models, bones)
         gmdc_data.elements = element_data[0]
-        for i, el in enumerate(gmdc_data.elements):
-            print( i, el.ref_array_size, GMDC.element_ids[el.element_identity] )
+
+        # LINKAGES
+        gmdc_data.linkages = gmdc_linkage.GMDCLinkage.build_data(
+            b_models, element_data[1]
+        )
+
+        # GROUPS
+        gmdc_data.groups = gmdc_group.GMDCGroup.build_data(
+            b_models, bones
+        )
+
+        # MODEL
+        gmdc_data.model = gmdc_model.GMDCModel.build_data(
+            b_models, bones
+        )
+
+        # SUBSETS
+        gmdc_data.subsets = gmdc_subset.GMDCSubset.build_data(
+            b_models, bones
+        )
 
         return gmdc_data
 

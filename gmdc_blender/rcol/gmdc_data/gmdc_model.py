@@ -90,3 +90,36 @@ class GMDCModel:
 
         for face_ind in self.faces:
             writer.write_int16(face_ind)
+
+
+    @staticmethod
+    def build_data(b_models, bones):
+        model = GMDCModel()
+
+        model.transforms = []
+        for b in bones:
+            transformlist = []
+            transformlist.append( b.rotation[1] )
+            transformlist.append( b.rotation[2] )
+            transformlist.append( b.rotation[3] )
+            transformlist.append( b.rotation[0] )
+            transformlist.append( b.position[0] )
+            transformlist.append( b.position[1] )
+            transformlist.append( b.position[2] )
+            model.transforms.append(transformlist)
+
+        namepairct = len(b_models[0].morphs)
+        model.name_pairs = []
+        for i in range( namepairct + 1 ):
+            if i == 0:
+                model.name_pairs.append( ['',''] )
+                continue
+
+            model.name_pairs.append(
+                b_models[0].morphs[i - 1].name.split(', ')
+            )
+
+            model.vertices = []
+            model.faces = []
+
+        return model

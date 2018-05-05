@@ -108,6 +108,6 @@ class MorphMap:
                 if delta == (0,0,0):
                     continue
 
-                bytemap[j][i] = i
+                bytemap[j][i] = i+1
 
         return bytemap

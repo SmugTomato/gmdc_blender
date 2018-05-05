@@ -41,7 +41,7 @@ class DataWriter:
         self.data_array.append(b_str)
 
     def write_int16(self, num):
-        val = struct.pack('<h', num)
+        val = struct.pack('<H', num)
         self.data_array.append(val)
 
     def write_int32(self, num):

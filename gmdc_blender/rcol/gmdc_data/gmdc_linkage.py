@@ -78,3 +78,23 @@ class GMDCLinkage:
         writer.write_int32( len(self.submodel_normals) )
         for uv_ind in self.submodel_uvs:
             writer.write_int16(uv_ind)
+
+
+    @staticmethod
+    def build_data(b_models, grplinks):
+        linkages = []
+
+        for i, mod in enumerate(b_models):
+            linkage = GMDCLinkage()
+
+            linkage.indices = grplinks[i]
+            linkage.ref_array_size = len(mod.vertices)
+            linkage.active_elements = len(linkage.indices)
+
+            linkage.submodel_vertices = []
+            linkage.submodel_uvs = []
+            linkage.submodel_normals = []
+
+            linkages.append(linkage)
+
+        return(linkages)

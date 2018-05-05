@@ -57,3 +57,16 @@ class GMDCSubset:
 
         for vert_ind in self.faces:
             writer.write_int16(vert_ind)
+
+
+    @staticmethod
+    def build_data(b_models, bones):
+        subsets = []
+
+        for b in bones:
+            subset = GMDCSubset()
+            subset.vertices = []
+            subset.faces = []
+            subsets.append(subset)
+
+        return subsets

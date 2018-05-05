@@ -63,3 +63,29 @@ class GMDCGroup:
         writer.write_int32( len(self.subsets) )
         for subset in self.subsets:
             writer.write_int16(subset)
+
+
+    def build_data(b_models, bones):
+        groups = []
+
+        for i, mod in enumerate(b_models):
+            grp = GMDCGroup()
+
+            grp.primitive_type = 2
+            grp.link_index = i
+            grp.name = mod.name
+
+            grp.faces = []
+            for f in mod.faces:
+                for val in f:
+                    grp.faces.append(val)
+
+            grp.opacity_amount = mod.opacity_amount
+
+            grp.subsets = []
+            for i in range(len(bones)):
+                grp.subsets.append(i)
+
+            groups.append(grp)
+
+        return(groups)

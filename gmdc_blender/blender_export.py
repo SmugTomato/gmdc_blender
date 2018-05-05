@@ -94,8 +94,11 @@ class ExportGMDC(Operator, ExportHelper):
         # Continue export process
         b_model = ExportGMDC.build_group(obs_to_export[0], filename)
 
-        # build gmdc
+        # Build gmdc
         gmdc_data = GMDC.build_data([b_model], bones)
+
+        # Write data
+        gmdc_data.write(self.filepath)
 
 
         return {'FINISHED'}
@@ -139,7 +142,7 @@ class ExportGMDC(Operator, ExportHelper):
         for i, polygon in enumerate(mesh.polygons):
             for j, loopindex in enumerate(polygon.loop_indices):
                 meshuvloop = mesh.uv_layers.active.data[loopindex]
-                uv = ( meshuvloop.uv[0], -meshuvloop.uv[1] - 1 )
+                uv = ( meshuvloop.uv[0], -meshuvloop.uv[1] + 1 )
                 vertidx = faces[i][j]
                 uvs[vertidx] = uv
 
