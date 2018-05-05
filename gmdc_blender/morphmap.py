@@ -23,9 +23,10 @@ class MorphMap:
 
 
 
-    def __init__(self, name, deltas):
+    def __init__(self, name, deltas, ndeltas):
         self.name = name
         self.deltas = deltas
+        self.ndeltas = ndeltas
 
 
     @staticmethod
@@ -39,7 +40,7 @@ class MorphMap:
 
             # Skip empty morph name pair, the use of these is unknown
             if name == ', ':
-                morphs.append( MorphMap(name, None) )
+                morphs.append( MorphMap(name, None, None) )
                 continue
 
             for ind in element_indices:
@@ -51,7 +52,7 @@ class MorphMap:
 
             iter += 1
 
-            morphs.append( MorphMap(name, deltas) )
+            morphs.append( MorphMap(name, deltas, None) )
         return morphs
 
     @staticmethod
@@ -61,3 +62,52 @@ class MorphMap:
             # Flip X and Y just like the verices
             deltas.append( (-line[0], -line[1], line[2]) )
         return deltas
+
+
+    @staticmethod
+    def from_blender(mesh):
+        morphs = []
+
+        for shpkey in mesh.shape_keys.key_blocks:
+            if shpkey == mesh.shape_keys.key_blocks[0]:
+                continue
+
+            normals = shpkey.normals_vertex_get()
+
+            deltas  = []
+            ndeltas = []
+            for i in range( len(shpkey.data) ):
+                deltas_val = (
+                    -1 * ( shpkey.data[i].co[0] - mesh.vertices[i].co[0] ),
+                    -1 * ( shpkey.data[i].co[1] - mesh.vertices[i].co[1] ),
+                    ( shpkey.data[i].co[2] - mesh.vertices[i].co[2] )
+                )
+
+                ndeltas_val = (
+                    -1 * ( normals[i*3 + 0] - mesh.vertices[i].normal[0] ),
+                    -1 * ( normals[i*3 + 1] - mesh.vertices[i].normal[1] ),
+                    ( normals[i*3 + 2] - mesh.vertices[i].normal[2] )
+                )
+
+                deltas.append( deltas_val )
+                ndeltas.append( ndeltas_val )
+
+            morphs.append(MorphMap(shpkey.name, deltas, ndeltas))
+
+        return(morphs)
+
+
+    @staticmethod
+    def make_bytemap(morphs, length):
+        bytemap = [[0,0,0,0]] * length
+        if len(morphs) == 0:
+            return bytemap
+
+        for i, morph in enumerate(morphs):
+            for j, delta in enumerate(morph.deltas):
+                if delta == (0,0,0):
+                    continue
+
+                bytemap[j][i] = i
+
+        return bytemap

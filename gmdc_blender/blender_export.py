@@ -23,6 +23,8 @@ from bpy.types import Operator
 
 from .rcol.gmdc import GMDC
 from .blender_model import BlenderModel
+from .morphmap import MorphMap
+from .bone_data import BoneData
 
 
 class ExportGMDC(Operator, ExportHelper):
@@ -41,15 +43,23 @@ class ExportGMDC(Operator, ExportHelper):
             )
 
     export_type = EnumProperty(
-            name="Objects",
+            name="Export",
             description="Choose an export method",
-            items=(('SELECTED', "Selected only", "Only export selected objects. (Recommended)"),
+            items=(('SELECTED', "Selected", "Only export selected objects. (Recommended)"),
                    ('SCENE', "Scene", "Export all supported objects in the scene.")),
             default='SELECTED',
             )
 
+    do_fix_weights = BoolProperty(
+            name="Fix weights",
+            description="Limit to 4 skin weights and normalize them.",
+            default=True,
+            )
+
 
     def execute(self, context):
+        bpy.ops.object.mode_set(mode='OBJECT')
+
         # Select objects to export depending on user choice
         obs_to_export = []
         if self.export_type == 'SELECTED':
@@ -78,10 +88,14 @@ class ExportGMDC(Operator, ExportHelper):
             return{'ERROR'}
 
 
-        # Continue export process
-        # b_models = BlenderModel.from_blender(obs_to_export, filename)
-        ExportGMDC.build_group(obs_to_export[0])
+        # Restructure bone data
+        bones = BoneData.from_armature(armature.object)
 
+        # Continue export process
+        b_model = ExportGMDC.build_group(obs_to_export[0], filename)
+
+        # build gmdc
+        gmdc_data = GMDC.build_data([b_model], bones)
 
 
         return {'FINISHED'}
@@ -102,6 +116,8 @@ class ExportGMDC(Operator, ExportHelper):
         normals     = []
         uvs         = []
         faces       = []
+        bone_assign = []
+        bone_weight = []
         name        = object.name
         filename    = mesh['filename']
         opacity     = mesh['opacity']
@@ -128,8 +144,27 @@ class ExportGMDC(Operator, ExportHelper):
                 uvs[vertidx] = uv
 
 
-        return BlenderModel(vertices, normals, faces, uvs, name, None,
-                            None, opacity, None, filename)
+        # Vertex groups (Bone assignments and weights)
+        for vert in mesh.vertices:
+            assign = [255] * 4
+            weight = [0] * 3
+            for i, assignment in enumerate(vert.groups):
+                if i < 3:
+                    weight[i] = assignment.weight
+                assign[i] = assignment.group
+            bone_assign.append(assign)
+            bone_weight.append(weight)
+
+
+        # Morphs
+        morphs = MorphMap.from_blender(mesh)
+        morph_bytemap = MorphMap.make_bytemap(morphs, len(vertices))
+
+
+
+        bpy.ops.ed.undo()   # Undo triangulation
+        return BlenderModel(vertices, normals, faces, uvs, name, bone_assign,
+                            bone_weight, opacity, morphs, filename, morph_bytemap)
 
 
     def __do_export(objects, filename):

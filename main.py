@@ -13,11 +13,20 @@ from gmdc_blender.blender_model import BlenderModel
 import struct
 
 
+def add(a):
+    a += 1
+
+
 def main():
     test_gmdc = GMDC.from_test_func('sims2_files/AdultTestMesh.5gd')
     test_gmdc.load_header()
     test_gmdc.load_data()
     test_gmdc.write('sims2_files/AdultTestMeshOUT.5gd')
+
+    a = 0
+    add(a)
+    print(a)
+
 
     # test_rcol = Rcol.from_file_data('sims2_files/AdultTestMesh.5cr')
     # # test_rcol.print()

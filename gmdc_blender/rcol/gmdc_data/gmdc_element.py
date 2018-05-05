@@ -20,6 +20,33 @@ Created by SmugTomato
 
 class GMDCElement:
 
+
+    BLEND_INDICES           = 0x1C4AFC56
+    BLEND_WEIGHTS           = 0x5C4AFC5C
+    TARGET_INDICES          = 0x7C4DEE82
+    NORMAL_MORPH_DELTAS     = 0xCB6F3A6A
+    COLOUR                  = 0xCB7206A1
+    COLOUR_DELTAS           = 0xEB720693
+    NORMALS_LIST            = 0x3B83078B
+    VERTICES                = 0x5B830781
+    UV_COORDINATES          = 0xBB8307AB
+    UV_COORDINATE_DELTAS    = 0xDB830795
+    BINORMALS               = 0x9BB38AFB
+    BONE_WEIGHTS            = 0x3BD70105
+    BONE_ASSIGNMENTS        = 0xFBD70111
+    BUMP_MAP_NORMALS        = 0x89D92BA0
+    BUMP_MAP_NORMAL_DELTAS  = 0x69D92B93
+    MORPH_VERTEX_DELTAS     = 0x5CF2CFE1
+    MORPH_VERTEX_MAP        = 0xDCF2CFDC
+    EP4_VERTEX_ID           = 0x114113C3
+    EP4_REGION_MASK         = 0x114113CD
+
+    SET_MAIN        = 0x00
+    SET_NORMS       = 0x01
+    SET_UV          = 0x02
+    SET_SECONDARY   = 0x04
+
+
     def __init__(self):
         self.ref_array_size         = None
         self.element_identity       = None
@@ -108,3 +135,200 @@ class GMDCElement:
         writer.write_int32(len(self.references))
         for ref in self.references:
             writer.write_int16(ref)
+
+
+    @staticmethod
+    def make_empty(block_format, set_format, identity, repetition):
+        element = GMDCElement()
+        element.ref_array_size = 0
+        element.element_identity = identity
+        element.identity_repitition = repetition
+        element.block_format = block_format
+        element.set_format = set_format
+        element.block_size = 0
+        element.list_length = 0
+        element.element_values = []
+        element.references = []
+
+        return element
+
+    @staticmethod
+    def from_datalist(data, identity, repetition):
+        set_format = GMDCElement.SET_SECONDARY
+        ref_array_size = len(data)
+        block_format = None
+        block_size   = None
+
+        _data_len = len(data[0])
+        if _data_len == 4:
+            block_format = 0x04
+            block_size = ref_array_size * 4
+        elif _data_len == 3:
+            block_format = 0x02
+            block_size = ref_array_size * 4 * 3
+        elif _data_len == 2:
+            block_format = 0x01
+            block_size = ref_array_size * 4 * 2
+        else:
+            block_format = 0x00
+            block_size = ref_array_size * 4
+
+        references = []
+
+        element = GMDCElement()
+        element.ref_array_size = ref_array_size
+        element.element_identity = identity
+        element.identity_repitition = repetition
+        element.block_format = block_format
+        element.set_format = set_format
+        element.block_size = block_size
+        element.list_length = ref_array_size
+        element.element_values = data
+        element.references = []
+
+        return element
+
+
+    # Horrible code down here... Will fix this later
+    @staticmethod
+    def empty_elements(b_models):
+        elements = []
+
+        # Empty elements first
+        elements.append(
+            GMDCElement.make_empty(0x02, GMDCElement.SET_MAIN,
+                                    GMDCElement.VERTICES, 0)
+        )
+        elements.append(
+            GMDCElement.make_empty(0x02, GMDCElement.SET_NORMS,
+                                    GMDCElement.NORMALS_LIST, 0)
+        )
+        for i in range(4):
+            elements.append(
+                GMDCElement.make_empty(0x01, GMDCElement.SET_UV,
+                                        GMDCElement.UV_COORDINATES, i)
+            )
+        for i in range(2):
+            elements.append(
+                GMDCElement.make_empty(0x04, GMDCElement.SET_UV,
+                                        GMDCElement.UV_COORDINATE_DELTAS, i)
+            )
+        # Per group empty elements now
+        for _ in b_models:
+            # Bone Assignments
+            elements.append(
+                GMDCElement.make_empty(0x04, GMDCElement.SET_SECONDARY,
+                                        GMDCElement.BONE_ASSIGNMENTS, 0)
+            )
+            # Bone Weights
+            elements.append(
+                GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
+                                        GMDCElement.BONE_WEIGHTS, 0)
+            )
+        for mod in b_models:
+            for i, _ in enumerate(mod.morphs):
+                # Morph Vertex Delta
+                elements.append(
+                    GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
+                                            GMDCElement.MORPH_VERTEX_DELTAS, i)
+                )
+            for i, _ in enumerate(mod.morphs):
+                # Morph Vertex Delta
+                elements.append(
+                    GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
+                                            GMDCElement.NORMAL_MORPH_DELTAS, i)
+                )
+            # Morph Vertex Map
+            elements.append(
+                GMDCElement.make_empty(0x04, GMDCElement.SET_SECONDARY,
+                                        GMDCElement.MORPH_VERTEX_MAP, 0)
+            )
+        for _ in b_models:
+            elements.append(
+                GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
+                                        GMDCElement.BUMP_MAP_NORMALS, 0)
+            )
+
+        return elements
+
+
+    @staticmethod
+    def from_blender(b_models, bones):
+        elements = GMDCElement.empty_elements(b_models)
+        links = []
+
+        link_index = len( elements )
+        for mod in b_models:
+            link_list = []
+
+            # Needs to be done for every element
+            # Will find a better method later (I hope)
+            link_list.append(link_index)
+            link_index += 1
+            # Vertices
+            elements.append(
+                GMDCElement.from_datalist(
+                    mod.vertices, GMDCElement.VERTICES, 0)
+            )
+            link_list.append(link_index)
+            link_index += 1
+            # Normals
+            elements.append(
+                GMDCElement.from_datalist(
+                    mod.normals, GMDCElement.NORMALS_LIST, 0)
+            )
+            link_list.append(link_index)
+            link_index += 1
+            # UV
+            elements.append(
+                GMDCElement.from_datalist(
+                    mod.uvs, GMDCElement.UV_COORDINATES, 0)
+            )
+            link_list.append(link_index)
+            link_index += 1
+            # Bone Assignment
+            elements.append(
+                GMDCElement.from_datalist(
+                    mod.bone_assign, GMDCElement.BONE_ASSIGNMENTS, 0)
+            )
+            link_list.append(link_index)
+            link_index += 1
+            # Bone Weights
+            elements.append(
+                GMDCElement.from_datalist(
+                    mod.bone_weight, GMDCElement.BONE_WEIGHTS, 0)
+            )
+            for i, morph in enumerate(mod.morphs):
+                link_list.append(link_index)
+                link_index += 1
+                # Morph Vertex Delta
+                elements.append(
+                    GMDCElement.from_datalist(
+                        morph.deltas, GMDCElement.MORPH_VERTEX_DELTAS, i)
+                )
+            for i, morph in enumerate(mod.morphs):
+                link_list.append(link_index)
+                link_index += 1
+                # Morph Vertex Delta
+                elements.append(
+                    GMDCElement.from_datalist(
+                        morph.ndeltas, GMDCElement.NORMAL_MORPH_DELTAS, i)
+                )
+            link_list.append(link_index)
+            link_index += 1
+            # Morph Vertex Map
+            elements.append(
+                GMDCElement.from_datalist(
+                    mod.morph_bytemap, GMDCElement.MORPH_VERTEX_MAP, 0)
+            )
+            link_list.append(link_index)
+            link_index += 1
+            # Bump Map Normals
+            elements.append(
+                GMDCElement.from_datalist(
+                    mod.normals, GMDCElement.BUMP_MAP_NORMALS, 0)
+            )
+
+            links.append(link_list)
+
+        return ( elements, links )

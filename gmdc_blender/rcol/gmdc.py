@@ -24,6 +24,29 @@ from .data_writer import DataWriter
 class GMDC:
 
 
+    element_ids = {
+        0x1C4AFC56: 'Blend Indices',
+        0x5C4AFC5C: 'Blend Weights',
+        0x7C4DEE82: 'Target Indices',
+        0xCB6F3A6A: 'Normal Morph Deltas',
+        0xCB7206A1: 'Colour',
+        0xEB720693: 'Colour Deltas',
+        0x3B83078B: 'Normals List',
+        0x5B830781: 'Vertices',
+        0xBB8307AB: 'UV Coordinates',
+        0xDB830795: 'UV Coordinate Deltas',
+        0x9BB38AFB: 'Binormals',
+        0x3BD70105: 'Bone Weights',
+        0xFBD70111: 'Bone Assignments',
+        0x89D92BA0: 'Bump Map Normals',
+        0x69D92B93: 'Bump Map Normal Deltas',
+        0x5CF2CFE1: 'Morph Vertex Deltas',
+        0xDCF2CFDC: 'Morph Vertex Map',
+        0x114113C3: '(EP4) VertexID',
+        0x114113CD: '(EP4) RegionMask'
+    }
+
+
     GMDC_IDENTIFIER = 0xAC4F8687
 
 
@@ -105,15 +128,18 @@ class GMDC:
         return True
 
     @staticmethod
-    def build_data(meshdata, filename):
+    def build_data(b_models, bones):
         gmdc_data = GMDC(None, None)
-        header = GMDCHeader.build_data(filename)
-        gmdc_data.header = header
+
+        gmdc_data.header = GMDCHeader.build_data(b_models[0].filename)
+
+        # Tuple ( elements[], group_element_links[][] )
+        element_data = gmdc_element.GMDCElement.from_blender(b_models, bones)
+        gmdc_data.elements = element_data[0]
+        for i, el in enumerate(gmdc_data.elements):
+            print( i, el.ref_array_size, GMDC.element_ids[el.element_identity] )
+
         return gmdc_data
-
-
-    def __build_header(self, filename):
-        self.header = GMDCHeader.build_data(filename)
 
 
     def load_data(self):

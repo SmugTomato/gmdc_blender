@@ -22,7 +22,8 @@ from .morphmap      import MorphMap
 class BlenderModel:
 
     def __init__(self, vertices, normals, faces, uvs, name, bone_assign,
-                    bone_weight, opacity_amount, morphs, filename):
+                    bone_weight, opacity_amount, morphs, filename,
+                    morph_bytemap):
         self.name           = name
         self.filename       = filename
         self.vertices       = vertices
@@ -33,6 +34,7 @@ class BlenderModel:
         self.bone_weight    = bone_weight
         self.opacity_amount = opacity_amount
         self.morphs         = morphs
+        self.morph_bytemap  = morph_bytemap
 
     @staticmethod
     def groups_from_gmdc(gmdc_data):
@@ -133,7 +135,7 @@ class BlenderModel:
 
 
         return BlenderModel(vertices, normals, faces, uvs, name, bone_assign,
-                            bone_weight, opacity_amount, morphs, filename)
+                            bone_weight, opacity_amount, morphs, filename, None)
 
 
     # Build from blender data for export
