@@ -17,6 +17,7 @@ Created by SmugTomato
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import bpy
+import bmesh
 from bpy_extras.io_utils import ExportHelper
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
@@ -81,11 +82,11 @@ class ExportGMDC(Operator, ExportHelper):
         # Further sanity checks, check array length and existance of Armature modifier
         if len(obs_to_export) == 0:
             print('ERROR: No valid objects were found')
-            return{'ERROR'}
+            return{'CANCELLED'}
         armature = obs_to_export[0].modifiers.get( 'Armature', None )
         if armature == None:
             print('ERROR: No armature modifier')
-            return{'ERROR'}
+            return{'CANCELLED'}
 
 
         # Restructure bone data
@@ -110,14 +111,40 @@ class ExportGMDC(Operator, ExportHelper):
 
     @staticmethod
     def build_group(object, filename):
-        # Triangulate before exporting
-        # bpy.context.scene.objects.active = object
-        # bpy.ops.object.mode_set(mode='EDIT')
-        # bpy.ops.mesh.select_all(action='SELECT')
-        # bpy.ops.mesh.quads_convert_to_tris(quad_method='FIXED', ngon_method='BEAUTY')
-        # bpy.ops.object.mode_set(mode='OBJECT')
-
+        # Bmesh section
         mesh = object.data
+        bm = bmesh.new()
+        bm.from_mesh(mesh)
+
+
+        # Triangulate faces
+        bmesh.ops.triangulate(bm, faces=bm.faces)
+
+
+        # Split UV seam edges
+        uvedges_to_split = []
+        old_normals = []
+        for e in bm.edges:
+            if e.seam:
+                uvedges_to_split.append(e)
+                for v in e.verts:
+                    co_norm = ( v.co, v.normal )
+                    if co_norm not in old_normals:
+                        old_normals.append( co_norm )
+            if not e.smooth:
+                edges_to_split.append(e)
+
+
+        # Fix normals along UV seams
+        bmesh.ops.split_edges(bm, edges=uvedges_to_split)
+        for vert in bm.verts:
+            for vco, nor in old_normals:
+                if vert.co == vco:
+                    vert.normal = nor
+
+
+        bm.to_mesh(mesh)
+        bm.free()
 
         vertices    = []
         normals     = []
