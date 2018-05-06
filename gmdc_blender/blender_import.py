@@ -24,8 +24,8 @@ from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
 
 from .rcol.gmdc import GMDC
-from .rcol.rcol_data import Rcol
-from .rcol.data_helper import DataHelper
+# from .rcol.rcol_data import Rcol
+# from .rcol.data_helper import DataHelper
 from . import blender_model
 from .bone_data import BoneData
 
@@ -110,9 +110,10 @@ class ImportGMDC(Operator, ImportHelper):
                 parent = amt.edit_bones[bonedata.parent]
                 bone.parent = parent
                 bone.tail = parent.head
-            if bone.tail == bone.head:
+            # Hardcoded 'r_longsleeve' for now, as it was breaking child skeletons
+            if bone.tail == bone.head or bone.name == 'r_longsleeve':
                 # Blender does not support 0 length bones
-                bone.head += Vector((0,0.00001,0))
+                bone.head += Vector((0,0,0.00001))
 
             # Enter custom properties for exporting later
             # # Translate Vector
@@ -221,5 +222,16 @@ class ImportGMDC(Operator, ImportHelper):
                         vert.co[1] + morph.deltas[i][1],
                         vert.co[2] + morph.deltas[i][2]
                     ) )
+
+
+        # After all that, merge vertices along UV seams
+        # This also messes up sharp edges though...
+        bm = bmesh.new()
+        bm.from_mesh(mesh)
+
+        bmesh.ops.remove_doubles(bm, verts=bm.verts)
+
+        bm.to_mesh(mesh)
+        bm.free()
 
         return 'Group \'' + b_model.name + '\' imported.\n'

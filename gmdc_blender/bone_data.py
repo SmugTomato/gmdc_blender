@@ -121,6 +121,8 @@ class BoneData:
             name = nameset[0]
             parent = nameset[1]
 
+            print(subset, name, parent, rotation, translate)
+
             bones.append(BoneData(name, parent, subset, translate, rotation))
 
         return bones
@@ -151,8 +153,8 @@ class BoneData:
                 translate= (
                     bone['tX'], bone['tY'], bone['tZ']
                 )
-                bones.append( BoneData(bone.name, None, subset,
-                                        translate, rotation) )
+                bones[subset] = BoneData(bone.name, None, subset,
+                                        translate, rotation)
         return bones
 
 

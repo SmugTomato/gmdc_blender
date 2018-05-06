@@ -91,11 +91,15 @@ class ExportGMDC(Operator, ExportHelper):
         # Restructure bone data
         bones = BoneData.from_armature(armature.object)
 
+        print(obs_to_export)
+
         # Continue export process
-        b_model = ExportGMDC.build_group(obs_to_export[0], filename)
+        b_models = []
+        for ob in obs_to_export:
+            b_models.append( ExportGMDC.build_group(ob, filename) )
 
         # Build gmdc
-        gmdc_data = GMDC.build_data([b_model], bones)
+        gmdc_data = GMDC.build_data(b_models, bones)
 
         # Write data
         gmdc_data.write(self.filepath)
@@ -107,11 +111,11 @@ class ExportGMDC(Operator, ExportHelper):
     @staticmethod
     def build_group(object, filename):
         # Triangulate before exporting
-        bpy.context.scene.objects.active = object
-        bpy.ops.object.mode_set(mode='EDIT')
-        bpy.ops.mesh.select_all(action='SELECT')
-        bpy.ops.mesh.quads_convert_to_tris(quad_method='FIXED', ngon_method='BEAUTY')
-        bpy.ops.object.mode_set(mode='OBJECT')
+        # bpy.context.scene.objects.active = object
+        # bpy.ops.object.mode_set(mode='EDIT')
+        # bpy.ops.mesh.select_all(action='SELECT')
+        # bpy.ops.mesh.quads_convert_to_tris(quad_method='FIXED', ngon_method='BEAUTY')
+        # bpy.ops.object.mode_set(mode='OBJECT')
 
         mesh = object.data
 
@@ -165,7 +169,7 @@ class ExportGMDC(Operator, ExportHelper):
 
 
 
-        bpy.ops.ed.undo()   # Undo triangulation
+        # bpy.ops.ed.undo()   # Undo triangulation
         return BlenderModel(vertices, normals, faces, uvs, name, bone_assign,
                             bone_weight, opacity, morphs, filename, morph_bytemap)
 
