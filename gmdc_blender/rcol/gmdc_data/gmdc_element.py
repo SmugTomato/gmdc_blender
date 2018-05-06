@@ -44,7 +44,7 @@ class GMDCElement:
     SET_MAIN        = 0x00
     SET_NORMS       = 0x01
     SET_UV          = 0x02
-    SET_SECONDARY   = 0x04
+    SET_SECONDARY   = 0x03
 
 
     def __init__(self):

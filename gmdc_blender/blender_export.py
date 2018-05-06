@@ -21,6 +21,7 @@ import bmesh
 from bpy_extras.io_utils import ExportHelper
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
+from mathutils import Vector
 
 from .rcol.gmdc import GMDC
 from .blender_model import BlenderModel
@@ -110,6 +111,16 @@ class ExportGMDC(Operator, ExportHelper):
 
 
     @staticmethod
+    def avg_vector(normals):
+        i = 0
+        total = Vector( (0,0,0) )
+        for n in normals:
+            total += n
+            i += 1
+        return total / i
+
+
+    @staticmethod
     def build_group(object, filename):
         # Bmesh section
         mesh = object.data
@@ -122,25 +133,25 @@ class ExportGMDC(Operator, ExportHelper):
 
 
         # Split UV seam edges
-        uvedges_to_split = []
+        edges_to_split = []
         old_normals = []
         for e in bm.edges:
             if e.seam:
-                uvedges_to_split.append(e)
-                for v in e.verts:
-                    co_norm = ( v.co, v.normal )
-                    if co_norm not in old_normals:
-                        old_normals.append( co_norm )
-            if not e.smooth:
                 edges_to_split.append(e)
 
+        bmesh.ops.split_edges(bm, edges=edges_to_split)
 
-        # Fix normals along UV seams
-        bmesh.ops.split_edges(bm, edges=uvedges_to_split)
-        for vert in bm.verts:
-            for vco, nor in old_normals:
-                if vert.co == vco:
-                    vert.normal = nor
+        # Rebuild normals
+        normals = {}
+        for i, v in enumerate(bm.verts):
+            if tuple(v.co) not in normals:
+                normals[ tuple(v.co) ] = [v.normal]
+            else:
+                normals[ tuple(v.co) ].append(v.normal)
+        for i, key in enumerate(normals):
+            normals[key] = ExportGMDC.avg_vector( normals[key] )
+        for v in bm.verts:
+            v.normal = normals[ tuple(v.co) ]
 
 
         bm.to_mesh(mesh)
