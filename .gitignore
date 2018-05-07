@@ -17,5 +17,5 @@
 *.png
 
 # VS code settings
-gmdc_blender/.vscode/settings.json
-gmdc_blender/AdultTestMesh.5cr
+io_sims2gmdc/.vscode/settings.json
+io_sims2gmdc/AdultTestMesh.5cr
