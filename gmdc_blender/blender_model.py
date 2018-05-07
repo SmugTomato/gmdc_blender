@@ -120,7 +120,11 @@ class BlenderModel:
         faces = []
         face_count = int(len(gmdc_data.groups[group_index].faces) / 3)
         for i in range(0,face_count):
-            face = ( gmdc_data.groups[group_index].faces[i*3 + 0], gmdc_data.groups[group_index].faces[i*3 + 1], gmdc_data.groups[group_index].faces[i*3 + 2] )
+            face = (
+                gmdc_data.groups[group_index].faces[i*3 + 0],
+                gmdc_data.groups[group_index].faces[i*3 + 1], 
+                gmdc_data.groups[group_index].faces[i*3 + 2]
+            )
             faces.append(face)
 
 

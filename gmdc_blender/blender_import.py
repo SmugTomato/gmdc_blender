@@ -16,6 +16,7 @@ Created by SmugTomato
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
+import time
 import bpy, math
 import bmesh
 from mathutils import Vector, Matrix, Quaternion
@@ -90,7 +91,8 @@ class ImportGMDC(Operator, ImportHelper):
         bpy.ops.object.add(
             type='ARMATURE',
             enter_editmode=True,
-            location=(0,0,0))
+            location=(0,0,0)
+        )
         # Armature object
         ob = bpy.context.object
         ob.show_x_ray = True
@@ -138,15 +140,19 @@ class ImportGMDC(Operator, ImportHelper):
 
 
     def do_import(self, b_model, armature):
-        print('Importing group: \'', b_model.name, '\'.', sep='')
+        print('Importing group: \'', b_model.name, '\'', sep='')
 
 
         # Create object and mesh
         mesh = bpy.data.meshes.new(b_model.name)
         mesh['opacity'] = b_model.opacity_amount
         mesh['filename'] = b_model.filename
+        mesh.use_auto_smooth = True
+        mesh.auto_smooth_angle = 3.14
+
         object = bpy.data.objects.new(b_model.name, mesh)
         bpy.context.scene.objects.link(object)
+        bpy.context.scene.objects.active = object
 
 
         # Load vertices and faces
@@ -181,7 +187,7 @@ class ImportGMDC(Operator, ImportHelper):
             return error
 
 
-        print('Applying bone weights.')
+        print('Applying bone weights...')
         for i in range(len(b_model.bone_assign)):
             remainder = 1.0     # Used for an implied 4th bone weight
             # print(i, b_model.bone_assign[i])
@@ -204,6 +210,7 @@ class ImportGMDC(Operator, ImportHelper):
 
 
         # Apply Morphs(if any) as shape keys
+        print('Loading morphs as shape keys...')
         if b_model.morphs:
             # Blender always needs a base shape key
             shpkey = object.shape_key_add(from_mix=False)
@@ -224,14 +231,54 @@ class ImportGMDC(Operator, ImportHelper):
                     ) )
 
 
-        # After all that, merge vertices along UV seams
-        # This also messes up sharp edges though...
+        # After all that, merge doubles and make originally hard edges sharp
         bm = bmesh.new()
         bm.from_mesh(mesh)
 
+        edges = self.get_sharp(b_model)
+
         bmesh.ops.remove_doubles(bm, verts=bm.verts)
+
+        # Check mesh edges against edge dictionary, mark hard edges sharp after removing doubles
+        numedges = 0
+        for e in bm.edges:
+            edgemid = tuple((e.verts[0].co + e.verts[1].co) / 2)
+            if len(edges[edgemid]) > 2:
+                numedges += 1
+                e.smooth = False
+
+        print(numedges, 'Hard edges found.')
+        print()
 
         bm.to_mesh(mesh)
         bm.free()
 
+        object.select = True
+        bpy.ops.object.shade_smooth()
+
         return 'Group \'' + b_model.name + '\' imported.\n'
+
+
+    def get_sharp(self, b_model):
+        print('Checking hard edges...')
+
+        edges = {}
+
+        # Build edges from faces in b_model and check if their normals differ
+        for f in b_model.faces:
+            for i, vertidx in enumerate(f):
+                idx_tocheck = i + 1
+                if i == len(f) - 1:
+                    idx_tocheck = 0
+                e = tuple(
+                    ( Vector( b_model.vertices[f[i]] ) + Vector( b_model.vertices[f[idx_tocheck]] ) ) / 2
+                )
+                if e not in edges:
+                    edges[e] = [ b_model.normals[f[i]], b_model.normals[f[idx_tocheck]] ]
+                    continue
+                if b_model.normals[f[i]] not in edges[e]:
+                    edges[e].append(b_model.normals[f[i]])
+                if b_model.normals[f[idx_tocheck]] not in edges[e]:
+                    edges[e].append(b_model.normals[f[idx_tocheck]])
+
+        return edges
