@@ -111,13 +111,13 @@ class ExportGMDC(Operator, ExportHelper):
 
 
     @staticmethod
-    def avg_vector(normals):
-        i = 0
+    def recalc_normals(verts):
         total = Vector( (0,0,0) )
-        for n in normals:
-            total += n
-            i += 1
-        return total / i
+        for v in verts:
+            total += v.normal
+        avg = total / len(verts)
+        for v in verts:
+            v.normal = avg
 
 
     @staticmethod
@@ -132,26 +132,31 @@ class ExportGMDC(Operator, ExportHelper):
         bmesh.ops.triangulate(bm, faces=bm.faces)
 
 
-        # Split UV seam edges
-        edges_to_split = []
-        old_normals = []
+        ## RECALCULATING NORMALS
+        # Get all edges to split (UV seams and Sharp edges)
+        uvsplit = []
         for e in bm.edges:
-            if e.seam:
-                edges_to_split.append(e)
+            if e.seam or not e.smooth:
+                uvsplit.append(e)
 
-        bmesh.ops.split_edges(bm, edges=edges_to_split)
+        # Split edges given by above loop
+        bmesh.ops.split_edges(bm, edges=uvsplit)
 
-        # Rebuild normals
-        normals = {}
-        for i, v in enumerate(bm.verts):
-            if tuple(v.co) not in normals:
-                normals[ tuple(v.co) ] = [v.normal]
-            else:
-                normals[ tuple(v.co) ].append(v.normal)
-        for i, key in enumerate(normals):
-            normals[key] = ExportGMDC.avg_vector( normals[key] )
-        for v in bm.verts:
-            v.normal = normals[ tuple(v.co) ]
+        # Run through all edges again, check if normals of their verts should be smoothed
+        verts_to_smooth = {}
+        for e in bm.edges:
+            if not e.seam or not e.smooth:
+                continue
+            for v in e.verts:
+                if tuple( v.co ) not in verts_to_smooth:
+                    verts_to_smooth[ tuple( v.co ) ] = [ v ]
+                    continue
+                if v not in verts_to_smooth[ tuple( v.co ) ]:
+                    verts_to_smooth[ tuple( v.co ) ].append( v )
+
+        # Finally run all vertices given by above loop through the normal smooth function
+        for vert in verts_to_smooth:
+            ExportGMDC.recalc_normals( verts_to_smooth[vert] )
 
 
         bm.to_mesh(mesh)
