@@ -32,7 +32,7 @@ from .bone_data import BoneData
 class ExportGMDC(Operator, ExportHelper):
     """Sims 2 GMDC Exporter"""
     bl_idname = "export.gmdc_export"
-    bl_label = "Sims 2 GMDC Export"
+    bl_label = "Sims 2 GMDC (.5gd)"
     bl_options = {'REGISTER', 'UNDO'}
 
     # ExportHelper mixin class uses this

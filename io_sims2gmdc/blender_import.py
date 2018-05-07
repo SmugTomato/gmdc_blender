@@ -33,7 +33,7 @@ from .bone_data import BoneData
 class ImportGMDC(Operator, ImportHelper):
     """Sims 2 GMDC Importer"""
     bl_idname = "import.gmdc_import"
-    bl_label = "Sims 2 GMDC Import"
+    bl_label = "Sims 2 GMDC (.5gd)"
     bl_options = {'REGISTER', 'UNDO'}
 
     # ImportHelper mixin class uses this
