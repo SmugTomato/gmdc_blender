@@ -65,36 +65,29 @@ class MorphMap:
 
 
     @staticmethod
-    def from_blender(mesh):
-        morphs = []
+    def from_blender(mesh, morphmesh, name):
+        deltas  = []
+        ndeltas = []
 
-        for shpkey in mesh.shape_keys.key_blocks:
-            if shpkey == mesh.shape_keys.key_blocks[0]:
-                continue
+        print(len(mesh.vertices), len(morphmesh.vertices))
 
-            normals = shpkey.normals_vertex_get()
+        for i in range( len(mesh.vertices) ):
+            deltas_val = (
+                -1 * ( morphmesh.vertices[i].co[0] - mesh.vertices[i].co[0] ),
+                -1 * ( morphmesh.vertices[i].co[1] - mesh.vertices[i].co[1] ),
+                ( morphmesh.vertices[i].co[2] - mesh.vertices[i].co[2] )
+            )
 
-            deltas  = []
-            ndeltas = []
-            for i in range( len(shpkey.data) ):
-                deltas_val = (
-                    -1 * ( shpkey.data[i].co[0] - mesh.vertices[i].co[0] ),
-                    -1 * ( shpkey.data[i].co[1] - mesh.vertices[i].co[1] ),
-                    ( shpkey.data[i].co[2] - mesh.vertices[i].co[2] )
-                )
+            ndeltas_val = (
+                -1 * ( morphmesh.vertices[i].normal[0] - mesh.vertices[i].normal[0] ),
+                -1 * ( morphmesh.vertices[i].normal[1] - mesh.vertices[i].normal[1] ),
+                ( morphmesh.vertices[i].normal[2] - mesh.vertices[i].normal[2] )
+            )
 
-                ndeltas_val = (
-                    -1 * ( normals[i*3 + 0] - mesh.vertices[i].normal[0] ),
-                    -1 * ( normals[i*3 + 1] - mesh.vertices[i].normal[1] ),
-                    ( normals[i*3 + 2] - mesh.vertices[i].normal[2] )
-                )
+            deltas.append( deltas_val )
+            ndeltas.append( ndeltas_val )
 
-                deltas.append( deltas_val )
-                ndeltas.append( ndeltas_val )
-
-            morphs.append(MorphMap(shpkey.name, deltas, ndeltas))
-
-        return(morphs)
+        return MorphMap(name, deltas, ndeltas)
 
 
     @staticmethod

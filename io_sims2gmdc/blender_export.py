@@ -111,19 +111,44 @@ class ExportGMDC(Operator, ExportHelper):
 
 
     @staticmethod
-    def recalc_normals(verts):
-        total = Vector( (0,0,0) )
-        for v in verts:
-            total += v.normal
-        avg = total / len(verts)
-        for v in verts:
-            v.normal = avg
+    def recalc_normals(bm_mesh):
+        # uvsplit = []
+        # for e in bm_mesh.edges:
+        #     if e.seam or not e.smooth:
+        #         uvsplit.append(e)
+        #
+        # # Split edges given by above loop
+        # bmesh.ops.split_edges(bm_mesh, edges=uvsplit)
+
+        # Run through all edges again, check if normals of their verts should be smoothed
+        verts_to_smooth = {}
+        for e in bm_mesh.edges:
+            if not e.seam or not e.smooth:
+                continue
+            for v in e.verts:
+                if tuple( v.co ) not in verts_to_smooth:
+                    verts_to_smooth[ tuple( v.co ) ] = [ v ]
+                    continue
+                if v not in verts_to_smooth[ tuple( v.co ) ]:
+                    verts_to_smooth[ tuple( v.co ) ].append( v )
+
+        # Finally run all vertices given by above loop through the normal smooth function
+        # This also needs to be done for every morph
+        for vert in verts_to_smooth:
+            total = Vector( (0,0,0) )
+            for v in verts_to_smooth[vert]:
+                total += v.normal
+            avg = total / len(verts_to_smooth[vert])
+            for v in verts_to_smooth[vert]:
+                v.normal = avg
 
 
     @staticmethod
     def build_group(object, filename):
-        # Bmesh section
-        mesh = object.data
+
+        # Make a copy of the mesh to keep the original intact
+        mesh = object.to_mesh(bpy.context.scene, False, 'RENDER', False, False)
+        temp_obj = bpy.data.objects.new('temp_obj', mesh)
         bm = bmesh.new()
         bm.from_mesh(mesh)
 
@@ -143,20 +168,22 @@ class ExportGMDC(Operator, ExportHelper):
         bmesh.ops.split_edges(bm, edges=uvsplit)
 
         # Run through all edges again, check if normals of their verts should be smoothed
-        verts_to_smooth = {}
-        for e in bm.edges:
-            if not e.seam or not e.smooth:
-                continue
-            for v in e.verts:
-                if tuple( v.co ) not in verts_to_smooth:
-                    verts_to_smooth[ tuple( v.co ) ] = [ v ]
-                    continue
-                if v not in verts_to_smooth[ tuple( v.co ) ]:
-                    verts_to_smooth[ tuple( v.co ) ].append( v )
-
-        # Finally run all vertices given by above loop through the normal smooth function
-        for vert in verts_to_smooth:
-            ExportGMDC.recalc_normals( verts_to_smooth[vert] )
+        # verts_to_smooth = {}
+        # for e in bm.edges:
+        #     if not e.seam or not e.smooth:
+        #         continue
+        #     for v in e.verts:
+        #         if tuple( v.co ) not in verts_to_smooth:
+        #             verts_to_smooth[ tuple( v.co ) ] = [ v ]
+        #             continue
+        #         if v not in verts_to_smooth[ tuple( v.co ) ]:
+        #             verts_to_smooth[ tuple( v.co ) ].append( v )
+        #
+        # # Finally run all vertices given by above loop through the normal smooth function
+        # # This also needs to be done for every morph
+        # for vert in verts_to_smooth:
+        #     ExportGMDC.recalc_normals( verts_to_smooth[vert] )
+        ExportGMDC.recalc_normals(bm)
 
 
         bm.to_mesh(mesh)
@@ -207,13 +234,47 @@ class ExportGMDC(Operator, ExportHelper):
 
 
         # Morphs
-        morphs = None
+        morphs = []
         morph_bytemap = None
         if mesh.shape_keys:
-            morphs = MorphMap.from_blender(mesh)
+
+            temp_obj.show_only_shape_key = True
+
+            # Recalculate normals for each morph and then create it
+            for key in temp_obj.data.shape_keys.key_blocks[1:]:
+                # Set active shape key
+                idx = temp_obj.data.shape_keys.key_blocks.find(key.name)
+                temp_obj.active_shape_key_index = idx
+
+                # Create a copy from active shape key
+                morphmesh = temp_obj.to_mesh(bpy.context.scene, True, 'RENDER', False, False)
+
+                # Initialize bmesh
+                morph_bm = bmesh.new()
+                morph_bm.from_mesh(morphmesh)
+
+                # Recalculate normals and create morph
+                ExportGMDC.recalc_normals(morph_bm)
+
+                # Remove copied mesh
+                morph_bm.to_mesh(morphmesh)
+                morph_bm.free()
+
+                # Create morph and remove copied mesh
+                morphs.append( MorphMap.from_blender(mesh, morphmesh, key.name) )
+                bpy.data.meshes.remove(morphmesh)
+
+
+            temp_obj.active_shape_key_index = 0
+            temp_obj.show_only_shape_key = False
+
+
+
             morph_bytemap = MorphMap.make_bytemap(morphs, len(vertices))
 
 
+        # Remove copied mesh once done
+        bpy.data.meshes.remove(mesh)
 
         # bpy.ops.ed.undo()   # Undo triangulation
         return BlenderModel(vertices, normals, faces, uvs, name, bone_assign,
