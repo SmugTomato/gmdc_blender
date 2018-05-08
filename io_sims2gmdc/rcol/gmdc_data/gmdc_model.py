@@ -108,18 +108,18 @@ class GMDCModel:
             transformlist.append( b.position[2] )
             model.transforms.append(transformlist)
 
-        namepairct = len(b_models[0].morphs)
         model.name_pairs = []
-        for i in range( namepairct + 1 ):
-            if i == 0:
-                model.name_pairs.append( ['',''] )
-                continue
+        model.vertices = []
+        model.faces = []
+        if b_models[0].morphs:
+            namepairct = len(b_models[0].morphs)
+            for i in range( namepairct + 1 ):
+                if i == 0:
+                    model.name_pairs.append( ['',''] )
+                    continue
 
-            model.name_pairs.append(
-                b_models[0].morphs[i - 1].name.split(', ')
-            )
-
-            model.vertices = []
-            model.faces = []
+                model.name_pairs.append(
+                    b_models[0].morphs[i - 1].name.split(', ')
+                )
 
         return model

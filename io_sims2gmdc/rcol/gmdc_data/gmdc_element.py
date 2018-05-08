@@ -226,18 +226,19 @@ class GMDCElement:
                                         GMDCElement.BONE_WEIGHTS, 0)
             )
         for mod in b_models:
-            for i, _ in enumerate(mod.morphs):
-                # Morph Vertex Delta
-                elements.append(
-                    GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
-                                            GMDCElement.MORPH_VERTEX_DELTAS, i)
-                )
-            for i, _ in enumerate(mod.morphs):
-                # Morph Vertex Delta
-                elements.append(
-                    GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
-                                            GMDCElement.NORMAL_MORPH_DELTAS, i)
-                )
+            if mod.morphs:
+                for i, _ in enumerate(mod.morphs):
+                    # Morph Vertex Delta
+                    elements.append(
+                        GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
+                                                GMDCElement.MORPH_VERTEX_DELTAS, i)
+                    )
+                for i, _ in enumerate(mod.morphs):
+                    # Morph Vertex Delta
+                    elements.append(
+                        GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
+                                                GMDCElement.NORMAL_MORPH_DELTAS, i)
+                    )
             # Morph Vertex Map
             elements.append(
                 GMDCElement.make_empty(0x04, GMDCElement.SET_SECONDARY,
@@ -298,29 +299,30 @@ class GMDCElement:
                 GMDCElement.from_datalist(
                     mod.bone_weight, GMDCElement.BONE_WEIGHTS, 0)
             )
-            for i, morph in enumerate(mod.morphs):
+            if mod.morphs:
+                for i, morph in enumerate(mod.morphs):
+                    link_list.append(link_index)
+                    link_index += 1
+                    # Morph Vertex Delta
+                    elements.append(
+                        GMDCElement.from_datalist(
+                            morph.deltas, GMDCElement.MORPH_VERTEX_DELTAS, i)
+                    )
+                for i, morph in enumerate(mod.morphs):
+                    link_list.append(link_index)
+                    link_index += 1
+                    # Morph Vertex Delta
+                    elements.append(
+                        GMDCElement.from_datalist(
+                            morph.ndeltas, GMDCElement.NORMAL_MORPH_DELTAS, i)
+                    )
                 link_list.append(link_index)
                 link_index += 1
-                # Morph Vertex Delta
+                # Morph Vertex Map
                 elements.append(
                     GMDCElement.from_datalist(
-                        morph.deltas, GMDCElement.MORPH_VERTEX_DELTAS, i)
+                        mod.morph_bytemap, GMDCElement.MORPH_VERTEX_MAP, 0)
                 )
-            for i, morph in enumerate(mod.morphs):
-                link_list.append(link_index)
-                link_index += 1
-                # Morph Vertex Delta
-                elements.append(
-                    GMDCElement.from_datalist(
-                        morph.ndeltas, GMDCElement.NORMAL_MORPH_DELTAS, i)
-                )
-            link_list.append(link_index)
-            link_index += 1
-            # Morph Vertex Map
-            elements.append(
-                GMDCElement.from_datalist(
-                    mod.morph_bytemap, GMDCElement.MORPH_VERTEX_MAP, 0)
-            )
             link_list.append(link_index)
             link_index += 1
             # Bump Map Normals
