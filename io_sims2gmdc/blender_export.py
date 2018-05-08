@@ -207,8 +207,11 @@ class ExportGMDC(Operator, ExportHelper):
 
 
         # Morphs
-        morphs = MorphMap.from_blender(mesh)
-        morph_bytemap = MorphMap.make_bytemap(morphs, len(vertices))
+        morphs = None
+        morph_bytemap = None
+        if mesh.shape_keys:
+            morphs = MorphMap.from_blender(mesh)
+            morph_bytemap = MorphMap.make_bytemap(morphs, len(vertices))
 
 
 
