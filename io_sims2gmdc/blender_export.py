@@ -112,14 +112,6 @@ class ExportGMDC(Operator, ExportHelper):
 
     @staticmethod
     def recalc_normals(bm_mesh):
-        # uvsplit = []
-        # for e in bm_mesh.edges:
-        #     if e.seam or not e.smooth:
-        #         uvsplit.append(e)
-        #
-        # # Split edges given by above loop
-        # bmesh.ops.split_edges(bm_mesh, edges=uvsplit)
-
         # Run through all edges again, check if normals of their verts should be smoothed
         verts_to_smooth = {}
         for e in bm_mesh.edges:
@@ -133,7 +125,6 @@ class ExportGMDC(Operator, ExportHelper):
                     verts_to_smooth[ tuple( v.co ) ].append( v )
 
         # Finally run all vertices given by above loop through the normal smooth function
-        # This also needs to be done for every morph
         for vert in verts_to_smooth:
             total = Vector( (0,0,0) )
             for v in verts_to_smooth[vert]:
@@ -156,7 +147,6 @@ class ExportGMDC(Operator, ExportHelper):
         # Triangulate faces
         bmesh.ops.triangulate(bm, faces=bm.faces)
 
-
         ## RECALCULATING NORMALS
         # Get all edges to split (UV seams and Sharp edges)
         uvsplit = []
@@ -167,24 +157,7 @@ class ExportGMDC(Operator, ExportHelper):
         # Split edges given by above loop
         bmesh.ops.split_edges(bm, edges=uvsplit)
 
-        # Run through all edges again, check if normals of their verts should be smoothed
-        # verts_to_smooth = {}
-        # for e in bm.edges:
-        #     if not e.seam or not e.smooth:
-        #         continue
-        #     for v in e.verts:
-        #         if tuple( v.co ) not in verts_to_smooth:
-        #             verts_to_smooth[ tuple( v.co ) ] = [ v ]
-        #             continue
-        #         if v not in verts_to_smooth[ tuple( v.co ) ]:
-        #             verts_to_smooth[ tuple( v.co ) ].append( v )
-        #
-        # # Finally run all vertices given by above loop through the normal smooth function
-        # # This also needs to be done for every morph
-        # for vert in verts_to_smooth:
-        #     ExportGMDC.recalc_normals( verts_to_smooth[vert] )
         ExportGMDC.recalc_normals(bm)
-
 
         bm.to_mesh(mesh)
         bm.free()
