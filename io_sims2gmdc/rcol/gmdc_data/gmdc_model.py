@@ -61,6 +61,7 @@ class GMDCModel:
                     temp_verts.append(temp_vert)
                 self.vertices.append(temp_verts)
 
+            self.faces = []
             for i in range(0,face_count):
                 temp_face = data_read.read_int16()
                 self.faces.append(temp_face)
@@ -97,16 +98,17 @@ class GMDCModel:
         model = GMDCModel()
 
         model.transforms = []
-        for b in bones:
-            transformlist = []
-            transformlist.append( b.rotation[1] )
-            transformlist.append( b.rotation[2] )
-            transformlist.append( b.rotation[3] )
-            transformlist.append( b.rotation[0] )
-            transformlist.append( b.position[0] )
-            transformlist.append( b.position[1] )
-            transformlist.append( b.position[2] )
-            model.transforms.append(transformlist)
+        if bones:
+            for b in bones:
+                transformlist = []
+                transformlist.append( b.rotation[1] )
+                transformlist.append( b.rotation[2] )
+                transformlist.append( b.rotation[3] )
+                transformlist.append( b.rotation[0] )
+                transformlist.append( b.position[0] )
+                transformlist.append( b.position[1] )
+                transformlist.append( b.position[2] )
+                model.transforms.append(transformlist)
 
         model.name_pairs = []
         model.vertices = []

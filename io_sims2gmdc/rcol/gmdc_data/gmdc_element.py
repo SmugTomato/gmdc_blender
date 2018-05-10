@@ -214,19 +214,21 @@ class GMDCElement:
                                         GMDCElement.UV_COORDINATE_DELTAS, i)
             )
         # Per group empty elements now
-        for _ in b_models:
-            # Bone Assignments
-            elements.append(
-                GMDCElement.make_empty(0x04, GMDCElement.SET_SECONDARY,
-                                        GMDCElement.BONE_ASSIGNMENTS, 0)
-            )
-            # Bone Weights
-            elements.append(
-                GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
-                                        GMDCElement.BONE_WEIGHTS, 0)
-            )
         for mod in b_models:
-            if mod.morphs:
+            if len(mod.bone_assign) > 0:
+                # Bone Assignments
+                elements.append(
+                    GMDCElement.make_empty(0x04, GMDCElement.SET_SECONDARY,
+                                            GMDCElement.BONE_ASSIGNMENTS, 0)
+                )
+                # Bone Weights
+                elements.append(
+                    GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
+                                            GMDCElement.BONE_WEIGHTS, 0)
+                )
+        for mod in b_models:
+            print(len(mod.morphs))
+            if len(mod.morphs) > 0:
                 for i, _ in enumerate(mod.morphs):
                     # Morph Vertex Delta
                     elements.append(
@@ -239,11 +241,11 @@ class GMDCElement:
                         GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
                                                 GMDCElement.NORMAL_MORPH_DELTAS, i)
                     )
-            # Morph Vertex Map
-            elements.append(
-                GMDCElement.make_empty(0x04, GMDCElement.SET_SECONDARY,
-                                        GMDCElement.MORPH_VERTEX_MAP, 0)
-            )
+                # Morph Vertex Map
+                elements.append(
+                    GMDCElement.make_empty(0x04, GMDCElement.SET_SECONDARY,
+                                            GMDCElement.MORPH_VERTEX_MAP, 0)
+                )
         for _ in b_models:
             elements.append(
                 GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
@@ -285,20 +287,21 @@ class GMDCElement:
                 GMDCElement.from_datalist(
                     mod.uvs, GMDCElement.UV_COORDINATES, 0)
             )
-            link_list.append(link_index)
-            link_index += 1
-            # Bone Assignment
-            elements.append(
-                GMDCElement.from_datalist(
-                    mod.bone_assign, GMDCElement.BONE_ASSIGNMENTS, 0)
-            )
-            link_list.append(link_index)
-            link_index += 1
-            # Bone Weights
-            elements.append(
-                GMDCElement.from_datalist(
-                    mod.bone_weight, GMDCElement.BONE_WEIGHTS, 0)
-            )
+            if mod.bone_assign:
+                link_list.append(link_index)
+                link_index += 1
+                # Bone Assignment
+                elements.append(
+                    GMDCElement.from_datalist(
+                        mod.bone_assign, GMDCElement.BONE_ASSIGNMENTS, 0)
+                )
+                link_list.append(link_index)
+                link_index += 1
+                # Bone Weights
+                elements.append(
+                    GMDCElement.from_datalist(
+                        mod.bone_weight, GMDCElement.BONE_WEIGHTS, 0)
+                )
             if mod.morphs:
                 for i, morph in enumerate(mod.morphs):
                     link_list.append(link_index)
@@ -328,7 +331,7 @@ class GMDCElement:
             # Bump Map Normals
             elements.append(
                 GMDCElement.from_datalist(
-                    mod.normals, GMDCElement.BUMP_MAP_NORMALS, 0)
+                    mod.tangents, GMDCElement.BUMP_MAP_NORMALS, 0)
             )
 
             links.append(link_list)

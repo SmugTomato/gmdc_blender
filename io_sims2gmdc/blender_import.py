@@ -61,7 +61,7 @@ class ImportGMDC(Operator, ImportHelper):
         b_models = blender_model.BlenderModel.groups_from_gmdc(gmdc_data)
 
         armature = None
-        if self.do_skeleton:
+        if self.do_skeleton and gmdc_data.model.transforms:
             armature = self.import_skeleton(gmdc_data)
 
         if b_models != False:
@@ -181,29 +181,30 @@ class ImportGMDC(Operator, ImportHelper):
 
         # Load bone assignments and weights
         # Check for mismatches in index counts
-        if len(b_model.vertices) != len(b_model.bone_assign) or \
-            len(b_model.vertices) != len(b_model.bone_weight):
-            error = 'ERROR: Group ' + b_model.name + '\'s vertex index counts don\'t match.'
-            return error
-
-
-        print('Applying bone weights...')
-        for i in range(len(b_model.bone_assign)):
-            remainder = 1.0     # Used for an implied 4th bone weight
-            # print(i, b_model.bone_assign[i])
-            for j in range(len(b_model.bone_assign[i])):
-                grpname = BoneData.bone_parent_table[ b_model.bone_assign[i][j] ][0]
-                vertgroup = object.vertex_groups[grpname]
-                if j != 3:
-                    weight = b_model.bone_weight[i][j]
-                    remainder -= weight
-                    vertgroup.add( [i], weight, 'ADD' )
-                else:
-                    vertgroup.add( [i], remainder, 'ADD' )
-
-
-        # Add Armature modifier
         if armature:
+            if len(b_model.vertices) != len(b_model.bone_assign) or \
+                len(b_model.vertices) != len(b_model.bone_weight):
+                error = 'ERROR: Group ' + b_model.name + '\'s vertex index counts don\'t match.'
+                return error
+
+
+
+            print('Applying bone weights...')
+            for i in range(len(b_model.bone_assign)):
+                remainder = 1.0     # Used for an implied 4th bone weight
+                # print(i, b_model.bone_assign[i])
+                for j in range(len(b_model.bone_assign[i])):
+                    grpname = BoneData.bone_parent_table[ b_model.bone_assign[i][j] ][0]
+                    vertgroup = object.vertex_groups[grpname]
+                    if j != 3:
+                        weight = b_model.bone_weight[i][j]
+                        remainder -= weight
+                        vertgroup.add( [i], weight, 'ADD' )
+                    else:
+                        vertgroup.add( [i], remainder, 'ADD' )
+
+
+            # Add Armature modifier
             object.modifiers.new("Armature", 'ARMATURE')
             object.modifiers["Armature"].object = armature
             object.modifiers["Armature"].use_deform_preserve_volume = False
@@ -253,8 +254,17 @@ class ImportGMDC(Operator, ImportHelper):
         bm.to_mesh(mesh)
         bm.free()
 
+
         object.select = True
         bpy.ops.object.shade_smooth()
+
+
+        # Delete loose geometry in case of Maxis object imports
+        bpy.ops.object.mode_set(mode='EDIT')
+        bpy.ops.mesh.select_all(action='SELECT')
+        bpy.ops.mesh.delete_loose()
+        bpy.ops.object.mode_set(mode='OBJECT')
+
 
         return 'Group \'' + b_model.name + '\' imported.\n'
 

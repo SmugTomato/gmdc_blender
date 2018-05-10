@@ -63,10 +63,11 @@ class GMDCSubset:
     def build_data(b_models, bones):
         subsets = []
 
-        for b in bones:
-            subset = GMDCSubset()
-            subset.vertices = []
-            subset.faces = []
-            subsets.append(subset)
+        if bones:
+            for b in bones:
+                subset = GMDCSubset()
+                subset.vertices = []
+                subset.faces = []
+                subsets.append(subset)
 
         return subsets

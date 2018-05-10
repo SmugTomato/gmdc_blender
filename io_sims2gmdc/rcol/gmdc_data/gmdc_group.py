@@ -83,8 +83,9 @@ class GMDCGroup:
             grp.opacity_amount = mod.opacity_amount
 
             grp.subsets = []
-            for i in range(len(bones)):
-                grp.subsets.append(i)
+            if bones:
+                for i in range(len(bones)):
+                    grp.subsets.append(i)
 
             groups.append(grp)
 

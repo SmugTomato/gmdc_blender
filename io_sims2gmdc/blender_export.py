@@ -85,20 +85,24 @@ class ExportGMDC(Operator, ExportHelper):
             print('ERROR: No valid objects were found')
             return{'CANCELLED'}
         armature = obs_to_export[0].modifiers.get( 'Armature', None )
-        if armature == None:
-            print('ERROR: No armature modifier')
-            return{'CANCELLED'}
+        # if armature == None:
+        #     print('ERROR: No armature modifier')
+        #     return{'CANCELLED'}
 
 
         # Restructure bone data
-        bones = BoneData.from_armature(armature.object)
+        has_armature = obs_to_export[0].modifiers.get( 'Armature', None ) != None
+        bones = None
+        if has_armature:
+            bones = BoneData.from_armature(armature.object)
 
         print(obs_to_export)
 
         # Continue export process
         b_models = []
         for ob in obs_to_export:
-            b_models.append( ExportGMDC.build_group(ob, filename) )
+            print(ob)
+            b_models.append( ExportGMDC.build_group(ob, filename, has_armature) )
 
         # Build gmdc
         gmdc_data = GMDC.build_data(b_models, bones)
@@ -135,7 +139,7 @@ class ExportGMDC(Operator, ExportHelper):
 
 
     @staticmethod
-    def build_group(object, filename):
+    def build_group(object, filename, has_armature):
 
         # Make a copy of the mesh to keep the original intact
         mesh = object.to_mesh(bpy.context.scene, False, 'RENDER', False, False)
@@ -164,6 +168,7 @@ class ExportGMDC(Operator, ExportHelper):
 
         vertices    = []
         normals     = []
+        tangents    = []
         uvs         = []
         faces       = []
         bone_assign = []
@@ -175,7 +180,21 @@ class ExportGMDC(Operator, ExportHelper):
         # Vertices, normals and pre-populating uvs
         for vert in mesh.vertices:
             vertices.append( (-vert.co[0], -vert.co[1], vert.co[2]) )
+            vert.normal.normalize()
             normals.append( (-vert.normal[0], -vert.normal[1], vert.normal[2]) )
+
+
+            c1 = vert.normal.cross(Vector( (0,1,0) )).normalized()
+            c2 = vert.normal.cross(Vector( (0,0,1) )).normalized()
+
+            if c1.length > c2.length:
+                tangents.append(c1)
+            else:
+                tangents.append(c2)
+
+            # tan = vert.normal.orthogonal().normalized()
+            # tangents.append( (tan[0], tan[1], tan[2]) )
+            # print(tan)
             uvs.append( None )
 
 
@@ -184,26 +203,41 @@ class ExportGMDC(Operator, ExportHelper):
             faces.append( (f.vertices[0], f.vertices[1], f.vertices[2]) )
 
 
+        # Tangents
+        mesh.calc_tangents()
+
+        # tangents = [0] * len(vertices)
+        # for i, polygon in enumerate(mesh.polygons):
+        #     for j, vert in enumerate([mesh.loops[z] for z in polygon.loop_indices]):
+        #         tan = ( vert.tangent[0], vert.tangent[1], vert.tangent[2] )
+        #         tangents[polygon.vertices[j]] = tan
+        #         print(tan, vert.tangent)
+
+
         # UVs
         uv_layer = mesh.uv_layers[0]
+        print(uv_layer, name)
         for i, polygon in enumerate(mesh.polygons):
             for j, loopindex in enumerate(polygon.loop_indices):
                 meshuvloop = mesh.uv_layers.active.data[loopindex]
                 uv = ( meshuvloop.uv[0], -meshuvloop.uv[1] + 1 )
                 vertidx = faces[i][j]
                 uvs[vertidx] = uv
+        print(uvs)
+        print()
 
 
         # Vertex groups (Bone assignments and weights)
-        for vert in mesh.vertices:
-            assign = [255] * 4
-            weight = [0] * 3
-            for i, assignment in enumerate(vert.groups):
-                if i < 3:
-                    weight[i] = assignment.weight
-                assign[i] = assignment.group
-            bone_assign.append(assign)
-            bone_weight.append(weight)
+        if has_armature:
+            for vert in mesh.vertices:
+                assign = [255] * 4
+                weight = [0] * 3
+                for i, assignment in enumerate(vert.groups):
+                    if i < 3:
+                        weight[i] = assignment.weight
+                    assign[i] = assignment.group
+                bone_assign.append(assign)
+                bone_weight.append(weight)
 
 
         # Morphs
@@ -250,7 +284,7 @@ class ExportGMDC(Operator, ExportHelper):
         bpy.data.meshes.remove(mesh)
 
         # bpy.ops.ed.undo()   # Undo triangulation
-        return BlenderModel(vertices, normals, faces, uvs, name, bone_assign,
+        return BlenderModel(vertices, normals, tangents, faces, uvs, name, bone_assign,
                             bone_weight, opacity, morphs, filename, morph_bytemap)
 
 

@@ -17,6 +17,7 @@ Created by SmugTomato
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 from .element_id import ElementID
+from mathutils import Vector
 
 
 class MorphMap:
@@ -69,8 +70,6 @@ class MorphMap:
         deltas  = []
         ndeltas = []
 
-        print(len(mesh.vertices), len(morphmesh.vertices))
-
         for i in range( len(mesh.vertices) ):
             deltas_val = (
                 -1 * ( morphmesh.vertices[i].co[0] - mesh.vertices[i].co[0] ),
@@ -78,10 +77,11 @@ class MorphMap:
                 ( morphmesh.vertices[i].co[2] - mesh.vertices[i].co[2] )
             )
 
+            morph_norm = morphmesh.vertices[i].normal.normalized()
             ndeltas_val = (
-                -1 * ( morphmesh.vertices[i].normal[0] - mesh.vertices[i].normal[0] ),
-                -1 * ( morphmesh.vertices[i].normal[1] - mesh.vertices[i].normal[1] ),
-                ( morphmesh.vertices[i].normal[2] - mesh.vertices[i].normal[2] )
+                -1 * ( morph_norm[0] - mesh.vertices[i].normal[0] ),
+                -1 * ( morph_norm[1] - mesh.vertices[i].normal[1] ),
+                ( morph_norm[2] - mesh.vertices[i].normal[2] )
             )
 
             deltas.append( deltas_val )

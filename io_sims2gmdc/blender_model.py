@@ -21,13 +21,14 @@ from .morphmap      import MorphMap
 
 class BlenderModel:
 
-    def __init__(self, vertices, normals, faces, uvs, name, bone_assign,
+    def __init__(self, vertices, normals, tangents, faces, uvs, name, bone_assign,
                     bone_weight, opacity_amount, morphs, filename,
                     morph_bytemap):
         self.name           = name
         self.filename       = filename
         self.vertices       = vertices
         self.normals        = normals
+        self.tangents       = tangents
         self.faces          = faces
         self.uvs            = uvs
         self.bone_assign    = bone_assign
@@ -68,9 +69,9 @@ class BlenderModel:
         vertices    = None
         uvs         = None
         normals     = None
-        bone_assign = None
-        bone_weight = None
-        morphs      = None
+        bone_assign = []
+        bone_weight = []
+        morphs      = []
         for ind in element_indices:
             # Vertices
             if gmdc_data.elements[ind].element_identity == ElementID.VERTICES:
@@ -122,7 +123,7 @@ class BlenderModel:
         for i in range(0,face_count):
             face = (
                 gmdc_data.groups[group_index].faces[i*3 + 0],
-                gmdc_data.groups[group_index].faces[i*3 + 1], 
+                gmdc_data.groups[group_index].faces[i*3 + 1],
                 gmdc_data.groups[group_index].faces[i*3 + 2]
             )
             faces.append(face)
@@ -138,7 +139,7 @@ class BlenderModel:
         morphs = MorphMap.make_morphs(gmdc_data, group_index, element_indices)
 
 
-        return BlenderModel(vertices, normals, faces, uvs, name, bone_assign,
+        return BlenderModel(vertices, normals, None, faces, uvs, name, bone_assign,
                             bone_weight, opacity_amount, morphs, filename, None)
 
 
