@@ -21,7 +21,7 @@ Created by SmugTomato
 bl_info = {
     "name": "Sims 2 GMDC Tools",
     "category": "Import-Export",
-	"version": (0, 1, 1),
+	"version": (0, 1, 2),
 	"blender": (2, 79, 0),
 	"location": "File > Import/Export",
 	"description": "Importer and exporter for Sims 2 GMDC(.5gd) files"
