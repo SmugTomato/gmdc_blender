@@ -128,7 +128,7 @@ class GMDC:
         return True
 
     @staticmethod
-    def build_data(b_models, bones):
+    def build_data(b_models, bones, boundmesh):
         gmdc_data = GMDC(None, None)
 
         # HEADER
@@ -151,7 +151,7 @@ class GMDC:
 
         # MODEL
         gmdc_data.model = gmdc_model.GMDCModel.build_data(
-            b_models, bones
+            b_models, bones, boundmesh
         )
 
         # SUBSETS

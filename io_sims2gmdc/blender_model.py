@@ -21,9 +21,9 @@ from .morphmap      import MorphMap
 
 class BlenderModel:
 
-    def __init__(self, vertices, normals, tangents, faces, uvs, name, bone_assign,
-                    bone_weight, opacity_amount, morphs, filename,
-                    morph_bytemap):
+    def __init__(self, vertices, normals, tangents, faces, uvs, name,
+                    bone_assign, bone_weight, opacity_amount, morphs,
+                    filename, morph_bytemap):
         self.name           = name
         self.filename       = filename
         self.vertices       = vertices
@@ -139,8 +139,9 @@ class BlenderModel:
         morphs = MorphMap.make_morphs(gmdc_data, group_index, element_indices)
 
 
-        return BlenderModel(vertices, normals, None, faces, uvs, name, bone_assign,
-                            bone_weight, opacity_amount, morphs, filename, None)
+        return BlenderModel(vertices, normals, None, faces, uvs, name,
+                            bone_assign, bone_weight, opacity_amount,
+                            morphs, filename, None)
 
 
     # Build from blender data for export

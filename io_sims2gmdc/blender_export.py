@@ -27,6 +27,7 @@ from .rcol.gmdc import GMDC
 from .blender_model import BlenderModel
 from .morphmap import MorphMap
 from .bone_data import BoneData
+from .rcol.boundmesh import BoundMesh
 
 
 class ExportGMDC(Operator, ExportHelper):
@@ -101,11 +102,16 @@ class ExportGMDC(Operator, ExportHelper):
         # Continue export process
         b_models = []
         for ob in obs_to_export:
-            print(ob)
             b_models.append( ExportGMDC.build_group(ob, filename, has_armature) )
 
+        # Create bounding mesh
+        boundmesh = None
+        if not has_armature:
+            boundmesh = BoundMesh.create(obs_to_export, decimate_amount=0.2)
+        print( 'Verts:\t', len(boundmesh.vertices), '\nFaces:\t', len(boundmesh.faces) )
+
         # Build gmdc
-        gmdc_data = GMDC.build_data(b_models, bones)
+        gmdc_data = GMDC.build_data(b_models, bones, boundmesh)
 
         # Write data
         gmdc_data.write(self.filepath)
@@ -280,10 +286,7 @@ class ExportGMDC(Operator, ExportHelper):
         # Remove copied mesh once done
         bpy.data.meshes.remove(mesh)
 
-        # bpy.ops.ed.undo()   # Undo triangulation
-        return BlenderModel(vertices, normals, tangents, faces, uvs, name, bone_assign,
-                            bone_weight, opacity, morphs, filename, morph_bytemap)
 
-
-    def __do_export(objects, filename):
-        pass
+        return BlenderModel(vertices, normals, tangents, faces, uvs, name,
+                            bone_assign, bone_weight, opacity, morphs,
+                            filename, morph_bytemap)

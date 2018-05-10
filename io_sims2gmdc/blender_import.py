@@ -68,6 +68,8 @@ class ImportGMDC(Operator, ImportHelper):
             for model in b_models:
                 print( self.do_import(model, armature) )
 
+        bpy.ops.object.select_all(action='DESELECT')
+
         return {'FINISHED'}
 
 
@@ -182,7 +184,7 @@ class ImportGMDC(Operator, ImportHelper):
             for b in armature.data.bones:
                 object.vertex_groups.new(b.name)
 
-                
+
             if len(b_model.vertices) != len(b_model.bone_assign) or \
                 len(b_model.vertices) != len(b_model.bone_weight):
                 error = 'ERROR: Group ' + b_model.name + '\'s vertex index counts don\'t match.'

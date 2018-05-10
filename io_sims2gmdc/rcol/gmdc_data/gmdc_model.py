@@ -81,6 +81,7 @@ class GMDCModel:
         # Skip next section if vertcount == 0
         writer.write_int32( len(self.vertices) )
         if len(self.vertices) == 0:
+            print('!0!')
             return
 
         writer.write_int32( len(self.faces) )
@@ -94,7 +95,7 @@ class GMDCModel:
 
 
     @staticmethod
-    def build_data(b_models, bones):
+    def build_data(b_models, bones, boundmesh):
         model = GMDCModel()
 
         model.transforms = []
@@ -111,8 +112,6 @@ class GMDCModel:
                 model.transforms.append(transformlist)
 
         model.name_pairs = []
-        model.vertices = []
-        model.faces = []
         if b_models[0].morphs:
             namepairct = len(b_models[0].morphs)
             for i in range( namepairct + 1 ):
@@ -123,5 +122,13 @@ class GMDCModel:
                 model.name_pairs.append(
                     b_models[0].morphs[i - 1].name.split(', ')
                 )
+
+        model.vertices = []
+        model.faces = []
+        if boundmesh:
+            model.vertices = boundmesh.vertices
+            for f in boundmesh.faces:
+                for ind in f:
+                    model.faces.append(ind)
 
         return model
