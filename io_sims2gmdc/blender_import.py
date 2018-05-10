@@ -175,17 +175,14 @@ class ImportGMDC(Operator, ImportHelper):
                 meshuvloop.uv = b_model.uvs[vertex_index]
 
 
-        # Create vertex groups for bone assignments
-        for b in armature.data.bones:
-            object.vertex_groups.new(b.name)
-
-        # for i, val in enumerate(BoneData.bone_parent_table):
-        #     object.vertex_groups.new(val[0])
-
-
         # Load bone assignments and weights
         # Check for mismatches in index counts
         if armature:
+            # Create vertex groups for bone assignments
+            for b in armature.data.bones:
+                object.vertex_groups.new(b.name)
+
+                
             if len(b_model.vertices) != len(b_model.bone_assign) or \
                 len(b_model.vertices) != len(b_model.bone_weight):
                 error = 'ERROR: Group ' + b_model.name + '\'s vertex index counts don\'t match.'
