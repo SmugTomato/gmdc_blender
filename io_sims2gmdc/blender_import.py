@@ -112,10 +112,11 @@ class ImportGMDC(Operator, ImportHelper):
                 parent = amt.edit_bones[bonedata.parent]
                 bone.parent = parent
                 bone.tail = parent.head
-            # Hardcoded 'r_longsleeve' for now, as it was breaking child skeletons
-            if bone.tail == bone.head or bone.name == 'r_longsleeve':
+            # Check if the length of a bone is too short for blender
+            bonelen = bone.tail.length - bone.head.length
+            if bonelen > -0.0005 and bonelen < 0.0005:
                 # Blender does not support 0 length bones
-                bone.head += Vector((0,0,0.00001))
+                bone.head += Vector((0,0,0.00005))
 
             # Enter custom properties for exporting later
             # # Translate Vector
@@ -175,8 +176,11 @@ class ImportGMDC(Operator, ImportHelper):
 
 
         # Create vertex groups for bone assignments
-        for i, val in enumerate(BoneData.bone_parent_table):
-            object.vertex_groups.new(val[0])
+        for b in armature.data.bones:
+            object.vertex_groups.new(b.name)
+
+        # for i, val in enumerate(BoneData.bone_parent_table):
+        #     object.vertex_groups.new(val[0])
 
 
         # Load bone assignments and weights
@@ -188,13 +192,19 @@ class ImportGMDC(Operator, ImportHelper):
                 return error
 
 
-
             print('Applying bone weights...')
             for i in range(len(b_model.bone_assign)):
                 remainder = 1.0     # Used for an implied 4th bone weight
                 # print(i, b_model.bone_assign[i])
                 for j in range(len(b_model.bone_assign[i])):
-                    grpname = BoneData.bone_parent_table[ b_model.bone_assign[i][j] ][0]
+                    # If it's a sim skeleton, use boneparent table
+                    # Otherwise use bone names
+                    if len(armature.data.bones) == 65:
+                        grpname = BoneData.bone_parent_table[ b_model.bone_assign[i][j] ][0]
+                    else:
+                        # print(b_model.bone_assign[i][j])
+                        grpname = armature.data.bones[ b_model.bone_assign[i][j] ].name
+
                     vertgroup = object.vertex_groups[grpname]
                     if j != 3:
                         weight = b_model.bone_weight[i][j]

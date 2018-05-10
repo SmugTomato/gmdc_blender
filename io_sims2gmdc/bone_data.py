@@ -24,8 +24,8 @@ class BoneData:
     # Same order as the subgroups section of the GMDC
     bone_parent_table = [
         # Base
-        ('__skel',  None,                   0),
-        ('root_trans',       '__skel',      1),
+        ('simskel',  None,                   0),
+        ('root_trans',       'simskel',      1),
         ('root_rot',         'root_trans',  2),
         ('spine0',           'root_rot',    3),
         ('spine1',           'spine0',      4),
@@ -113,15 +113,24 @@ class BoneData:
         print('Loading skeleton.\n')
         bones = []
 
-        for subset, nameset in enumerate(BoneData.bone_parent_table):
-            trans_bl = gmdc.model.transforms[subset]
+        if len(gmdc.model.transforms) == 65:
+            for subset, nameset in enumerate(BoneData.bone_parent_table):
+                trans_bl = gmdc.model.transforms[subset]
 
-            rotation  = ( -trans_bl[3], trans_bl[0], trans_bl[1], trans_bl[2] )
-            translate = ( trans_bl[4], trans_bl[5], trans_bl[6] )
-            name = nameset[0]
-            parent = nameset[1]
+                rotation  = ( -trans_bl[3], trans_bl[0], trans_bl[1], trans_bl[2] )
+                translate = ( trans_bl[4], trans_bl[5], trans_bl[6] )
+                name = nameset[0]
+                parent = nameset[1]
 
-            bones.append(BoneData(name, parent, subset, translate, rotation))
+                bones.append(BoneData(name, parent, subset, translate, rotation))
+        else:
+            for i, trans_bl in enumerate(gmdc.model.transforms):
+                rotation  = ( -trans_bl[3], trans_bl[0], trans_bl[1], trans_bl[2] )
+                translate = ( trans_bl[4], trans_bl[5], trans_bl[6] )
+                name = 'Joint' + str(i)
+                parent = None
+
+                bones.append(BoneData(name, parent, i, translate, rotation))
 
         return bones
 

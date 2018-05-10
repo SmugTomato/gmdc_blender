@@ -96,7 +96,7 @@ class ExportGMDC(Operator, ExportHelper):
         if has_armature:
             bones = BoneData.from_armature(armature.object)
 
-        print(obs_to_export)
+        print('Objects to export:', obs_to_export)
 
         # Continue export process
         b_models = []
@@ -216,15 +216,12 @@ class ExportGMDC(Operator, ExportHelper):
 
         # UVs
         uv_layer = mesh.uv_layers[0]
-        print(uv_layer, name)
         for i, polygon in enumerate(mesh.polygons):
             for j, loopindex in enumerate(polygon.loop_indices):
                 meshuvloop = mesh.uv_layers.active.data[loopindex]
                 uv = ( meshuvloop.uv[0], -meshuvloop.uv[1] + 1 )
                 vertidx = faces[i][j]
                 uvs[vertidx] = uv
-        print(uvs)
-        print()
 
 
         # Vertex groups (Bone assignments and weights)
