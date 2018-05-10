@@ -107,8 +107,14 @@ class ImportGMDC(Operator, ImportHelper):
         # Sims 2 bones seem to be reversed head to tail
         for bonedata in skeldata:
             bone = amt.edit_bones.new(bonedata.name)
+
+            # Negate trans to account for flipped axes
             trans = Vector(bonedata.position)
+            trans.negate()
+            # Rotate rot quaternion to account for flipped axes
             rot = Quaternion(bonedata.rotation)
+            rot.rotate( Quaternion((0,0,0,1)) )
+
             bone.head = rot * trans
             if bonedata.parent != None:
                 parent = amt.edit_bones[bonedata.parent]
@@ -132,10 +138,8 @@ class ImportGMDC(Operator, ImportHelper):
             bone['rZ'] = bonedata.rotation[3]
 
 
-        # Go back to Object mode, scale the armature -1 along Z and apply the transform
+        # Go back to Object mode
         bpy.ops.object.mode_set(mode='OBJECT')
-        bpy.ops.transform.resize(value=(1, 1, -1))
-        bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
 
         # Return the Armature object
         return ob
