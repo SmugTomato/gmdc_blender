@@ -60,7 +60,7 @@ class GMDCSubset:
 
 
     @staticmethod
-    def build_data(b_models, bones):
+    def build_data(b_models, bones, riggedbounds):
         subsets = []
 
         if bones:
@@ -68,6 +68,12 @@ class GMDCSubset:
                 subset = GMDCSubset()
                 subset.vertices = []
                 subset.faces = []
+
+                subset.vertices = riggedbounds[b.subset].vertices
+                for f in riggedbounds[b.subset].faces:
+                    for idx in f:
+                        subset.faces.append(idx)
+
                 subsets.append(subset)
 
         return subsets

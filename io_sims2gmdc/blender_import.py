@@ -51,6 +51,12 @@ class ImportGMDC(Operator, ImportHelper):
             default=True,
             )
 
+    do_bounddebug = BoolProperty(
+            name="[DEBUG] Bound mesh",
+            description="Import bounding mesh",
+            default=False,
+            )
+
     def execute(self, context):
         gmdc_data = GMDC.from_file_data(self.filepath)
         if gmdc_data.load_header() == False:
@@ -64,7 +70,15 @@ class ImportGMDC(Operator, ImportHelper):
         if self.do_skeleton and gmdc_data.model.transforms:
             armature = self.import_skeleton(gmdc_data)
 
-        if b_models != False:
+
+        # DEBUG
+        if self.do_bounddebug:
+            skeldata = BoneData.build_bones(gmdc_data)
+            self.debug_boundmesh(gmdc_data.subsets, skeldata)
+
+
+
+        if b_models != False and not self.do_bounddebug:
             for model in b_models:
                 print( self.do_import(model, armature) )
 
@@ -305,3 +319,38 @@ class ImportGMDC(Operator, ImportHelper):
                     edges[e].append(b_model.normals[f[idx_tocheck]])
 
         return edges
+
+
+
+    # DEBUG
+    def debug_boundmesh(self, subsets, skeldata):
+        vert_offset = 0
+        for set, bone in zip(subsets, skeldata):
+            if not set.faces:
+                continue
+
+            # Negate trans to account for flipped axes
+            trans = Vector(bone.position)
+            trans.negate()
+            # Rotate rot quaternion to account for flipped axes
+            rot = Quaternion(bone.rotation)
+            rot.rotate( Quaternion((0,0,0,1)) )
+
+            relative_zero = rot * trans
+            verts = []
+            faces = []
+            for vert in set.vertices:
+                # Relative vertex position: Absolute position - bone position
+                # I guess?
+                verts.append( rot * Vector(vert) + relative_zero )
+
+            # Create object and mesh
+            mesh = bpy.data.meshes.new(bone.name)
+
+            object = bpy.data.objects.new(bone.name, mesh)
+            bpy.context.scene.objects.link(object)
+            bpy.context.scene.objects.active = object
+
+
+            # Load vertices and faces
+            mesh.from_pydata(verts, [], [])

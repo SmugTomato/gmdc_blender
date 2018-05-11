@@ -21,7 +21,7 @@ import bmesh
 from bpy_extras.io_utils import ExportHelper
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
-from mathutils import Vector
+from mathutils import Vector, Quaternion
 
 from .rcol.gmdc import GMDC
 from .blender_model import BlenderModel
@@ -81,6 +81,8 @@ class ExportGMDC(Operator, ExportHelper):
                 if opacity and filename:
                     obs_to_export.append(ob)
 
+
+
         # Further sanity checks, check array length and existance of Armature modifier
         if len(obs_to_export) == 0:
             print('ERROR: No valid objects were found')
@@ -104,14 +106,17 @@ class ExportGMDC(Operator, ExportHelper):
         for ob in obs_to_export:
             b_models.append( ExportGMDC.build_group(ob, filename, has_armature) )
 
-        # Create bounding mesh
+        # Create bounding mesh(es)
         boundmesh = None
+        riggedbounds = None
         if not has_armature:
             boundmesh = BoundMesh.create(obs_to_export, decimate_amount=0.2)
-        print( 'Verts:\t', len(boundmesh.vertices), '\nFaces:\t', len(boundmesh.faces) )
+            print( 'Verts:\t', len(boundmesh.vertices), '\nFaces:\t', len(boundmesh.faces) )
+        else:
+            riggedbounds = self.create_riggedbounds(obs_to_export, bones)
 
         # Build gmdc
-        gmdc_data = GMDC.build_data(b_models, bones, boundmesh)
+        gmdc_data = GMDC.build_data(b_models, bones, boundmesh, riggedbounds)
 
         # Write data
         gmdc_data.write(self.filepath)
@@ -290,3 +295,76 @@ class ExportGMDC(Operator, ExportHelper):
         return BlenderModel(vertices, normals, tangents, faces, uvs, name,
                             bone_assign, bone_weight, opacity, morphs,
                             filename, morph_bytemap)
+
+
+    def create_riggedbounds(self, objects, bones):
+        subsets = []
+
+        for b in bones:
+            # Negate trans to account for flipped axes
+            # trans = Vector(b.position)
+            # trans.negate()
+            # Rotate rot quaternion to account for flipped axes
+            rot = Quaternion(b.rotation)
+            # rot.rotate( Quaternion((0,0,0,1)) )
+
+            # relative_zero = rot * trans
+
+            vertices = []
+            vertco = []
+            faces = []
+
+            for ob in objects:
+                ob.modifiers.new("tri", 'TRIANGULATE')
+                mesh = ob.to_mesh(bpy.context.scene, True, 'RENDER', False, False)
+                ob.modifiers.remove( ob.modifiers["tri"] )
+
+
+                for f in mesh.polygons:
+                    assigncount = 0
+
+                    for idx in f.vertices:
+                        for assignment in mesh.vertices[idx].groups:
+                            if assignment.group == b.subset:
+                                assigncount += 1
+
+                    if assigncount < 1:
+                        continue
+
+                    face = []
+                    for idx in f.vertices:
+                        vert = mesh.vertices[idx]
+                        if not vert in vertices:
+                            vertices.append(vert)
+                        face.append( vertices.index(vert) )
+                    faces.append(face)
+
+
+                for v in vertices:
+                    # I don't know how this works, but it seems like it does
+                    newco = rot * Vector( (v.co[0], v.co[1], -v.co[2]) )
+                    # newco = rot * newcoord
+                    vertco.append(tuple(
+                        Vector(b.position) - newco
+                    ))
+
+
+            print(b.name, len(vertices), len(faces))
+            subsets.append( BoundMesh(vertco, faces) )
+
+        return subsets
+
+
+
+
+
+
+# for vert in mesh.vertices:
+#     assign = [255] * 4
+#     weight = [0] * 3
+#     for i, assignment in enumerate(vert.groups):
+#         if i < 3:
+#             weight[i] = assignment.weight
+#         assign[i] = assignment.group
+#     bone_assign.append(assign)
+#     bone_weight.append(weight)
