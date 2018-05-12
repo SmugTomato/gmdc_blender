@@ -23,7 +23,7 @@ NECKFIX = {
 }
 
 
-class MySettings(PropertyGroup):
+class PROP_GmdcSettings(PropertyGroup):
 
     is_shadow = BoolProperty(
         name="Shadow mesh",
@@ -63,12 +63,12 @@ class MySettings(PropertyGroup):
         )
 
 
-class MyOperator(bpy.types.Operator):
+class OP_AddMorph(bpy.types.Operator):
     bl_label = "Add Morph"
     bl_idname = "gmdc.morphs_add_morph"
 
     def execute(self, context):
-        mytool = context.scene.my_tool
+        gmdc_props = context.scene.gmdc_props
         obj = bpy.context.scene.objects.active
 
 
@@ -86,15 +86,15 @@ class MyOperator(bpy.types.Operator):
 
         # Select proper morph name
         morphname = None
-        if mytool.mesh_type == 'TOP':
-            if mytool.morph_type == 'FAT':
+        if gmdc_props.mesh_type == 'TOP':
+            if gmdc_props.morph_type == 'FAT':
                 morphname = "topmorphs, fattop"
-            if mytool.morph_type == 'PREG':
+            if gmdc_props.morph_type == 'PREG':
                 morphname = "topmorphs, pregtop"
-        if mytool.mesh_type == 'BOT':
-            if mytool.morph_type == 'FAT':
+        if gmdc_props.mesh_type == 'BOT':
+            if gmdc_props.morph_type == 'FAT':
                 morphname = "botmorphs, fatbot"
-            if mytool.morph_type == 'PREG':
+            if gmdc_props.morph_type == 'PREG':
                 morphname = "botmorphs, pregbot"
 
 
@@ -111,12 +111,12 @@ class MyOperator(bpy.types.Operator):
         return {'FINISHED'}
 
 
-class UpdateMorphNames(bpy.types.Operator):
+class OP_UpdateMorphNames(bpy.types.Operator):
     bl_label = "Update Morph names"
     bl_idname = "gmdc.morphs_update_names"
 
     def execute(self, context):
-        mytool = context.scene.my_tool
+        gmdc_props = context.scene.gmdc_props
         obj = bpy.context.scene.objects.active
 
         if not obj.data.shape_keys:
@@ -124,29 +124,61 @@ class UpdateMorphNames(bpy.types.Operator):
             return {'CANCELLED'}
 
         for key in obj.data.shape_keys.key_blocks[1:]:
-            if mytool.mesh_type == 'TOP':
+            if gmdc_props.mesh_type == 'TOP':
                 key.name = key.name.replace("bot", "top")
-            elif mytool.mesh_type == 'BOT':
+            elif gmdc_props.mesh_type == 'BOT':
                 key.name = key.name.replace("top", "bot")
 
         return {'FINISHED'}
 
 
-class UpdateNeckFix(bpy.types.Operator):
+class OP_UpdateNeckFix(bpy.types.Operator):
     bl_label = "Update Applied Neckseam fix"
     bl_idname = "gmdc.fixes_neckseam"
 
     def execute(self, context):
-        mytool = context.scene.my_tool
+        gmdc_props = context.scene.gmdc_props
         obj = bpy.context.scene.objects.active
 
         global NECKFIX
-        obj.data["neck_fix"] = NECKFIX[mytool.neckfix_type]
+        obj["neck_fix"] = NECKFIX[gmdc_props.neckfix_type]
 
         return {'FINISHED'}
 
 
-class HelloWorldPanel(bpy.types.Panel):
+class OP_HideShadows(bpy.types.Operator):
+    bl_label = "Hide all shadow meshes"
+    bl_idname = "gmdc.shadow_hide"
+
+    def execute(self, context):
+        obj = bpy.context.scene.objects.active
+        if obj.parent:
+            obj = obj.parent
+
+        for ob in bpy.context.scene.objects:
+            if ob.get("is_shadow") == True and ob.parent == obj:
+                ob.hide = True
+
+        return {'FINISHED'}
+
+
+class OP_UnhideShadows(bpy.types.Operator):
+    bl_label = "Unhide all shadow meshes"
+    bl_idname = "gmdc.shadow_unhide"
+
+    def execute(self, context):
+        obj = bpy.context.scene.objects.active
+        if obj.parent:
+            obj = obj.parent
+
+        for ob in bpy.context.scene.objects:
+            if ob.get("is_shadow") == True and ob.parent == obj:
+                ob.hide = False
+
+        return {'FINISHED'}
+
+
+class GmdcPanel(bpy.types.Panel):
     """Creates a Panel in the scene context of the properties editor"""
     bl_label = "Sims 2 GMDC Tools Panel"
     bl_idname = "SCENE_PT_gmdctools"
@@ -184,13 +216,17 @@ class HelloWorldPanel(bpy.types.Panel):
         col = box.column()
         col.label(text=obj.name, icon='GROUP')
 
-        box.prop(obj, "name")
+        col = box.column()
+        col.prop(obj, '["filename"]')
+        row = col.row(align=True)
+        row.operator("gmdc.shadow_hide", text="Hide shadows", icon='RESTRICT_VIEW_ON')
+        row.operator("gmdc.shadow_unhide", text="Unhide shadows", icon='RESTRICT_VIEW_OFF')
 
 
 
     def draw_object(self, obj, scene):
         layout = self.layout
-        mytool = scene.my_tool
+        gmdc_props = scene.gmdc_props
 
         if obj.parent:
             self.draw_container(obj.parent, scene)
@@ -205,20 +241,20 @@ class HelloWorldPanel(bpy.types.Panel):
 
         box.prop(obj, "name")
 
-        if obj.data.get("opacity") != None:
+        if obj.get("opacity") != None:
             row = box.row()
             row.label("Opacity:")
-            row.prop(obj.data, '["opacity"]', text="")
+            row.prop(obj, '["opacity"]', text="")
 
-        if obj.data.get("is_shadow") != None:
+        if obj.get("is_shadow") != None:
             row = box.row()
             row.label("Shadowmesh:")
-            row.prop(obj.data, '["is_shadow"]', text="")
+            row.prop(obj, '["is_shadow"]', text="")
 
-        if obj.data.get("calc_tangents") != None and not obj.data.get("is_shadow"):
+        if obj.get("calc_tangents") != None and not obj.get("is_shadow"):
             row = box.row()
             row.label("Calculate Tangents:")
-            row.prop(obj.data, '["calc_tangents"]', text="")
+            row.prop(obj, '["calc_tangents"]', text="")
 
 
         # MORPHS
@@ -227,7 +263,7 @@ class HelloWorldPanel(bpy.types.Panel):
 
         col = box2.column(align=True)
         row = col.row(align=True)
-        row.prop(mytool, "mesh_type", expand=True)
+        row.prop(gmdc_props, "mesh_type", expand=True)
         col.operator("gmdc.morphs_update_names", text="Update morph names")
 
         if obj.data.shape_keys:
@@ -240,7 +276,7 @@ class HelloWorldPanel(bpy.types.Panel):
 
         col = box2.column(align=True)
         row = col.row(align=True)
-        row.prop(mytool, "morph_type", expand=True)
+        row.prop(gmdc_props, "morph_type", expand=True)
         col.operator("gmdc.morphs_add_morph", text="Add Morph")
 
 
@@ -251,34 +287,4 @@ class HelloWorldPanel(bpy.types.Panel):
         col = fixes.column(align=True)
         row = col.row(align=True)
         row.operator("gmdc.fixes_neckseam", text="Apply neck fix")
-        row.prop(mytool, "neckfix_type", expand=False, text="")
-
-
-
-
-
-
-def register():
-    bpy.utils.register_class(HelloWorldPanel)
-
-    bpy.utils.register_class(MyOperator)
-    bpy.utils.register_class(UpdateMorphNames)
-    bpy.utils.register_class(UpdateNeckFix)
-
-    bpy.utils.register_class(MySettings)
-    bpy.types.Scene.my_tool = PointerProperty(type=MySettings)
-
-
-def unregister():
-    bpy.utils.unregister_class(HelloWorldPanel)
-
-    bpy.utils.unregister_class(MyOperator)
-    bpy.utils.unregister_class(UpdateMorphNames)
-    bpy.utils.unregister_class(UpdateNeckFix)
-
-    bpy.utils.unregister_class(MySettings)
-    del bpy.types.Scene.my_tool
-
-
-if __name__ == "__main__":
-    register()
+        row.prop(gmdc_props, "neckfix_type", expand=False, text="")

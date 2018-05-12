@@ -65,8 +65,23 @@ class ExportGMDC(Operator, ExportHelper):
 
         # Select objects to export depending on user choice
         obs_to_export = []
+        scene_obs = []
         if self.export_type == 'SELECTED':
-            scene_obs = bpy.context.selected_objects
+            active = context.scene.objects.active
+            print(active)
+
+            if active.parent and active.parent.get("filename", None):
+                active = active.parent
+                print(active)
+
+            if not active.parent and not active.get("filename", None):
+                print("No valid objects selected")
+                return {'CANCELLED'}
+
+            for ob in context.scene.objects:
+                if ob.parent == active and ob.type == 'MESH':
+                    obs_to_export.append(ob)
+
             print('Selected only')
         else:
             scene_obs = bpy.context.scene.objects
@@ -102,6 +117,7 @@ class ExportGMDC(Operator, ExportHelper):
         print('Objects to export:', obs_to_export)
 
         # Continue export process
+        filename = "test"
         b_models = []
         for ob in obs_to_export:
             b_models.append( ExportGMDC.build_group(ob, filename, has_armature) )

@@ -23,6 +23,7 @@ from mathutils import Vector, Matrix, Quaternion
 from bpy_extras.io_utils import ImportHelper
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
+from rna_prop_ui import rna_idprop_ui_prop_get
 
 from .rcol.gmdc import GMDC
 # from .rcol.rcol_data import Rcol
@@ -66,9 +67,22 @@ class ImportGMDC(Operator, ImportHelper):
         gmdc_data.load_data()
         b_models = blender_model.BlenderModel.groups_from_gmdc(gmdc_data)
 
+
+        # Container for all groups and their armature, keeps the scene clean
+        bpy.ops.object.empty_add(
+            type='PLAIN_AXES',
+            location=(0, 0, 0)
+        )
+        filename  = gmdc_data.header.file_name
+        container = bpy.context.scene.objects.active
+        container.name = filename.split("-")[0]
+        container["filename"]   = filename
+
+
         armature = None
         if self.do_skeleton and gmdc_data.model.transforms:
             armature = self.import_skeleton(gmdc_data)
+            armature.parent = container
 
 
         # DEBUG
@@ -80,7 +94,7 @@ class ImportGMDC(Operator, ImportHelper):
 
         if b_models != False and not self.do_bounddebug:
             for model in b_models:
-                print( self.do_import(model, armature) )
+                print( self.do_import(model, armature, container) )
 
         bpy.ops.object.select_all(action='DESELECT')
 
@@ -143,10 +157,12 @@ class ImportGMDC(Operator, ImportHelper):
 
             # Enter custom properties for exporting later
             # # Translate Vector
+            bone["translate"] = [bonedata.position[0], bonedata.position[1], bonedata.position[2]]
             bone['tX'] = bonedata.position[0]
             bone['tY'] = bonedata.position[1]
             bone['tZ'] = bonedata.position[2]
             # # Rotation Quaternion
+            bone["rotation"] = [bonedata.rotation[0], bonedata.rotation[1], bonedata.rotation[2], bonedata.rotation[3]]
             bone['rW'] = bonedata.rotation[0]
             bone['rX'] = bonedata.rotation[1]
             bone['rY'] = bonedata.rotation[2]
@@ -160,8 +176,17 @@ class ImportGMDC(Operator, ImportHelper):
         return ob
 
 
+    def __add_property(self, obj, key, value, range, description):
+        obj[key] = value
+        prop_ui = rna_idprop_ui_prop_get(obj, key)
+        prop_ui["min"] = range[0]
+        prop_ui["max"] = range[1]
+        prop_ui["soft_min"] = range[0]
+        prop_ui["soft_max"] = range[1]
+        prop_ui["description"] = description
 
-    def do_import(self, b_model, armature):
+
+    def do_import(self, b_model, armature, container):
         print('Importing group: \'', b_model.name, '\'', sep='')
 
 
@@ -173,8 +198,43 @@ class ImportGMDC(Operator, ImportHelper):
         mesh.auto_smooth_angle = 3.14
 
         object = bpy.data.objects.new(b_model.name, mesh)
+        object.parent = container
         bpy.context.scene.objects.link(object)
         bpy.context.scene.objects.active = object
+
+
+        # Assign custom properties
+        self.__add_property(
+            obj   = object,
+            key   = "opacity",
+            value = b_model.opacity_amount,
+            range = [-1, 255],
+            description = "Opacity of this mesh."
+        )
+        self.__add_property(
+            obj   = object,
+            key   = "is_shadow",
+            value = "shadow" in object.name,
+            range = [0, 1],
+            description = "Is this a shadow mesh?"
+        )
+        self.__add_property(
+            obj   = object,
+            key   = "calc_tangents",
+            value = False,
+            range = [0, 1],
+            description = "Should tangents be calculated on export?"
+        )
+        self.__add_property(
+            obj   = object,
+            key   = "neck_fix",
+            value = -1,
+            range = [-1, 5],
+            description = "Neck fix to apply (See GMDC Panel)"
+        )
+
+        for area in bpy.context.screen.areas:
+            area.tag_redraw()
 
 
         # Load vertices and faces
