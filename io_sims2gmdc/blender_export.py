@@ -111,7 +111,6 @@ class ExportGMDC(Operator, ExportHelper):
         riggedbounds = None
         if not has_armature:
             boundmesh = BoundMesh.create(obs_to_export, decimate_amount=0.2)
-            print( 'Verts:\t', len(boundmesh.vertices), '\nFaces:\t', len(boundmesh.faces) )
         else:
             riggedbounds = self.create_riggedbounds(obs_to_export, bones)
 

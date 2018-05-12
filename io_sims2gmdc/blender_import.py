@@ -110,7 +110,8 @@ class ImportGMDC(Operator, ImportHelper):
             location=(0,0,0)
         )
         # Armature object
-        ob = bpy.context.object
+        # ob = bpy.context.object
+        ob = bpy.context.scene.objects.active
         ob.show_x_ray = True
         ob.name = name
         # Armature

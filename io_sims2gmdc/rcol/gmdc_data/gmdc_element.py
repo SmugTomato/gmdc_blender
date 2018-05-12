@@ -227,7 +227,6 @@ class GMDCElement:
                                             GMDCElement.BONE_WEIGHTS, 0)
                 )
         for mod in b_models:
-            print(len(mod.morphs))
             if len(mod.morphs) > 0:
                 for i, _ in enumerate(mod.morphs):
                     # Morph Vertex Delta
