@@ -139,7 +139,7 @@ class BoneData:
     def from_armature(armature):
         bones = [None] * len(armature.data.bones)
         if len(bones) == 65:       # Is sim skeleton
-            for bone in armature.data.bones:
+            for i, bone in enumerate(armature.data.bones):
                 for subset, name in enumerate(BoneData.bone_parent_table):
                     if bone.name == name[0]:
                         rotation = (

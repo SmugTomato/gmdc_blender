@@ -120,7 +120,7 @@ class ExportGMDC(Operator, ExportHelper):
         filename = "test"
         b_models = []
         for ob in obs_to_export:
-            b_models.append( ExportGMDC.build_group(ob, filename, has_armature) )
+            b_models.append( ExportGMDC.build_group(ob, filename, has_armature, bones, armature) )
 
         # Create bounding mesh(es)
         boundmesh = None
@@ -128,6 +128,7 @@ class ExportGMDC(Operator, ExportHelper):
         if not has_armature:
             boundmesh = BoundMesh.create(obs_to_export, decimate_amount=0.2)
         else:
+            # BUGGED FOR SIM MESHES
             riggedbounds = self.create_riggedbounds(obs_to_export, bones)
 
         # Build gmdc
@@ -165,7 +166,7 @@ class ExportGMDC(Operator, ExportHelper):
 
 
     @staticmethod
-    def build_group(object, filename, has_armature):
+    def build_group(object, filename, has_armature, bones, armature):
 
         # Make a copy of the mesh to keep the original intact
         mesh = object.to_mesh(bpy.context.scene, False, 'RENDER', False, False)
@@ -250,6 +251,20 @@ class ExportGMDC(Operator, ExportHelper):
                 uvs[vertidx] = uv
 
 
+        i = 0
+        for grp, bon in zip(object.vertex_groups, armature.object.data.bones):
+            print(i, grp.name, bon.name)
+            i += 1
+
+
+        # TEMPORARY FIX FOR BAD BONE ASSIGNMENTS IN SIMS
+        bonedict = {}
+        for i, grp in enumerate(object.vertex_groups):
+            for properbone in BoneData.bone_parent_table:
+                if grp.name == properbone[0]:
+                    bonedict[i] = properbone[2]
+
+
         # Vertex groups (Bone assignments and weights)
         if has_armature:
             for vert in mesh.vertices:
@@ -258,7 +273,10 @@ class ExportGMDC(Operator, ExportHelper):
                 for i, assignment in enumerate(vert.groups):
                     if i < 3:
                         weight[i] = assignment.weight
-                    assign[i] = assignment.group
+                    if len(bones) == 65:
+                        assign[i] = bonedict[assignment.group]
+                    else:
+                        assign[i] = assignment.group
                 bone_assign.append(assign)
                 bone_weight.append(weight)
 
