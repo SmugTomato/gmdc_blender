@@ -111,7 +111,7 @@ class ExportGMDC(Operator, ExportHelper):
         # Restructure bone data
         has_armature = obs_to_export[0].modifiers.get( 'Armature', None ) != None
         bones = None
-        if has_armature:
+        if armature:
             bones = BoneData.from_armature(armature.object)
 
         print('Objects to export:', obs_to_export)
@@ -120,12 +120,12 @@ class ExportGMDC(Operator, ExportHelper):
         filename = "test"
         b_models = []
         for ob in obs_to_export:
-            b_models.append( ExportGMDC.build_group(ob, filename, has_armature, bones, armature) )
+            b_models.append( ExportGMDC.build_group(ob, filename, armature, bones) )
 
         # Create bounding mesh(es)
         boundmesh = None
         riggedbounds = None
-        if not has_armature:
+        if not armature:
             boundmesh = BoundMesh.create(obs_to_export, decimate_amount=0.2)
         else:
             # BUGGED FOR SIM MESHES
@@ -166,7 +166,7 @@ class ExportGMDC(Operator, ExportHelper):
 
 
     @staticmethod
-    def build_group(object, filename, has_armature, bones, armature):
+    def build_group(object, filename, armature, bones):
 
         # Make a copy of the mesh to keep the original intact
         mesh = object.to_mesh(bpy.context.scene, False, 'RENDER', False, False)
@@ -258,15 +258,15 @@ class ExportGMDC(Operator, ExportHelper):
 
 
         # TEMPORARY FIX FOR BAD BONE ASSIGNMENTS IN SIMS
-        bonedict = {}
+        bonemap = {}
         for i, grp in enumerate(object.vertex_groups):
-            for properbone in BoneData.bone_parent_table:
-                if grp.name == properbone[0]:
-                    bonedict[i] = properbone[2]
+            for b in BoneData.bone_parent_table:
+                if grp.name == b[0]:
+                    bonemap[i] = b[2]
 
 
         # Vertex groups (Bone assignments and weights)
-        if has_armature:
+        if armature:
             for vert in mesh.vertices:
                 assign = [255] * 4
                 weight = [0] * 3
@@ -274,7 +274,7 @@ class ExportGMDC(Operator, ExportHelper):
                     if i < 3:
                         weight[i] = assignment.weight
                     if len(bones) == 65:
-                        assign[i] = bonedict[assignment.group]
+                        assign[i] = bonemap[assignment.group]
                     else:
                         assign[i] = assignment.group
                 bone_assign.append(assign)
@@ -331,9 +331,19 @@ class ExportGMDC(Operator, ExportHelper):
 
 
     def create_riggedbounds(self, objects, bones):
-        subsets = []
+        subsets = [None]*len(bones)
 
-        for b in bones:
+        # TEMPORARY FIX FOR BAD BONE ASSIGNMENTS IN SIMS
+        bonemap = {}
+        for i, grp in enumerate(objects[0].vertex_groups):
+            for b in BoneData.bone_parent_table:
+                if grp.name == b[0]:
+                    bonemap[i] = b[2]
+
+        for key in bonemap:
+            print(key, '\t', bonemap[key])
+
+        for subset, b in enumerate(bones):
             # Negate trans to account for flipped axes
             # trans = Vector(b.position)
             # trans.negate()
@@ -382,8 +392,11 @@ class ExportGMDC(Operator, ExportHelper):
                     ))
 
 
-            print(b.name, len(vertices), len(faces))
-            subsets.append( BoundMesh(vertco, faces) )
+            print(subset, b.name, len(vertices), len(faces))
+            if len(bones) == 65 and bones[0].name == 'simskel':
+                subsets[bonemap[subset]] = BoundMesh(vertco, faces)
+            else:
+                subsets[subset] = BoundMesh(vertco, faces)
 
         return subsets
 
