@@ -30,6 +30,7 @@ from .rcol.gmdc import GMDC
 # from .rcol.data_helper import DataHelper
 from . import blender_model
 from .bone_data import BoneData
+from . import neckfixes
 
 class ImportGMDC(Operator, ImportHelper):
     """Sims 2 GMDC Importer"""
@@ -58,6 +59,12 @@ class ImportGMDC(Operator, ImportHelper):
             default=False,
             )
 
+    do_neckdebug = BoolProperty(
+            name="[DEBUG] Neck normals",
+            description="Lookup neck vertex normals",
+            default=False,
+            )
+
     def execute(self, context):
         gmdc_data = GMDC.from_file_data(self.filepath)
         if gmdc_data.load_header() == False:
@@ -79,6 +86,11 @@ class ImportGMDC(Operator, ImportHelper):
         container["filename"]   = filename
 
 
+        if self.do_neckdebug:
+            self.debug_necknormals(b_models[0])
+            return {'FINISHED'}
+
+
         armature = None
         if self.do_skeleton and gmdc_data.model.transforms:
             armature = self.import_skeleton(gmdc_data)
@@ -89,10 +101,11 @@ class ImportGMDC(Operator, ImportHelper):
         if self.do_bounddebug:
             skeldata = BoneData.build_bones(gmdc_data)
             self.debug_boundmesh(gmdc_data.subsets, skeldata)
+            return {'FINISHED'}
 
 
 
-        if b_models != False and not self.do_bounddebug:
+        if b_models != False:
             for model in b_models:
                 print( self.do_import(model, armature, container) )
 
@@ -415,3 +428,21 @@ class ImportGMDC(Operator, ImportHelper):
 
             # Load vertices and faces
             mesh.from_pydata(verts, [], [])
+
+
+    # DEBUG
+    def debug_necknormals(self, model):
+        print( "######## NECK NORMALS ########" )
+        print()
+        print()
+        print()
+
+        for vco, vno in zip(model.vertices, model.normals):
+            if vco in neckfixes.test:
+                print(vco, ":\n    ", vno, ",", sep="")
+                print(neckfixes.neck_normals[0][vco])
+
+        print()
+        print()
+        print()
+        print( "######## NECK NORMALS ########" )

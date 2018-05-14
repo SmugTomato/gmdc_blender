@@ -28,6 +28,7 @@ from .blender_model import BlenderModel
 from .morphmap import MorphMap
 from .bone_data import BoneData
 from .rcol.boundmesh import BoundMesh
+from . import neckfixes
 
 
 class ExportGMDC(Operator, ExportHelper):
@@ -142,7 +143,7 @@ class ExportGMDC(Operator, ExportHelper):
 
 
     @staticmethod
-    def recalc_normals(bm_mesh):
+    def recalc_normals(bm_mesh, neckfix_type):
         # Run through all edges again, check if normals of their verts should be smoothed
         verts_to_smooth = {}
         for e in bm_mesh.edges:
@@ -164,9 +165,21 @@ class ExportGMDC(Operator, ExportHelper):
             for v in verts_to_smooth[vert]:
                 v.normal = avg
 
+        # IF a neck fix is specified, set apropriate normals
+        print(neckfix_type)
+        if neckfix_type != None and neckfix_type != -1:
+            for vert in bm_mesh.verts:
+                if not tuple(vert.co) in neckfixes.neck_normals[neckfix_type]:
+                    continue
+
+                vert.normal = Vector( neckfixes.neck_normals[neckfix_type][tuple(vert.co)] )
+                print("TEST!")
+            print()
+
 
     @staticmethod
     def build_group(object, filename, armature, bones):
+        neckfix_type = object.get("neck_fix")
 
         # Make a copy of the mesh to keep the original intact
         mesh = object.to_mesh(bpy.context.scene, False, 'RENDER', False, False)
@@ -188,7 +201,7 @@ class ExportGMDC(Operator, ExportHelper):
         # Split edges given by above loop
         bmesh.ops.split_edges(bm, edges=uvsplit)
 
-        ExportGMDC.recalc_normals(bm)
+        ExportGMDC.recalc_normals(bm, neckfix_type)
 
         bm.to_mesh(mesh)
         bm.free()
@@ -211,18 +224,23 @@ class ExportGMDC(Operator, ExportHelper):
             normals.append( (-vert.normal[0], -vert.normal[1], vert.normal[2]) )
 
 
-            c1 = vert.normal.cross(Vector( (0,1,0) )).normalized()
-            c2 = vert.normal.cross(Vector( (0,0,1) )).normalized()
+            # c1 = vert.normal.cross(Vector( (0,1,0) )).normalized()
+            # c2 = vert.normal.cross(Vector( (0,0,1) )).normalized()
+            #
+            # if c1.length > c2.length:
+            #     tangents.append(c1)
+            # else:
+            #     tangents.append(c2)
 
-            if c1.length > c2.length:
-                tangents.append(c1)
-            else:
-                tangents.append(c2)
 
-            # tan = vert.normal.orthogonal().normalized()
-            # tangents.append( (tan[0], tan[1], tan[2]) )
             # print(tan)
-            uvs.append( None )
+            # uvs.append( None )
+
+        # Tangents
+        if object.get("calc_tangents") != None and object.get("is_shadow") == False:
+            for vert in mesh.vertices:
+                tan = vert.normal.orthogonal().normalized()
+                tangents.append( (tan[0], tan[1], tan[2]) )
 
 
         # Faces
@@ -231,7 +249,7 @@ class ExportGMDC(Operator, ExportHelper):
 
 
         # Tangents
-        mesh.calc_tangents()
+        # mesh.calc_tangents()
 
         # tangents = [0] * len(vertices)
         # for i, polygon in enumerate(mesh.polygons):
@@ -242,6 +260,7 @@ class ExportGMDC(Operator, ExportHelper):
 
 
         # UVs
+        uvs = [None]*len(vertices)
         uv_layer = mesh.uv_layers[0]
         for i, polygon in enumerate(mesh.polygons):
             for j, loopindex in enumerate(polygon.loop_indices):
@@ -302,7 +321,7 @@ class ExportGMDC(Operator, ExportHelper):
                 morph_bm.from_mesh(morphmesh)
 
                 # Recalculate normals and create morph
-                ExportGMDC.recalc_normals(morph_bm)
+                ExportGMDC.recalc_normals(morph_bm, neckfix_type)
 
                 # Remove copied mesh
                 morph_bm.to_mesh(morphmesh)
@@ -343,9 +362,6 @@ class ExportGMDC(Operator, ExportHelper):
             else:
                 for i in range(len(bones)):
                     bonemap[i] = i
-
-        for key in bonemap:
-            print(key, '\t', bonemap[key])
 
         for subset, b in enumerate(bones):
             # Negate trans to account for flipped axes
@@ -396,7 +412,7 @@ class ExportGMDC(Operator, ExportHelper):
                     ))
 
 
-            print(subset, b.name, len(vertices), len(faces))
+            # print(subset, b.name, len(vertices), len(faces))
             # if len(bones) == 65 and bones[0].name == 'simskel':
             subsets[bonemap[subset]] = BoundMesh(vertco, faces)
             # else:
