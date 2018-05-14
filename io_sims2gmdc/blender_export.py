@@ -336,9 +336,13 @@ class ExportGMDC(Operator, ExportHelper):
         # TEMPORARY FIX FOR BAD BONE ASSIGNMENTS IN SIMS
         bonemap = {}
         for i, grp in enumerate(objects[0].vertex_groups):
-            for b in BoneData.bone_parent_table:
-                if grp.name == b[0]:
-                    bonemap[i] = b[2]
+            if len(bones) == 65 and bones[0].name == 'simskel':
+                for b in BoneData.bone_parent_table:
+                    if grp.name == b[0]:
+                        bonemap[i] = b[2]
+            else:
+                for i in range(len(bones)):
+                    bonemap[i] = i
 
         for key in bonemap:
             print(key, '\t', bonemap[key])
@@ -348,7 +352,7 @@ class ExportGMDC(Operator, ExportHelper):
             # trans = Vector(b.position)
             # trans.negate()
             # Rotate rot quaternion to account for flipped axes
-            rot = Quaternion(b.rotation)
+            rot = Quaternion(bones[bonemap[subset]].rotation)
             # rot.rotate( Quaternion((0,0,0,1)) )
 
             # relative_zero = rot * trans
@@ -388,15 +392,15 @@ class ExportGMDC(Operator, ExportHelper):
                     newco = rot * Vector( (v.co[0], v.co[1], -v.co[2]) )
                     # newco = rot * newcoord
                     vertco.append(tuple(
-                        Vector(b.position) - newco
+                        Vector(bones[bonemap[subset]].position) - newco
                     ))
 
 
             print(subset, b.name, len(vertices), len(faces))
-            if len(bones) == 65 and bones[0].name == 'simskel':
-                subsets[bonemap[subset]] = BoundMesh(vertco, faces)
-            else:
-                subsets[subset] = BoundMesh(vertco, faces)
+            # if len(bones) == 65 and bones[0].name == 'simskel':
+            subsets[bonemap[subset]] = BoundMesh(vertco, faces)
+            # else:
+            #     subsets[subset] = BoundMesh(vertco, faces)
 
         return subsets
 
