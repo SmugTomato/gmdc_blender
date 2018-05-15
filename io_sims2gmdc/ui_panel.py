@@ -86,12 +86,16 @@ class OP_AddMorph(bpy.types.Operator):
 
         # Select proper morph name
         morphname = None
-        if gmdc_props.mesh_type == 'TOP':
-            if gmdc_props.morph_type == 'FAT':
+        type = None
+        if gmdc_props.morph_type == 'FAT':
+            type = "fat"
+            if gmdc_props.mesh_type == 'TOP':
                 morphname = "topmorphs, fattop"
-            if gmdc_props.morph_type == 'PREG':
+            if gmdc_props.mesh_type == 'BOT':
                 morphname = "topmorphs, pregtop"
-        if gmdc_props.mesh_type == 'BOT':
+
+        if gmdc_props.morph_type == 'PREG':
+            type = "preg"
             if gmdc_props.morph_type == 'FAT':
                 morphname = "botmorphs, fatbot"
             if gmdc_props.morph_type == 'PREG':
@@ -100,7 +104,7 @@ class OP_AddMorph(bpy.types.Operator):
 
         # Return on duplicate names
         for key in obj.data.shape_keys.key_blocks:
-            if key.name == morphname:
+            if type in key.name:
                 print("Morph already present")
                 return {'CANCELLED'}
 

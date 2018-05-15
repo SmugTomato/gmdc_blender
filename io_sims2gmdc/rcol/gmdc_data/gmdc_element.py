@@ -245,11 +245,12 @@ class GMDCElement:
                     GMDCElement.make_empty(0x04, GMDCElement.SET_SECONDARY,
                                             GMDCElement.MORPH_VERTEX_MAP, 0)
                 )
-        for _ in b_models:
-            elements.append(
-                GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
-                                        GMDCElement.BUMP_MAP_NORMALS, 0)
-            )
+        for mod in b_models:
+            if len(mod.tangents) > 0:
+                elements.append(
+                    GMDCElement.make_empty(0x02, GMDCElement.SET_SECONDARY,
+                                            GMDCElement.BUMP_MAP_NORMALS, 0)
+                )
 
         return elements
 
@@ -325,13 +326,14 @@ class GMDCElement:
                     GMDCElement.from_datalist(
                         mod.morph_bytemap, GMDCElement.MORPH_VERTEX_MAP, 0)
                 )
-            link_list.append(link_index)
-            link_index += 1
-            # Bump Map Normals
-            elements.append(
-                GMDCElement.from_datalist(
-                    mod.tangents, GMDCElement.BUMP_MAP_NORMALS, 0)
-            )
+            if len(mod.tangents) > 0:
+                link_list.append(link_index)
+                link_index += 1
+                # Bump Map Normals
+                elements.append(
+                    GMDCElement.from_datalist(
+                        mod.tangents, GMDCElement.BUMP_MAP_NORMALS, 0)
+                )
 
             links.append(link_list)
 

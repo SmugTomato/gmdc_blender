@@ -62,17 +62,6 @@ class GMDC:
 
 
     @staticmethod
-    def from_test_func(file_path):
-        print("reading .5gd file...\n")
-
-        file = open(file_path, "rb")
-        file_data = file.read()
-        byte_offset = 0
-        file.close()
-        return GMDC(file_data, byte_offset)
-
-
-    @staticmethod
     def from_file_data(file_path):
         print("reading .5gd file...\n")
 
@@ -128,11 +117,11 @@ class GMDC:
         return True
 
     @staticmethod
-    def build_data(b_models, bones, boundmesh, riggedbounds):
+    def build_data(filename, b_models, bones, boundmesh, riggedbounds):
         gmdc_data = GMDC(None, None)
 
         # HEADER
-        gmdc_data.header = GMDCHeader.build_data(b_models[0].filename)
+        gmdc_data.header = GMDCHeader.build_data(filename)
 
         # ELEMENTS
         # Tuple ( elements[], group_element_links[][] )

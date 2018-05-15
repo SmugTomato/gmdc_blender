@@ -46,20 +46,6 @@ class ExportGMDC(Operator, ExportHelper):
             maxlen=255,  # Max internal buffer length, longer would be clamped.
             )
 
-    export_type = EnumProperty(
-            name="Export",
-            description="Choose an export method",
-            items=(('SELECTED', "Selected", "Only export selected objects. (Recommended)"),
-                   ('SCENE', "Scene", "Export all supported objects in the scene.")),
-            default='SELECTED',
-            )
-
-    do_fix_weights = BoolProperty(
-            name="Fix weights",
-            description="Limit to 4 skin weights and normalize them.",
-            default=True,
-            )
-
 
     def execute(self, context):
         bpy.ops.object.mode_set(mode='OBJECT')
@@ -67,35 +53,32 @@ class ExportGMDC(Operator, ExportHelper):
         # Select objects to export depending on user choice
         obs_to_export = []
         scene_obs = []
-        if self.export_type == 'SELECTED':
-            active = context.scene.objects.active
+        filename = "placeholder"
+        active = context.scene.objects.active
+        print(active)
+
+        if active.parent and active.parent.get("filename", None):
+            active = active.parent
             print(active)
 
-            if active.parent and active.parent.get("filename", None):
-                active = active.parent
-                print(active)
+        if not active.parent and not active.get("filename", None):
+            print("No valid objects selected")
+            return {'CANCELLED'}
 
-            if not active.parent and not active.get("filename", None):
-                print("No valid objects selected")
-                return {'CANCELLED'}
+        filename = active.get("filename", "placeholder")
 
-            for ob in context.scene.objects:
-                if ob.parent == active and ob.type == 'MESH':
-                    obs_to_export.append(ob)
-
-            print('Selected only')
-        else:
-            scene_obs = bpy.context.scene.objects
-            print('Scene')
+        for ob in context.scene.objects:
+            if ob.parent == active and ob.type == 'MESH':
+                obs_to_export.append(ob)
 
         # Check for existance of necessary custom properties
-        for ob in scene_obs:
-            if ob.type == 'MESH':
-                opacity = ob.data.get( 'opacity', None )
-                # Internal GMDC filename, NOT the actual name of the file you save
-                filename = ob.data.get( 'filename', None )
-                if opacity and filename:
-                    obs_to_export.append(ob)
+        # for ob in scene_obs:
+        #     if ob.type == 'MESH':
+        #         opacity = ob.data.get( 'opacity', None )
+        #         # Internal GMDC filename, NOT the actual name of the file you save
+        #         filename = ob.data.get( 'filename', None )
+        #         if opacity and filename:
+        #             obs_to_export.append(ob)
 
 
 
@@ -110,7 +93,7 @@ class ExportGMDC(Operator, ExportHelper):
 
 
         # Restructure bone data
-        has_armature = obs_to_export[0].modifiers.get( 'Armature', None ) != None
+        # has_armature = obs_to_export[0].modifiers.get( 'Armature', None ) != None
         bones = None
         if armature:
             bones = BoneData.from_armature(armature.object)
@@ -118,10 +101,9 @@ class ExportGMDC(Operator, ExportHelper):
         print('Objects to export:', obs_to_export)
 
         # Continue export process
-        filename = "test"
         b_models = []
         for ob in obs_to_export:
-            b_models.append( ExportGMDC.build_group(ob, filename, armature, bones) )
+            b_models.append( ExportGMDC.build_group(ob, armature, bones) )
 
         # Create bounding mesh(es)
         boundmesh = None
@@ -133,7 +115,7 @@ class ExportGMDC(Operator, ExportHelper):
             riggedbounds = self.create_riggedbounds(obs_to_export, bones)
 
         # Build gmdc
-        gmdc_data = GMDC.build_data(b_models, bones, boundmesh, riggedbounds)
+        gmdc_data = GMDC.build_data(filename, b_models, bones, boundmesh, riggedbounds)
 
         # Write data
         gmdc_data.write(self.filepath)
@@ -166,7 +148,6 @@ class ExportGMDC(Operator, ExportHelper):
                 v.normal = avg
 
         # IF a neck fix is specified, set apropriate normals
-        print(neckfix_type)
         if neckfix_type != None and neckfix_type != -1:
             for vert in bm_mesh.verts:
                 if not tuple(vert.co) in neckfixes.neck_normals[neckfix_type]:
@@ -178,7 +159,7 @@ class ExportGMDC(Operator, ExportHelper):
 
 
     @staticmethod
-    def build_group(object, filename, armature, bones):
+    def build_group(object, armature, bones):
         neckfix_type = object.get("neck_fix")
 
         # Make a copy of the mesh to keep the original intact
@@ -214,8 +195,7 @@ class ExportGMDC(Operator, ExportHelper):
         bone_assign = []
         bone_weight = []
         name        = object.name
-        filename    = mesh['filename']
-        opacity     = mesh['opacity']
+        opacity     = object.get("opacity", -1)
 
         # Vertices, normals and pre-populating uvs
         for vert in mesh.vertices:
@@ -268,12 +248,6 @@ class ExportGMDC(Operator, ExportHelper):
                 uv = ( meshuvloop.uv[0], -meshuvloop.uv[1] + 1 )
                 vertidx = faces[i][j]
                 uvs[vertidx] = uv
-
-
-        i = 0
-        for grp, bon in zip(object.vertex_groups, armature.object.data.bones):
-            print(i, grp.name, bon.name)
-            i += 1
 
 
         # TEMPORARY FIX FOR BAD BONE ASSIGNMENTS IN SIMS
@@ -346,7 +320,7 @@ class ExportGMDC(Operator, ExportHelper):
 
         return BlenderModel(vertices, normals, tangents, faces, uvs, name,
                             bone_assign, bone_weight, opacity, morphs,
-                            filename, morph_bytemap)
+                            morph_bytemap)
 
 
     def create_riggedbounds(self, objects, bones):

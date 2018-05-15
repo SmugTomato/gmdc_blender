@@ -143,23 +143,20 @@ class BoneData:
                 for subset, name in enumerate(BoneData.bone_parent_table):
                     if bone.name == name[0]:
                         rotation = (
-                            -bone['rW'], bone['rX'],
-                            bone['rY'], bone['rZ']
+                            -bone["rotation"][0], bone["rotation"][1],
+                            bone["rotation"][2], bone["rotation"][3]
                         )
-                        translate= (
-                            bone['tX'], bone['tY'], bone['tZ']
-                        )
+                        translate = bone["translate"]
                         bones[subset] = BoneData(bone.name, name[1], subset,
                                             translate, rotation)
         else:
             for subset, bone in enumerate(armature.data.bones):
                 rotation = (
-                    -bone['rW'], bone['rX'],
-                    bone['rY'], bone['rZ']
+                    -bone["rotation"][0], bone["rotation"][1],
+                    bone["rotation"][2], bone["rotation"][3]
                 )
-                translate= (
-                    bone['tX'], bone['tY'], bone['tZ']
-                )
+                translate = bone["translate"]
+
                 bones[subset] = BoneData(bone.name, None, subset,
                                         translate, rotation)
         return bones

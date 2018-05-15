@@ -169,17 +169,9 @@ class ImportGMDC(Operator, ImportHelper):
                 bone.head += Vector((0,0,0.00005))
 
             # Enter custom properties for exporting later
-            # # Translate Vector
+            # # Translate Vector and Rotation Quaternion
             bone["translate"] = [bonedata.position[0], bonedata.position[1], bonedata.position[2]]
-            bone['tX'] = bonedata.position[0]
-            bone['tY'] = bonedata.position[1]
-            bone['tZ'] = bonedata.position[2]
-            # # Rotation Quaternion
             bone["rotation"] = [bonedata.rotation[0], bonedata.rotation[1], bonedata.rotation[2], bonedata.rotation[3]]
-            bone['rW'] = bonedata.rotation[0]
-            bone['rX'] = bonedata.rotation[1]
-            bone['rY'] = bonedata.rotation[2]
-            bone['rZ'] = bonedata.rotation[3]
 
 
         # Go back to Object mode
@@ -198,6 +190,9 @@ class ImportGMDC(Operator, ImportHelper):
         prop_ui["soft_max"] = range[1]
         prop_ui["description"] = description
 
+        for area in bpy.context.screen.areas:
+            area.tag_redraw()
+
 
     def do_import(self, b_model, armature, container):
         print('Importing group: \'', b_model.name, '\'', sep='')
@@ -205,8 +200,6 @@ class ImportGMDC(Operator, ImportHelper):
 
         # Create object and mesh
         mesh = bpy.data.meshes.new(b_model.name)
-        mesh['opacity'] = b_model.opacity_amount
-        mesh['filename'] = b_model.filename
         mesh.use_auto_smooth = True
         mesh.auto_smooth_angle = 3.14
 
@@ -231,10 +224,11 @@ class ImportGMDC(Operator, ImportHelper):
             range = [0, 1],
             description = "Is this a shadow mesh?"
         )
+        do_tangents = object.get("is_shadow") == False
         self.__add_property(
             obj   = object,
             key   = "calc_tangents",
-            value = False,
+            value = do_tangents,
             range = [0, 1],
             description = "Should tangents be calculated on export?"
         )
@@ -245,9 +239,6 @@ class ImportGMDC(Operator, ImportHelper):
             range = [-1, 5],
             description = "Neck fix to apply (See GMDC Panel)"
         )
-
-        for area in bpy.context.screen.areas:
-            area.tag_redraw()
 
 
         # Load vertices and faces
