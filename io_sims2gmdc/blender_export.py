@@ -162,6 +162,15 @@ class ExportGMDC(Operator, ExportHelper):
     def build_group(object, armature, bones):
         neckfix_type = object.get("neck_fix")
 
+
+        # Mark seams from UV Islands, ideally there would be a nice way to do this without ops
+        bpy.context.scene.objects.active = object   # Set active selection to current object
+        bpy.ops.object.mode_set(mode = 'EDIT')
+        bpy.ops.uv.seams_from_islands(mark_seams=True, mark_sharp=False)
+        bpy.ops.object.mode_set(mode = 'OBJECT')
+        bpy.context.scene.objects.active = None     # Revert active selection to None
+
+
         # Make a copy of the mesh to keep the original intact
         mesh = object.to_mesh(bpy.context.scene, False, 'RENDER', False, False)
         temp_obj = bpy.data.objects.new('temp_obj', mesh)
