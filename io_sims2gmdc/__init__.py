@@ -30,6 +30,8 @@ from .ui_panel       import(PROP_GmdcSettings,
                             OP_UpdateMorphNames,
                             OP_HideShadows,
                             OP_UnhideShadows,
+                            OP_HideArmature,
+                            OP_UnHideArmature,
                             GmdcPanel)
 
 
@@ -63,6 +65,8 @@ def register():
     bpy.utils.register_class(OP_UpdateNeckFix)
     bpy.utils.register_class(OP_HideShadows)
     bpy.utils.register_class(OP_UnhideShadows)
+    bpy.utils.register_class(OP_HideArmature)
+    bpy.utils.register_class(OP_UnHideArmature)
     bpy.utils.register_class(PROP_GmdcSettings)
     bpy.types.Scene.gmdc_props = PointerProperty(type=PROP_GmdcSettings)
 
@@ -81,6 +85,8 @@ def unregister():
     bpy.utils.unregister_class(OP_UpdateNeckFix)
     bpy.utils.unregister_class(OP_HideShadows)
     bpy.utils.unregister_class(OP_UnhideShadows)
+    bpy.utils.unregister_class(OP_HideArmature)
+    bpy.utils.unregister_class(OP_UnHideArmature)
     bpy.utils.unregister_class(PROP_GmdcSettings)
     del bpy.types.Scene.gmdc_props
 

@@ -182,6 +182,38 @@ class OP_UnhideShadows(bpy.types.Operator):
         return {'FINISHED'}
 
 
+class OP_UnHideArmature(bpy.types.Operator):
+    bl_label = "Unhide Armature"
+    bl_idname = "gmdc.armature_unhide"
+
+    def execute(self, context):
+        obj = bpy.context.scene.objects.active
+        if obj.parent:
+            obj = obj.parent
+
+        for ob in bpy.context.scene.objects:
+            if ob.type == 'ARMATURE' and ob.parent == obj:
+                ob.hide = False
+
+        return {'FINISHED'}
+
+
+class OP_HideArmature(bpy.types.Operator):
+    bl_label = "Hide Armature"
+    bl_idname = "gmdc.armature_hide"
+
+    def execute(self, context):
+        obj = bpy.context.scene.objects.active
+        if obj.parent:
+            obj = obj.parent
+
+        for ob in bpy.context.scene.objects:
+            if ob.type == 'ARMATURE' and ob.parent == obj:
+                ob.hide = True
+
+        return {'FINISHED'}
+
+
 class GmdcPanel(bpy.types.Panel):
     """Creates a Panel in the scene context of the properties editor"""
     bl_label = "Sims 2 GMDC Tools Panel"
@@ -209,6 +241,9 @@ class GmdcPanel(bpy.types.Panel):
 
         if obj and obj.select and obj.type == 'EMPTY':
             self.draw_container(obj, scene)
+        elif obj and obj.select and obj.parent and not obj.type == 'MESH':
+            if obj.parent.get("filename", None):
+                self.draw_container(obj.parent, scene)
 
 
     def draw_container(self, obj, scene):
@@ -223,8 +258,13 @@ class GmdcPanel(bpy.types.Panel):
         col = box.column()
         col.prop(obj, '["filename"]')
         row = col.row(align=True)
-        row.operator("gmdc.shadow_hide", text="Hide shadows", icon='RESTRICT_VIEW_ON')
-        row.operator("gmdc.shadow_unhide", text="Unhide shadows", icon='RESTRICT_VIEW_OFF')
+        row.label(text="Shadows:", icon='LAMP_SPOT')
+        row.operator("gmdc.shadow_hide", text="Hide", icon='RESTRICT_VIEW_ON')
+        row.operator("gmdc.shadow_unhide", text="Unhide", icon='RESTRICT_VIEW_OFF')
+        row = col.row(align=True)
+        row.label(text="Armature:", icon='ARMATURE_DATA')
+        row.operator("gmdc.armature_hide", text="Hide", icon='RESTRICT_VIEW_ON')
+        row.operator("gmdc.armature_unhide", text="Unhide", icon='RESTRICT_VIEW_OFF')
 
 
 

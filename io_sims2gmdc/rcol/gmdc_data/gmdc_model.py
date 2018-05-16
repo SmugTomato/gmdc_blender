@@ -81,7 +81,6 @@ class GMDCModel:
         # Skip next section if vertcount == 0
         writer.write_int32( len(self.vertices) )
         if len(self.vertices) == 0:
-            print('!0!')
             return
 
         writer.write_int32( len(self.faces) )

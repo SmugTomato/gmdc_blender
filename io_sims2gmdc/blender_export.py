@@ -55,11 +55,9 @@ class ExportGMDC(Operator, ExportHelper):
         scene_obs = []
         filename = "placeholder"
         active = context.scene.objects.active
-        print(active)
 
         if active.parent and active.parent.get("filename", None):
             active = active.parent
-            print(active)
 
         if not active.parent and not active.get("filename", None):
             print("No valid objects selected")
@@ -154,7 +152,6 @@ class ExportGMDC(Operator, ExportHelper):
                     continue
 
                 vert.normal = Vector( neckfixes.neck_normals[neckfix_type][tuple(vert.co)] )
-                print("TEST!")
             print()
 
 
