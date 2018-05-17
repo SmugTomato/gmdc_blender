@@ -69,7 +69,7 @@ class ImportGMDC(Operator, ImportHelper):
         gmdc_data = GMDC.from_file_data(self.filepath)
 
         if not gmdc_data.load_data():
-            print ("Import Cancelled")
+            print ("IMPORT CANCELLED")
             return {'CANCELLED'}
 
         b_models = blender_model.BlenderModel.groups_from_gmdc(gmdc_data)
@@ -315,11 +315,11 @@ class ImportGMDC(Operator, ImportHelper):
                 shpkey = object.shape_key_add(from_mix=False)
                 shpkey.name = morph.name
 
-                for i, vert in enumerate(mesh.vertices):
+                for vert, delta in zip(mesh.vertices, morph.deltas):
                     shpkey.data[vert.index].co = Vector( (
-                        vert.co[0] + morph.deltas[i][0],
-                        vert.co[1] + morph.deltas[i][1],
-                        vert.co[2] + morph.deltas[i][2]
+                        vert.co[0] + delta[0],
+                        vert.co[1] + delta[1],
+                        vert.co[2] + delta[2]
                     ) )
 
 

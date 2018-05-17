@@ -16,8 +16,13 @@ Created by SmugTomato
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
-from .gmdc_data import gmdc_header, gmdc_element, gmdc_linkage, gmdc_group, gmdc_model, gmdc_subset
-from .gmdc_data.gmdc_header import GMDCHeader
+from .gmdc_data.gmdc_header     import GMDCHeader
+from .gmdc_data.gmdc_element    import GMDCElement
+from .gmdc_data.gmdc_linkage    import GMDCLinkage
+from .gmdc_data.gmdc_group      import GMDCGroup
+from .gmdc_data.gmdc_model      import GMDCModel
+from .gmdc_data.gmdc_subset     import GMDCSubset
+
 from .data_reader import DataReader
 from .data_writer import DataWriter
 
@@ -117,26 +122,26 @@ class GMDC:
 
         # ELEMENTS
         # Tuple ( elements[], group_element_links[][] )
-        element_data = gmdc_element.GMDCElement.from_blender(b_models, bones)
+        element_data = GMDCElement.from_blender(b_models, bones)
         gmdc_data.elements = element_data[0]
 
         # LINKAGES
-        gmdc_data.linkages = gmdc_linkage.GMDCLinkage.build_data(
+        gmdc_data.linkages = GMDCLinkage.build_data(
             b_models, element_data[1]
         )
 
         # GROUPS
-        gmdc_data.groups = gmdc_group.GMDCGroup.build_data(
+        gmdc_data.groups = GMDCGroup.build_data(
             b_models, bones
         )
 
         # MODEL
-        gmdc_data.model = gmdc_model.GMDCModel.build_data(
+        gmdc_data.model = GMDCModel.build_data(
             b_models, bones, boundmesh
         )
 
         # SUBSETS
-        gmdc_data.subsets = gmdc_subset.GMDCSubset.build_data(
+        gmdc_data.subsets = GMDCSubset.build_data(
             b_models, bones, riggedbounds
         )
 
@@ -153,16 +158,19 @@ class GMDC:
         # ELEMENTS
         count = self.data_read.read_int32()
         self.elements = []
-        for i in range(0,count):
-            temp_element = gmdc_element.GMDCElement()
-            temp_element.read_data(self.data_read)
+        for _ in range(count):
+            temp_element = GMDCElement.from_data(
+                self.data_read, self.header.version
+            )
+            if not temp_element:
+                return False
             self.elements.append(temp_element)
 
         # LINKAGES
         count = self.data_read.read_int32()
         self.linkages = []
-        for i in range(0,count):
-            temp_linkage = gmdc_linkage.GMDCLinkage()
+        for _ in range(count):
+            temp_linkage = GMDCLinkage()
             temp_linkage.read_data(self.data_read)
             self.linkages.append(temp_linkage)
 
@@ -170,19 +178,19 @@ class GMDC:
         count = self.data_read.read_int32()
         self.groups = []
         for i in range(0,count):
-            temp_group = gmdc_group.GMDCGroup()
+            temp_group = GMDCGroup()
             temp_group.read_data(self.data_read, self.header.version)
             self.groups.append(temp_group)
 
         # MODEL
-        self.model = gmdc_model.GMDCModel()
+        self.model = GMDCModel()
         self.model.read_data(self.data_read)
 
         # SUBSETS
         count = self.data_read.read_int32()
         self.subsets = []
         for i in range(0,count):
-            temp_subset = gmdc_subset.GMDCSubset()
+            temp_subset = GMDCSubset()
             temp_subset.read_data(self.data_read)
             self.subsets.append(temp_subset)
 

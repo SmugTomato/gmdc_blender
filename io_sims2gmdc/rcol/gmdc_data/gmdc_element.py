@@ -47,67 +47,86 @@ class GMDCElement:
     SET_SECONDARY   = 0x03
 
 
-    def __init__(self):
-        self.ref_array_size         = None
-        self.element_identity       = None
-        self.identity_repitition    = None
+    def __init__(self, refsize, idenity, id_repetition, block_format,
+                    set_format, block_size, list_length,
+                    element_values, references):
+        self.ref_array_size         = refsize
+        self.element_identity       = idenity
+        self.identity_repitition    = id_repetition
 
-        self.block_format   = None
-        self.set_format     = None
+        self.block_format   = block_format
+        self.set_format     = set_format
 
-        self.block_size     = None
-        self.list_length    = None
-        self.set_length     = None
+        self.block_size     = block_size
+        self.list_length    = list_length
 
-        self.element_values = None
-        self.references     = None
+        self.element_values = element_values
+        self.references     = references
 
-    def __get_set_length(self):
-        if self.block_format == 0x01:
+
+    @staticmethod
+    def get_set_length(block_format):
+        if block_format == 0x01:
             return 2
-        elif self.block_format == 0x02:
+        elif block_format == 0x02:
             return 3
-        elif self.block_format == 0x04:
+        elif block_format == 0x04:
             return 4
         return 1
 
-    def __get_list_length(self):
-        if self.block_format != 0x04:
-            return int(self.block_size / self.set_length / 4)
-        return int(self.block_size / 1 / 4)
 
-    def read_data(self, data_read):
-        self.ref_array_size         = data_read.read_int32()
-        self.element_identity       = data_read.read_uint32()
-        self.identity_repitition    = data_read.read_int32()
+    @staticmethod
+    def get_list_length(block_format, block_size, set_length):
+        if block_format != 0x04:
+            return int(block_size / set_length / 4)
+        return int(block_size / 1 / 4)
 
-        self.block_format   = data_read.read_int32()
-        self.set_format     = data_read.read_int32()
+    @staticmethod
+    def from_data(reader, version):
+        """"Construct an element from GMDC data"""
+        try:
+            ref_array_size         = reader.read_int32()
+            element_identity       = reader.read_uint32()
+            identity_repitition    = reader.read_int32()
 
-        self.block_size     = data_read.read_int32()
+            block_format   = reader.read_int32()
+            set_format     = reader.read_int32()
 
-        self.set_length     = self.__get_set_length()
-        self.list_length    = self.__get_list_length()
+            block_size     = reader.read_int32()
 
-        self.element_values = []
-        for i in range(0,self.list_length):
-            temp_array = []
+            set_length     = GMDCElement.get_set_length(block_format)
+            list_length    = GMDCElement.get_list_length(
+                block_format, block_size, set_length
+            )
 
-            for j in range(0,self.set_length):
-                if self.block_format == 0x04:
-                    temp_val = data_read.read_byte()
+            element_values = []
+            for i in range(list_length):
+                temp_array = []
+
+                for j in range(set_length):
+                    if block_format == 0x04:
+                        temp_val = reader.read_byte()
+                    else:
+                        temp_val = reader.read_float()
                     temp_array.append(temp_val)
+
+                element_values.append(temp_array)
+
+            count = reader.read_int32()
+            references = []
+            for _ in range(count):
+                if version == 4:
+                    temp_val = reader.read_int16()
                 else:
-                    temp_val = data_read.read_float()
-                    temp_array.append(temp_val)
-
-            self.element_values.append(temp_array)
-
-        count = data_read.read_int32()
-        self.references = []
-        for i in range(0,count):
-            temp_val = data_read.read_int16()
-            self.references.append(temp_val)
+                    temp_val = reader.read_int32()
+                references.append(temp_val)
+        except:
+            print("Error reading element!")
+            return False
+        else:
+            return GMDCElement(ref_array_size, element_identity,
+                    identity_repitition, None, None, None, None, element_values,
+                    references)
 
 
     def print(self):
@@ -139,24 +158,15 @@ class GMDCElement:
 
     @staticmethod
     def make_empty(block_format, set_format, identity, repetition):
-        element = GMDCElement()
-        element.ref_array_size = 0
-        element.element_identity = identity
-        element.identity_repitition = repetition
-        element.block_format = block_format
-        element.set_format = set_format
-        element.block_size = 0
-        element.list_length = 0
-        element.element_values = []
-        element.references = []
-
-        return element
+        return GMDCElement(
+            0, idenity, repetition, block_format, set_format, 0, 0, 0, [], []
+        )
 
     @staticmethod
     def from_datalist(data, identity, repetition):
-        set_format = GMDCElement.SET_SECONDARY
         ref_array_size = len(data)
         block_format = None
+        set_format = GMDCElement.SET_SECONDARY
         block_size   = None
 
         _data_len = len(data[0])
@@ -175,18 +185,10 @@ class GMDCElement:
 
         references = []
 
-        element = GMDCElement()
-        element.ref_array_size = ref_array_size
-        element.element_identity = identity
-        element.identity_repitition = repetition
-        element.block_format = block_format
-        element.set_format = set_format
-        element.block_size = block_size
-        element.list_length = ref_array_size
-        element.element_values = data
-        element.references = []
-
-        return element
+        return GMDCElement(
+            ref_array_size, idenity, repetition, block_format, set_format,
+            block_size, ref_array_size, element_values, []
+        )
 
 
     # Horrible code down here... Will fix this later
