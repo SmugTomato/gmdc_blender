@@ -159,7 +159,7 @@ class GMDCElement:
     @staticmethod
     def make_empty(block_format, set_format, identity, repetition):
         return GMDCElement(
-            0, idenity, repetition, block_format, set_format, 0, 0, 0, [], []
+            0, identity, repetition, block_format, set_format, 0, 0, [], []
         )
 
     @staticmethod
@@ -186,8 +186,8 @@ class GMDCElement:
         references = []
 
         return GMDCElement(
-            ref_array_size, idenity, repetition, block_format, set_format,
-            block_size, ref_array_size, element_values, []
+            ref_array_size, identity, repetition, block_format, set_format,
+            block_size, ref_array_size, data, []
         )
 
 
