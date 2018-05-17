@@ -21,73 +21,71 @@ Created by SmugTomato
 class GMDCHeader:
 
 
-    def __init__(self, language, stringstyle, repeatval, indexval, filetype,
-                        blockname, block_id, version, resname, res_id,
-                        res_version, filename):
-        self.language           = language
-        self.string_style       = stringstyle
-        self.repeat_value       = repeatval
-        self.index_value        = indexval
-        self.file_type          = filetype
-        self.block_name         = blockname
-        self.block_id           = block_id
+    def __init__(self, filename, version=4):
         self.version            = version
-        self.res_name           = resname
-        self.res_id             = res_id
-        self.res_version        = res_version
-        self.file_name          = filename
+        self.filename          = filename
 
 
     @staticmethod
-    def from_data(data_read):
-        language           = data_read.read_int16()
-        stringstyle        = data_read.read_int16()
-        repeatval          = data_read.read_int32()
-        indexval           = data_read.read_int32()
-        filetype           = data_read.read_uint32()
-        blockname          = data_read.read_byte_string()
-        block_id           = data_read.read_uint32()
-        version            = data_read.read_int32()
-        resname            = data_read.read_byte_string()
-        res_id             = data_read.read_int32()
-        res_version        = data_read.read_int32()
-        filename           = data_read.read_byte_string()
+    def from_data(reader):
+        """Build Header from GDMC Data"""
+        reader.read_int16()          # Language      0x0001
+        reader.read_int16()          # String style  0xFFFF
+        reader.read_int32()          # Repeat value  0
+        reader.read_int32()          # Index value   1
 
-        return GMDCHeader( language, stringstyle, repeatval, indexval, filetype,
-                            blockname, block_id, version, resname, res_id,
-                            res_version, filename)
+        # File type     0xAC4F8687
+        if not reader.read_uint32() == 0xAC4F8687:
+            print("Invalid GMDC File header, [Filetype Failure]")
+            return False
 
+        # ‘cGeometryDataContainer’
+        try:
+            reader.read_byte_string()
+        except:
+            print("Error reading string value in GMDC Header")
+            return False
 
-    @staticmethod
-    def build_data(filename):
-        language    = 0x0001        # WORD
-        stringstyle = 0xffff        # WORD
-        repeatval   = 0             # DWORD
-        indexval    = 1             # DWORD
-        filetype    = 0xAC4F8687    # DWORD, GMDC Identifier
-        blockname   = 'cGeometryDataContainer'
-        block_id    = 0xAC4F8687    # DWORD, GMDC Identifier
-        version     = 4             # DWORD, needs support for 1 and 2 later
-        resname     = 'cSGResource'
-        res_id      = 0             # DWORD
-        res_version = 2             # DWORD
-        # filename
+        # Block ID      0xAC4F8687
+        if not reader.read_uint32() == 0xAC4F8687:
+            print("Invalid GMDC File header, [BlockID Failure]")
+            return False
 
-        return GMDCHeader( language, stringstyle, repeatval, indexval, filetype,
-                            blockname, block_id, version, resname, res_id,
-                            res_version, filename)
+        # GMDC version  1, 2 or 4
+        version  = reader.read_int32()
+
+        # ‘cSGResource’
+        try:
+            reader.read_byte_string()
+        except:
+            print("Error reading string value in GMDC Header")
+            return False
+
+        # Resource ID and Version: 0, 2
+        reader.read_int32()
+        reader.read_int32()
+
+        # Internal filename
+        try:
+            filename = reader.read_byte_string()
+        except:
+            print("Error reading string value in GMDC Header")
+            return False
+
+        return GMDCHeader(filename, version)
 
 
     def write(self, writer):
-        writer.write_int16(self.language)
-        writer.write_int16(self.string_style)
-        writer.write_int32(self.repeat_value)
-        writer.write_int32(self.index_value)
-        writer.write_uint32(self.file_type)
-        writer.write_byte_string(self.block_name)
-        writer.write_uint32(self.block_id)
-        writer.write_int32(self.version)
-        writer.write_byte_string(self.res_name)
-        writer.write_uint32(self.res_id)
-        writer.write_int32(self.res_version)
-        writer.write_byte_string(self.file_name)
+        """Write out the GMDC Header"""
+        writer.write_int16( 0x0001 )
+        writer.write_int16( 0xFFFF )
+        writer.write_int32( 0 )
+        writer.write_int32( 1 )
+        writer.write_uint32( 0xAC4F8687 )
+        writer.write_byte_string( "cGeometryDataContainer" )
+        writer.write_uint32( 0xAC4F8687 )
+        writer.write_int32( self.version )
+        writer.write_byte_string( "cSGResource" )
+        writer.write_uint32( 0 )
+        writer.write_int32( 2 )
+        writer.write_byte_string( self.filename )

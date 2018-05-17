@@ -108,20 +108,12 @@ class GMDC:
         file_data.close()
 
 
-
-    def load_header(self):
-        self.header = GMDCHeader.from_data(self.data_read)
-
-        if self.header.version != 4 or self.header.file_type != self.GMDC_IDENTIFIER:
-            return False
-        return True
-
     @staticmethod
     def build_data(filename, b_models, bones, boundmesh, riggedbounds):
         gmdc_data = GMDC(None, None)
 
         # HEADER
-        gmdc_data.header = GMDCHeader.build_data(filename)
+        gmdc_data.header = GMDCHeader(filename=filename, version=4)
 
         # ELEMENTS
         # Tuple ( elements[], group_element_links[][] )
@@ -152,6 +144,12 @@ class GMDC:
 
 
     def load_data(self):
+        # HEADER
+        self.header = GMDCHeader.from_data(self.data_read)
+        if not self.header:
+            print("Error reading File Header!")
+            return False
+
         # ELEMENTS
         count = self.data_read.read_int32()
         self.elements = []
@@ -187,3 +185,5 @@ class GMDC:
             temp_subset = gmdc_subset.GMDCSubset()
             temp_subset.read_data(self.data_read)
             self.subsets.append(temp_subset)
+
+        return True

@@ -67,20 +67,19 @@ class ImportGMDC(Operator, ImportHelper):
 
     def execute(self, context):
         gmdc_data = GMDC.from_file_data(self.filepath)
-        if gmdc_data.load_header() == False:
-            print ('Unsupported GMDC version', hex(gmdc_data.header.file_type))
-            return False
 
-        gmdc_data.load_data()
+        if not gmdc_data.load_data():
+            print ("Import Cancelled")
+            return {'CANCELLED'}
+
         b_models = blender_model.BlenderModel.groups_from_gmdc(gmdc_data)
-
 
         # Container for all groups and their armature, keeps the scene clean
         bpy.ops.object.empty_add(
             type='PLAIN_AXES',
             location=(0, 0, 0)
         )
-        filename  = gmdc_data.header.file_name
+        filename  = gmdc_data.header.filename
         container = bpy.context.scene.objects.active
         container.name = filename.split("-")[0]
         container["filename"]   = filename
