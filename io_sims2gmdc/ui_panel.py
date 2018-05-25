@@ -129,48 +129,53 @@ class OP_AddMorph(bpy.types.Operator):
 
     def execute(self, context):
         gmdc_props = context.scene.gmdc_props
-        obj = bpy.context.scene.objects.active
+
+        container = context.scene.objects.active
+        if container.parent and container.parent.type == 'EMPTY' and container.parent.get("filename"):
+            container = container.parent
+
+        obs = [ob for ob in context.scene.objects if ob.parent == container and ob.type == 'MESH']
+
+        for obj in obs:
+            if not obj.data.shape_keys:
+                # Blender always needs a base shape key
+                shpkey = obj.shape_key_add(from_mix=False)
+                shpkey.name = "Basis"
 
 
-        if not obj.data.shape_keys:
-            # Blender always needs a base shape key
+            # Check morph count
+            if len(obj.data.shape_keys.key_blocks) > 4:
+                print("Too many morphs")
+                continue
+
+
+            # Select proper morph name
+            morphname = None
+            type = None
+            if gmdc_props.morph_type == 'FAT':
+                type = "fat"
+                if gmdc_props.mesh_type == 'TOP':
+                    morphname = "topmorphs, fattop"
+                if gmdc_props.mesh_type == 'BOT':
+                    morphname = "botmorphs, fatbot"
+
+            if gmdc_props.morph_type == 'PREG':
+                type = "preg"
+                if gmdc_props.mesh_type == 'TOP':
+                    morphname = "topmorphs, pregtop"
+                if gmdc_props.mesh_type == 'BOT':
+                    morphname = "botmorphs, pregbot"
+
+
+            # Skip duplicate names
+            for key in obj.data.shape_keys.key_blocks:
+                if type in key.name:
+                    print("Morph already present")
+                    continue
+
+
             shpkey = obj.shape_key_add(from_mix=False)
-            shpkey.name = "Basis"
-
-
-        # Check morph count
-        if len(obj.data.shape_keys.key_blocks) > 4:
-            print("Too many morphs")
-            return {'CANCELLED'}
-
-
-        # Select proper morph name
-        morphname = None
-        type = None
-        if gmdc_props.morph_type == 'FAT':
-            type = "fat"
-            if gmdc_props.mesh_type == 'TOP':
-                morphname = "topmorphs, fattop"
-            if gmdc_props.mesh_type == 'BOT':
-                morphname = "botmorphs, fatbot"
-
-        if gmdc_props.morph_type == 'PREG':
-            type = "preg"
-            if gmdc_props.mesh_type == 'TOP':
-                morphname = "topmorphs, pregtop"
-            if gmdc_props.mesh_type == 'BOT':
-                morphname = "botmorphs, pregbot"
-
-
-        # Return on duplicate names
-        for key in obj.data.shape_keys.key_blocks:
-            if type in key.name:
-                print("Morph already present")
-                return {'CANCELLED'}
-
-
-        shpkey = obj.shape_key_add(from_mix=False)
-        shpkey.name = morphname
+            shpkey.name = morphname
 
         return {'FINISHED'}
 
@@ -181,17 +186,22 @@ class OP_UpdateMorphNames(bpy.types.Operator):
 
     def execute(self, context):
         gmdc_props = context.scene.gmdc_props
-        obj = bpy.context.scene.objects.active
+        container = context.scene.objects.active
+        if container.parent and container.parent.type == 'EMPTY' and container.parent.get("filename"):
+            container = container.parent
 
-        if not obj.data.shape_keys:
-            print('No morphs present.')
-            return {'CANCELLED'}
+        obs = [ob for ob in context.scene.objects if ob.parent == container and ob.type == 'MESH']
 
-        for key in obj.data.shape_keys.key_blocks[1:]:
-            if gmdc_props.mesh_type == 'TOP':
-                key.name = key.name.replace("bot", "top")
-            elif gmdc_props.mesh_type == 'BOT':
-                key.name = key.name.replace("top", "bot")
+        for obj in obs:
+            if not obj.data.shape_keys:
+                print('No morphs present.')
+                continue
+
+            for key in obj.data.shape_keys.key_blocks[1:]:
+                if gmdc_props.mesh_type == 'TOP':
+                    key.name = key.name.replace("bot", "top")
+                elif gmdc_props.mesh_type == 'BOT':
+                    key.name = key.name.replace("top", "bot")
 
         return {'FINISHED'}
 
