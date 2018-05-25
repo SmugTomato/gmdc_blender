@@ -92,13 +92,13 @@ class OP_AddMorph(bpy.types.Operator):
             if gmdc_props.mesh_type == 'TOP':
                 morphname = "topmorphs, fattop"
             if gmdc_props.mesh_type == 'BOT':
-                morphname = "topmorphs, pregtop"
+                morphname = "botmorphs, fatbot"
 
         if gmdc_props.morph_type == 'PREG':
             type = "preg"
-            if gmdc_props.morph_type == 'FAT':
-                morphname = "botmorphs, fatbot"
-            if gmdc_props.morph_type == 'PREG':
+            if gmdc_props.mesh_type == 'TOP':
+                morphname = "topmorphs, pregtop"
+            if gmdc_props.mesh_type == 'BOT':
                 morphname = "botmorphs, pregbot"
 
 

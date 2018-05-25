@@ -30,7 +30,7 @@ class BoundMesh:
 
 
     @staticmethod
-    def create(objects, decimate_amount):
+    def create(objects, decimate_amount, custom=False):
         # First deselect everything
         bpy.ops.object.select_all(action='DESELECT')
 
