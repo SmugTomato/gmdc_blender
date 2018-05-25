@@ -62,7 +62,15 @@ class PROP_GmdcSettings(PropertyGroup):
         default='NONE'
         )
 
+    bones_per_vert = IntProperty(
+        name="Bones per vertex",
+        description="Maximum bones to be assigned per vertex. (1-4)",
+        soft_max=4,
+        soft_min=1,
+        default=4
+    )
 
+# <editor-fold> -- OPERATORS
 class OP_SyncMorphs(bpy.types.Operator):
     bl_label = "Synchronize Morphs"
     bl_idname = "gmdc.morphs_sync"
@@ -120,7 +128,6 @@ class OP_SyncMorphs(bpy.types.Operator):
 
 
         return {'FINISHED'}
-
 
 
 class OP_AddMorph(bpy.types.Operator):
@@ -282,6 +289,7 @@ class OP_HideArmature(bpy.types.Operator):
                 ob.hide = True
 
         return {'FINISHED'}
+# </editor-fold> -- END PROPERTIES
 
 
 class GmdcPanel(bpy.types.Panel):
@@ -305,15 +313,17 @@ class GmdcPanel(bpy.types.Panel):
         row.operator("export.gmdc_export", text="Export GMDC", icon='EXPORT')
 
         #print(scene.objects.active)
+        try:
+            if obj and obj.select and obj.type == 'MESH':
+                self.draw_object(obj, scene)
 
-        if obj and obj.select and obj.type == 'MESH':
-            self.draw_object(obj, scene)
-
-        if obj and obj.select and obj.type == 'EMPTY':
-            self.draw_container(obj, scene)
-        elif obj and obj.select and obj.parent and not obj.type == 'MESH':
-            if obj.parent.get("filename", None):
-                self.draw_container(obj.parent, scene)
+            if obj and obj.select and obj.type == 'EMPTY':
+                self.draw_container(obj, scene)
+            elif obj and obj.select and obj.parent and not obj.type == 'MESH':
+                if obj.parent.get("filename", None):
+                    self.draw_container(obj.parent, scene)
+        except:
+            return
 
 
     def draw_container(self, obj, scene):

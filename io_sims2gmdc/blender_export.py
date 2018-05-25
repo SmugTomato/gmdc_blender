@@ -65,9 +65,12 @@ class ExportGMDC(Operator, ExportHelper):
 
         filename = active.get("filename", "placeholder")
 
+        custom_bounds = None
         for ob in context.scene.objects:
-            if ob.parent == active and ob.type == 'MESH' and ob.name != "__bounds__":
+            if ob.parent == active and ob.type == 'MESH' and "__bounds__" not in ob.name:
                 obs_to_export.append(ob)
+            elif "__bounds__" in ob.name:
+                custom_bounds = ob
 
 
         # Further sanity checks, check array length and existance of Armature modifier
@@ -92,8 +95,8 @@ class ExportGMDC(Operator, ExportHelper):
         boundmesh = None
         riggedbounds = None
         if not armature:
-            if bpy.context.scene.objects["__bounds__"]:
-                boundmesh = BoundMesh.create(obs_to_export, custom=bpy.context.scene.objects["__bounds__"])
+            if custom_bounds:
+                boundmesh = BoundMesh.create(obs_to_export, custom=custom_bounds)
             else:
                 boundmesh = BoundMesh.create(obs_to_export)
         else:
