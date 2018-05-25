@@ -307,7 +307,7 @@ class ImportGMDC(Operator, ImportHelper):
         if b_model.morphs:
             # Blender always needs a base shape key
             shpkey = object.shape_key_add(from_mix=False)
-            shpkey.name = "base"
+            shpkey.name = "Basis"
 
             for morph in b_model.morphs:
                 if morph.name == ', ':
