@@ -63,6 +63,66 @@ class PROP_GmdcSettings(PropertyGroup):
         )
 
 
+class OP_SyncMorphs(bpy.types.Operator):
+    bl_label = "Synchronize Morphs"
+    bl_idname = "gmdc.morphs_sync"
+
+    def execute(self, context):
+        container = context.scene.objects.active
+        if container.parent and container.parent.type == 'EMPTY' and container.parent.get("filename"):
+            container = container.parent
+
+        obs = [ob for ob in context.scene.objects if ob.parent == container and ob.type == 'MESH']
+
+        names = []
+        for ob in obs:
+            try:
+                for k in ob.data.shape_keys.key_blocks[1:]:
+                    if not k.name in names:
+                        names.append(k.name)
+            except:
+                print(ob, "Has no shape keys, skipping...")
+
+        if len(names) > 2:
+            print("Too many shape keys or mismatching names")
+            return {'CANCELLED'}
+
+        for ob in obs:
+            # Return when names is empty
+            if len(names) == 0:
+                print("No morphs present to synchronize")
+                return {'CANCELLED'}
+
+            # Add base key if not present and mesh has morphs
+            if not ob.data.shape_keys:
+                shpkey = ob.shape_key_add(from_mix=False)
+                shpkey.name = "Basis"
+
+            # Add missing morphs
+            for name in names:
+                if not name in [k.name for k in ob.data.shape_keys.key_blocks]:
+                    shpkey = ob.shape_key_add(from_mix=False)
+                    shpkey.name = name
+
+
+        # Finally, sort according to names list
+        for ob in obs:
+            if not len(ob.data.shape_keys.key_blocks) == 3:
+                print("Too many/few shape keys, please sort morphs manually")
+                continue
+
+            ob.active_shape_key_index = 2
+            if not ob.data.shape_keys.key_blocks[2].name == names[1]:
+                bpy.ops.object.shape_key_move(type='UP')
+
+            print(ob.name, "Morph:0", ob.data.shape_keys.key_blocks[1].name == names[0])
+            print(ob.name, "Morph:1", ob.data.shape_keys.key_blocks[2].name == names[1])
+
+
+        return {'FINISHED'}
+
+
+
 class OP_AddMorph(bpy.types.Operator):
     bl_label = "Add Morph"
     bl_idname = "gmdc.morphs_add_morph"
@@ -322,6 +382,7 @@ class GmdcPanel(bpy.types.Panel):
         row = col.row(align=True)
         row.prop(gmdc_props, "morph_type", expand=True)
         col.operator("gmdc.morphs_add_morph", text="Add Morph")
+        col.operator("gmdc.morphs_sync")
 
 
         # FIXES
