@@ -66,18 +66,8 @@ class ExportGMDC(Operator, ExportHelper):
         filename = active.get("filename", "placeholder")
 
         for ob in context.scene.objects:
-            if ob.parent == active and ob.type == 'MESH':
+            if ob.parent == active and ob.type == 'MESH' and ob.name != "__bounds__":
                 obs_to_export.append(ob)
-
-        # Check for existance of necessary custom properties
-        # for ob in scene_obs:
-        #     if ob.type == 'MESH':
-        #         opacity = ob.data.get( 'opacity', None )
-        #         # Internal GMDC filename, NOT the actual name of the file you save
-        #         filename = ob.data.get( 'filename', None )
-        #         if opacity and filename:
-        #             obs_to_export.append(ob)
-
 
 
         # Further sanity checks, check array length and existance of Armature modifier
@@ -85,13 +75,8 @@ class ExportGMDC(Operator, ExportHelper):
             print('ERROR: No valid objects were found')
             return{'CANCELLED'}
         armature = obs_to_export[0].modifiers.get( 'Armature', None )
-        # if armature == None:
-        #     print('ERROR: No armature modifier')
-        #     return{'CANCELLED'}
 
 
-        # Restructure bone data
-        # has_armature = obs_to_export[0].modifiers.get( 'Armature', None ) != None
         bones = None
         if armature:
             bones = BoneData.from_armature(armature.object)
@@ -107,7 +92,10 @@ class ExportGMDC(Operator, ExportHelper):
         boundmesh = None
         riggedbounds = None
         if not armature:
-            boundmesh = BoundMesh.create(obs_to_export, decimate_amount=0.2)
+            if bpy.context.scene.objects["__bounds__"]:
+                boundmesh = BoundMesh.create(obs_to_export, custom=bpy.context.scene.objects["__bounds__"])
+            else:
+                boundmesh = BoundMesh.create(obs_to_export)
         else:
             # BUGGED FOR SIM MESHES
             riggedbounds = self.create_riggedbounds(obs_to_export, bones)

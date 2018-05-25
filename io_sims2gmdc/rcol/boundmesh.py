@@ -30,14 +30,27 @@ class BoundMesh:
 
 
     @staticmethod
-    def create(objects, decimate_amount, custom=False):
+    def create(objects, decimate_amount=1.0, custom=False):
         # First deselect everything
         bpy.ops.object.select_all(action='DESELECT')
 
-        # Select all non shadow mesh objects
         vert_offset = 0
         vertices = []
         faces = []
+
+        # If custom mesh exists, use it and skip next section
+        if custom:
+            mesh = custom.data
+            for v in mesh.vertices:
+                vertices.append((-v.co[0], -v.co[1], v.co[2]))
+
+            for f in mesh.polygons:
+                faces.append((f.vertices[0], f.vertices[1],f.vertices[2]))
+
+            return BoundMesh(vertices, faces)
+
+
+        # Select all non shadow mesh objects
         for ob in objects:
             # Skip shadow meshes
             if 'shadow' in ob.name:
