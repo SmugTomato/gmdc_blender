@@ -300,9 +300,9 @@ class GmdcPanel(bpy.types.Panel):
         obj = scene.objects.active
 
         # Import/Export buttons
-        row = layout.row()
-        row.operator("import.gmdc_import", text="Import...", icon='IMPORT')
-        row.operator("export.gmdc_export", text="Export...", icon='EXPORT')
+        row = layout.row(align=True)
+        row.operator("import.gmdc_import", text="Import GMDC", icon='IMPORT')
+        row.operator("export.gmdc_export", text="Export GMDC", icon='EXPORT')
 
         #print(scene.objects.active)
 
