@@ -324,6 +324,20 @@ class ImportGMDC(Operator, ImportHelper):
                     ) )
 
 
+        # Import Original normals as vertex colors
+        mesh.vertex_colors.new("__NORMALS__")
+        color_map = mesh.vertex_colors['__NORMALS__']
+        for poly in mesh.polygons:
+            for vert_idx, loop_idx in zip(poly.vertices, poly.loop_indices):
+                # Convert Vertex normal to a valid Color
+                normal = Vector(b_model.normals[vert_idx])
+                rgb = ( normal + Vector((1.0, 1.0, 1.0)) ) * 0.5
+                # Set Vertex color to new color
+                color_map.data[loop_idx].color = rgb
+        print("Original normals imported as vertex colors on layer '__NORMALS__'")
+        print()
+
+
         # After all that, merge doubles and make originally hard edges sharp
         bm = bmesh.new()
         bm.from_mesh(mesh)
@@ -345,7 +359,6 @@ class ImportGMDC(Operator, ImportHelper):
 
         bm.to_mesh(mesh)
         bm.free()
-
 
         object.select = True
         bpy.ops.object.shade_smooth()
