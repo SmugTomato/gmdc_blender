@@ -323,6 +323,12 @@ class ImportGMDC(Operator, ImportHelper):
                         vert.co[2] + morph.deltas[i][2]
                     ) )
 
+        # Add vertex group to control whicg verts keep their old normals
+        object.vertex_groups.new("__NORMALS__")
+        vertgroup = object.vertex_groups['__NORMALS__']
+        ## Should be done manually by user before exporting
+        # for i in range (len(mesh.vertices)):
+        #     vertgroup.add( [i], 1, 'ADD' )
 
         # Import Original normals as vertex colors
         mesh.vertex_colors.new("__NORMALS__")
