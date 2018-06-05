@@ -21,7 +21,7 @@ import bmesh
 from bpy_extras.io_utils import ExportHelper
 from bpy.props import StringProperty, BoolProperty, EnumProperty
 from bpy.types import Operator
-from mathutils import Vector, Quaternion
+from mathutils import Vector, Quaternion, Color
 
 from .rcol.gmdc import GMDC
 from .blender_model import BlenderModel
@@ -147,6 +147,33 @@ class ExportGMDC(Operator, ExportHelper):
 
 
     @staticmethod
+    def normals_from_colors(mesh):
+        """
+        Replace normals based on vertex colors,
+        only applies to verts affected by __NORMALS__
+        """
+        #if not object.vertex_groups['__NORMALS__']:
+        #    return
+        if not mesh.vertex_colors['__NORMALS__']:
+            return
+
+        #mesh = object.data
+        color_map = mesh.vertex_colors['__NORMALS__']
+        #grp_idx = object.vertex_groups['__NORMALS__'].index
+
+        for poly in mesh.polygons:
+            for vert_idx, loop_idx in zip(poly.vertices, poly.loop_indices):
+                #groups = [grp.group for grp in mesh.vertices[vert_idx].groups]
+                rgb = Vector(color_map.data[loop_idx].color)
+                if rgb.x == 0 and rgb.y == 0 and rgb.z == 0:
+                    continue
+                normal = rgb * 2 - Vector((1,1,1))
+                mesh.vertices[vert_idx].normal = normal
+
+
+
+
+    @staticmethod
     def build_group(object, armature, bones):
         neckfix_type = object.get("neck_fix")
 
@@ -183,6 +210,8 @@ class ExportGMDC(Operator, ExportHelper):
 
         bm.to_mesh(mesh)
         bm.free()
+
+        ExportGMDC.normals_from_colors(mesh)
 
         vertices    = []
         normals     = []
@@ -297,6 +326,9 @@ class ExportGMDC(Operator, ExportHelper):
                 # Remove copied mesh
                 morph_bm.to_mesh(morphmesh)
                 morph_bm.free()
+
+                # Replace normals
+                ExportGMDC.normals_from_colors(morphmesh)
 
                 # Create morph and remove copied mesh
                 morphs.append( MorphMap.from_blender(mesh, morphmesh, key.name) )

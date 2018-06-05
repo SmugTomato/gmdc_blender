@@ -324,8 +324,8 @@ class ImportGMDC(Operator, ImportHelper):
                     ) )
 
         # Add vertex group to control whicg verts keep their old normals
-        object.vertex_groups.new("__NORMALS__")
-        vertgroup = object.vertex_groups['__NORMALS__']
+        #object.vertex_groups.new("__NORMALS__")
+        #vertgroup = object.vertex_groups['__NORMALS__']
         ## Should be done manually by user before exporting
         # for i in range (len(mesh.vertices)):
         #     vertgroup.add( [i], 1, 'ADD' )
@@ -337,6 +337,7 @@ class ImportGMDC(Operator, ImportHelper):
             for vert_idx, loop_idx in zip(poly.vertices, poly.loop_indices):
                 # Convert Vertex normal to a valid Color
                 normal = Vector(b_model.normals[vert_idx])
+                normal.normalize()
                 rgb = ( normal + Vector((1.0, 1.0, 1.0)) ) * 0.5
                 # Set Vertex color to new color
                 color_map.data[loop_idx].color = rgb
